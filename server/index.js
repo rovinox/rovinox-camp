@@ -1,27 +1,30 @@
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const app = express();
+const cors = require("cors");
+const mongoose = require("mongoose");
+const connectDB = require("./config/dbConn");
+const session = require("express-session");
 app.use(express.json());
-const { MongoClient } = require("mongodb");
-//app.use(express.static(`${__dirname}/../build`));
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+connectDB();
 
-const { SERVER_PORT, DB_URI } = process.env;
-const client = new MongoClient(DB_URI);
+const { SERVER_PORT, SESSION_SECRET } = process.env;
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: SESSION_SECRET,
+  })
+);
+app.use("/register", require("./routes/register"));
+app.use("/login", require("./routes/login"));
 
-async function run() {
-  try {
-    const database = client.db("sample_mflix");
-    const movies = database.collection("movies");
-    // Query for a movie that has the title 'Back to the Future'
-    const query = { title: "Back to the Future" };
-    const movie = await movies.findOne(query);
-    console.log(movie);
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
-
-app.listen(SERVER_PORT, () => console.log(`linting on ${SERVER_PORT}`));
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(SERVER_PORT, () =>
+    console.log(`Server running on port ${SERVER_PORT}`)
+  );
+});

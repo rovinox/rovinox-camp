@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 //import { useHistory } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 function Copyright(props) {
@@ -32,13 +33,19 @@ function Copyright(props) {
 export default function Login() {
   const [error, setError] = useState(false);
   //const history = useHistory();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+    try {
+      const result = await axios.post("http://localhost:8080/login", user);
+      console.log(result);
+    } catch (error) {
+      console.error(error?.message);
+    }
   };
 
   return (

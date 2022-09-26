@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-//import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -28,8 +28,7 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-  //const history = useHistory();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
@@ -38,7 +37,12 @@ export default function SignUp() {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
     };
-    //history.push("/home");
+    try {
+      const result = await axios.post("http://localhost:8080/register", user);
+      console.log(result);
+    } catch (error) {
+      console.error(error?.message);
+    }
   };
 
   return (
