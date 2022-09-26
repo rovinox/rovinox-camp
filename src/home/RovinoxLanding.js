@@ -3,75 +3,71 @@ import "./RovinoxLanding.css";
 import vid1 from "../asset/vid1.mp4";
 import vid2 from "../asset/vid2.mp4";
 import vid3 from "../asset/vid3.mp4";
+import pic1 from "../asset/pic1.jpg";
+import { TypeAnimation } from "react-type-animation";
+import CourseTable from "../component/CourseTable";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Button } from "@mui/material";
 export default function RovinoxLanding() {
-  const [currentVideo, setCurrentVideo] = useState(vid2);
+  const [currentVideo, setCurrentVideo] = useState(vid1);
 
   return (
     <div>
-      <section className="showcase">
-        <header>
+      <div className="vid-container">
+        <header className="header-client">
           <h2 className="logo">Rovinox</h2>
-          <div className="toggle"></div>
+          <div className="links-client">
+            <span>Course</span>
+            <span>Tuition & Finance</span>
+            <span>About US</span>
+            <span>Apply</span>
+          </div>
         </header>
+        <div className="heading-client">
+          <TypeAnimation
+            sequence={["Jumpstart your career in tech with Rovinox", 1000]}
+            wrapper="div"
+            cursor={false}
+            repeat={Infinity}
+            style={{ fontSize: "2em" }}
+          />
+          <TypeAnimation
+            sequence={["It’s Time to Invest In  Your Future", 1000]}
+            wrapper="div"
+            cursor={false}
+            repeat={Infinity}
+            style={{ fontSize: "2em" }}
+          />
+        </div>
         <video muted loop autoPlay>
           <source src={currentVideo} type="video/mp4" />
         </video>
-        <div className="overlay"></div>
-        <div className="text">
-          <h2>Never Stop To </h2>
-          <h3>Exploring The World</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
-          <a href="#">Explore</a>
-        </div>
-      </section>
-      <div className="menu">
-        <ul>
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">News</a>
-          </li>
-          <li>
-            <a href="#">Destination</a>
-          </li>
-          <li>
-            <a href="#">Blog</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
+      <div className="remote-client">
+        <img className="remote-pic" src={pic1} alt="pic" />
+        <div>
+          <p>
+            {" "}
+            <CheckCircleIcon color="primary" /> Live, real-time instruction
+          </p>
+          <p>
+            {" "}
+            <CheckCircleIcon color="primary" /> Live, real-time instruction
+          </p>
+          <p>
+            {" "}
+            <CheckCircleIcon color="primary" /> Live, real-time instruction
+          </p>
+          <p>
+            {" "}
+            <CheckCircleIcon color="primary" /> Live, real-time instruction
+          </p>
+          If you’d like to know more—call, email, or chat with us.
+          <br></br>
+          <Button color="primary">chat with us</Button>
+        </div>
+      </div>
+      <CourseTable />
     </div>
   );
 }
