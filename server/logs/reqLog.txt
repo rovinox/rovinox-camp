@@ -1,0 +1,6 @@
+20220926	13:51:24	c0ab4e1f-c36b-4f99-ac17-15123c953c4b	GET	http://localhost:8080/	/Roboto-Regular.ttf
+20220926	13:52:41	32b7b649-6edf-4676-b1bc-fdae4fa870f9	GET	http://localhost:8080/	/Roboto-Regular.ttf
+20220926	14:07:47	2936e1f8-da45-44e9-b365-dd4bbb18ad4b	GET	http://localhost:8080/	/Roboto-Regular.ttf
+20220926	14:08:55	db28565b-0161-43bc-8738-924c0622648c	GET	http://localhost:8080/	/Roboto-Regular.ttf
+20220926	14:09:03	bc2493bf-b519-4269-b3e3-19b7fe364b07	OPTIONS	http://localhost:3000	/register
+20220926	14:09:03	2f19e5d6-4c00-42a2-9aa8-141dd19164ef	POST	http://localhost:3000	/register

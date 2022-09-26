@@ -1,0 +1,4 @@
+20220926	13:51:24	479f0428-98d7-4bc6-9214-4aea76e12e89	Error: Not allowed by CORS
+20220926	13:52:41	d89bdfd1-a12a-4d3b-9694-df940efb84d5	Error: Not allowed by CORS
+20220926	14:07:47	8f79aa26-0dff-445e-bfe8-2c1b04cba35a	Error: Not allowed by CORS
+20220926	14:08:55	f73e04a9-b3ec-4b08-8f48-94b19baee016	Error: Not allowed by CORS

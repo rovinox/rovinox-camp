@@ -1,20 +1,27 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const studentSchema = new Schema({
-  firstName: {
+const userSchema = new Schema({
+  email: {
     type: String,
     required: true,
   },
-  lastName: {
-    type: String,
-    required: true,
+  roles: {
+    User: {
+      type: Number,
+      default: 2001,
+    },
+    Admin: Number,
   },
   password: {
     type: String,
     required: true,
   },
-  email: {
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
     type: String,
     required: true,
   },
@@ -25,4 +32,4 @@ const studentSchema = new Schema({
   refreshToken: String,
 });
 
-module.exports = mongoose.model("student", studentSchema);
+module.exports = mongoose.model("User", userSchema);
