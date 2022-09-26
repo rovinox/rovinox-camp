@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 //import { useHistory } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 function Copyright(props) {
@@ -32,7 +33,7 @@ function Copyright(props) {
 
 export default function Login() {
   const [error, setError] = useState(false);
-  //const history = useHistory();
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,6 +44,9 @@ export default function Login() {
     try {
       const result = await axios.post("http://localhost:8080/login", user);
       console.log(result);
+      if (result?.data?.user_id) {
+        navigate("/student");
+      }
     } catch (error) {
       console.error(error?.message);
     }

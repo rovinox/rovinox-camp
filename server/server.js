@@ -21,6 +21,14 @@ app.use(
 );
 app.use("/register", require("./routes/register"));
 app.use("/login", require("./routes/login"));
+app.use("/user", (request, response) => {
+  console.log("vv5", request.session.user);
+  response.json(request.session.user);
+});
+app.use("/logout", (request, response) => {
+  request.session.destroy();
+  response.json(request.session);
+});
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
