@@ -1,19 +1,19 @@
-import React, { useState, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
+import useAuth from "../hooks/useAuth";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-//import { useHistory } from "react-router-dom";
-import Alert from "@mui/material/Alert";
+const LOGIN_URL = "/login";
 function Copyright(props) {
   return (
     <Typography
@@ -31,20 +31,58 @@ function Copyright(props) {
 }
 
 export default function Login() {
-  const [error, setError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/student";
+
+  const emailRef = useRef();
+  const errRef = useRef();
   //const history = useHistory();
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const user = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
+  // useEffect(() => {
+  //   emailRef.current.focus();
+  // }, []);
+
+  // useEffect(() => {
+  //   setErrMsg("");
+  // }, [email, pwd]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      const result = await axios.post("http://localhost:8080/login", user);
-      console.log(result);
-    } catch (error) {
-      console.error(error?.message);
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ email, password: pwd }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      //console.log(JSON.stringify(response));
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+      setAuth({ email, password: pwd, roles, accessToken });
+      setEmail("");
+      setPwd("");
+      //navigate(from, { replace: true });
+      navigate("/student");
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing email name or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      //errRef.current.focus();
     }
   };
 
@@ -100,6 +138,9 @@ export default function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                ref={emailRef}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
               <TextField
                 margin="normal"
@@ -110,6 +151,8 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -129,6 +172,7 @@ export default function Login() {
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
+                {errMsg && <Typography ref={errRef}>{errMsg}</Typography>}
               </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>

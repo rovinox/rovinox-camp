@@ -21,10 +21,10 @@ app.use(logger);
 
 // Handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
-app.use(credentials);
+//app.use(credentials);
 
 // Cross Origin Resource Sharing
-app.use(cors(corsOptions));
+app.use(cors());
 
 // built-in middleware to handle urlencoded form data
 app.use(express.urlencoded({ extended: false }));
@@ -41,7 +41,7 @@ app.use("/", express.static(path.join(__dirname, "/public")));
 // routes
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
-app.use("/auth", require("./routes/auth"));
+app.use("/login", require("./routes/auth"));
 app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 
