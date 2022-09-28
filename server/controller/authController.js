@@ -1,25 +1,50 @@
 const bcrypt = require("bcrypt");
 const Student = require("../model/student");
-const login = async (request, response) => {
-  const { email, password } = request.body;
+const jwt = require("jsonwebtoken");
+const login = async (req, res) => {
+  const { email, password } = req.body;
   console.log(email, password);
   const foundUser = await Student.findOne({ email });
 
   if (!foundUser) {
-    response.status(401).json("Incorrect username or password");
+    res.status(401).json("Incorrect email or password");
   } else {
     const authenticated = await bcrypt.compareSync(
       password,
       foundUser.password
     );
     if (!authenticated) {
-      response.status(401).json("Incorrect username or password");
+      res.status(401).json("Incorrect email or password");
     } else {
-      request.session.user = {
-        user_id: foundUser._id,
-      };
-      response.json(request.session.user);
-      console.log("vv3", request.session.user);
+      const accessToken = jwt.sign(
+        {
+          UserInfo: {
+            email: foundUser.email,
+          },
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "10s" }
+      );
+      const refreshToken = jwt.sign(
+        { email: foundUser.email },
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: "1d" }
+      );
+      // Saving refreshToken with current user
+      foundUser.refreshToken = refreshToken;
+      const result = await foundUser.save();
+      console.log(result);
+
+      // Creates Secure Cookie with refresh token
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+
+      // Send authorization roles and access token to user
+      res.json({ accessToken });
     }
   }
 };
