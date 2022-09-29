@@ -7,6 +7,8 @@ import pic1 from "../asset/pic1.jpg";
 import { TypeAnimation } from "react-type-animation";
 import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 import { Button } from "@mui/material";
 export default function RovinoxLanding() {
   const [currentVideo, setCurrentVideo] = useState(vid1);

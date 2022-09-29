@@ -7,7 +7,10 @@ import Login from "./student/Login";
 import SignUp from "./student/Signup";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { purple, teal } from "@mui/material/colors";
+import { purple, teal, green } from "@mui/material/colors";
+import { AuthProvider } from "./context/AuthProvider";
+import CssBaseline from "@mui/material/CssBaseline";
+import Apply from "./component/Apply";
 
 const router = createBrowserRouter([
   {
@@ -26,11 +29,18 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
+  {
+    path: "/apply",
+    element: <Apply />,
+  },
 ]);
 const theme = createTheme({
   palette: {
     primary: {
       main: teal[500],
+    },
+    background: {
+      default: green["A100"],
     },
     secondary: {
       main: purple[500],
@@ -40,7 +50,10 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ThemeProvider theme={theme}>
-    <RouterProvider router={router} />
+    <CssBaseline />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </ThemeProvider>
 );
 

@@ -7,26 +7,17 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../component/course";
+import { green } from "@mui/material/colors";
 
 export default function CourseListDrawer({
   setCurrentCourse,
   openDrawer,
   setOpenDrawer,
+  toggleDrawer,
 }) {
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setOpenDrawer(open);
-  };
-
   const list = () => (
     <Box
-      sx={{ width: 250 }}
+      sx={{ width: 250, background: green["A100"] }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -37,6 +28,9 @@ export default function CourseListDrawer({
             onClick={() => setCurrentCourse(course.day)}
             button
             key={index}
+            sx={{
+              height: 35,
+            }}
           >
             <Typography>Day {course.day}&nbsp;</Typography>
             <ListItemText primary={course.title} />
@@ -47,11 +41,8 @@ export default function CourseListDrawer({
   );
 
   return (
-    <div>
-      <Button onClick={toggleDrawer(true)}>course</Button>
-      <Drawer anchor={"left"} open={openDrawer} onClose={toggleDrawer(false)}>
-        {list()}
-      </Drawer>
-    </div>
+    <Drawer anchor={"left"} open={openDrawer} onClose={toggleDrawer(false)}>
+      {list()}
+    </Drawer>
   );
 }

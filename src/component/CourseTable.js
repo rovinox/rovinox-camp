@@ -6,8 +6,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import "./courseTable.css";
 import { Button } from "@mui/material";
+import { green } from "@mui/material/colors";
 
 function createData(Course, ScheduleAndTime, Tuition, DeadlineToEnroll) {
   return { Course, ScheduleAndTime, Tuition, DeadlineToEnroll };
@@ -45,13 +47,13 @@ const rows = [
     "Nov 01, 2022"
   ),
 ];
-
+console.log(rows);
 export default function CourseTable() {
   return (
     <div className="course-table-header">
       <h1>See What Cohorts Are Starting Soon</h1>
       <p>
-        Ready to plan out your bootcamp experience? Start by viewing the
+        Ready to plan out your Bootcamp experience? Start by viewing the
         upcoming course start dates. You can easily start your application once
         you’ve chosen a cohort.
       </p>
@@ -61,6 +63,7 @@ export default function CourseTable() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          background: green["A100"],
         }}
         component={Paper}
       >

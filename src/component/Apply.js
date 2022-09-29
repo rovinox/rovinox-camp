@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
 function Copyright(props) {
@@ -26,23 +27,45 @@ function Copyright(props) {
   );
 }
 
-export default function SignUp() {
+export default function Apply() {
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const user = {
       email: data.get("email"),
-      password: data.get("password"),
+      phoneNumber: data.get("phoneNumber"),
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
+      course: selectedCourse,
     };
+    console.log(user);
     try {
-      const result = await axios.post("http://localhost:8080/register", user);
+      const result = await axios.post("http://localhost:8080/email", user);
       console.log(result);
     } catch (error) {
       console.error(error?.message);
     }
   };
+  const courseList = [
+    {
+      value: 1,
+      label: "Full-Stack Jul 05, Tues,Thurs 6:30PM - 9:00PM",
+    },
+    {
+      value: 2,
+      label: "Full-Stack Oct 22, Tues,Thurs 6:30PM - 9:00PM",
+    },
+    {
+      value: 3,
+      label: "Full-Stack Nov 05, Tues,Thurs 6:30PM - 9:00PM",
+    },
+    {
+      value: 4,
+      label: "Full-Stack Dec 05, Tues,Thurs 6:30PM - 9:00PM",
+    },
+  ];
 
   return (
     <Container component="main" maxWidth="xs">
@@ -57,8 +80,24 @@ export default function SignUp() {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
+        <Typography sx={{ mb: 5 }} component="h1" variant="h5">
+          Apply
+        </Typography>
+        <Typography component="p">
+          Your application is the first step to your new future. You'll need
+          about{" "}
+          <Typography component="span" variant="h5">
+            30 seconds
+          </Typography>{" "}
+          to complete your portion. Relax,{" "}
+          <Typography component="span" variant="h5">
+            no payment
+          </Typography>{" "}
+          or{" "}
+          <Typography component="span" variant="h5">
+            commitment
+          </Typography>{" "}
+          will be required during the application process.
         </Typography>
         <Box component="form" Validate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -97,12 +136,30 @@ export default function SignUp() {
               <TextField
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
+                name="phoneNumber"
+                id="standard-number"
+                label="Phone Number"
               />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                name="course"
+                select
+                label="Course"
+                value={courseList.value}
+              >
+                {courseList.map((option) => (
+                  <MenuItem
+                    onClick={() => setSelectedCourse(option.value)}
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
           </Grid>
           <Button
@@ -112,15 +169,8 @@ export default function SignUp() {
             sx={{ mt: 3, mb: 2 }}
             //onClick={navigateToHome}
           >
-            Sign Up
+            submit
           </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link to="/" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
       <Copyright sx={{ mt: 5 }} />
