@@ -41,6 +41,7 @@ app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 app.use("/valid", require("./routes/valid"));
 app.use("/email", require("./routes/email"));
+app.use("/users", require("./routes/users"));
 
 // app.all("*", (req, res) => {
 //   res.status(404);

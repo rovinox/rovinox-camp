@@ -11,6 +11,7 @@ import { purple, teal, green } from "@mui/material/colors";
 import { AuthProvider } from "./context/AuthProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import Apply from "./component/Apply";
+import AdminLanding from "./admin/AdminLanding";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/apply",
     element: <Apply />,
+  },
+  {
+    path: "/admin",
+    element: <AdminLanding />,
   },
 ]);
 const theme = createTheme({

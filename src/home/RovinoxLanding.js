@@ -7,22 +7,33 @@ import pic1 from "../asset/pic1.jpg";
 import { TypeAnimation } from "react-type-animation";
 import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 export default function RovinoxLanding() {
+  const navigate = useNavigate();
   const [currentVideo, setCurrentVideo] = useState(vid1);
+  const [courseMouse, setCourseMouse] = useState(false);
+  const [courseDropdown, setCourseDropdown] = useState(false);
 
+  const turnOnCourse = () => {
+    setCourseMouse(true);
+  };
   return (
     <div>
       <div className="vid-container">
         <header className="header-client">
           <h2 className="logo">Rovinox</h2>
           <div className="links-client">
-            <span>Course</span>
-            <span>Tuition & Finance</span>
-            <span>About US</span>
-            <span>Apply</span>
+            <div onMouseEnter={turnOnCourse}>Course</div>
+            <div>Tuition & Finance</div>
+            <div>About US</div>
+            <Button
+              onClick={() => {
+                navigate("/apply");
+              }}
+            >
+              <div>Apply</div>
+            </Button>
           </div>
         </header>
         <div className="heading-client">

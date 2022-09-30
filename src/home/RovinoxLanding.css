@@ -27,6 +27,13 @@ body {
   justify-content: space-between;
   align-items: stretch;
   align-content: stretch;
+  z-index: 5;
+}
+.links-client div {
+  /* display: inline;
+  height: 150px;
+  width: 200; */
+  border: 1px solid red;
 }
 .logo {
   margin-left: 40px;
