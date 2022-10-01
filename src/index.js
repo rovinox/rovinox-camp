@@ -44,9 +44,9 @@ const theme = createTheme({
     primary: {
       main: teal[500],
     },
-    background: {
-      default: green["A100"],
-    },
+    // background: {
+    //   default: green["A100"],
+    // },
     secondary: {
       main: purple[500],
     },

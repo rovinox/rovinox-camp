@@ -1,121 +1,74 @@
 import { useEffect, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import axios from "axios";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import StudentList from "./StudentList";
+import AddCourse from "../admin/AddCourse";
 
-const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "last name", width: 13 },
-  { field: "email", headerName: "Email", width: 320 },
-  { field: "enabled", headerName: "Enabled", width: 100 },
-  { field: "role", headerName: "Role", width: 100 },
-];
-
-const rows = [
-  {
-    id: 1,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 2,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 3,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 4,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 5,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 4,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 5,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 6,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-  {
-    id: 7,
-    lastName: "Snow",
-    firstName: "Jon",
-    email: "dskjg",
-    enabled: "yes",
-    role: "admin",
-  },
-];
-
-export default function AdminLanding() {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const result = await axios.get("http://localhost:8080/users");
-        if (result?.data?.users) {
-          result.data.users.forEach((user, index) => {
-            user.id = index + 1;
-            user.enabled = user.enabled ? "Yes" : "no";
-          });
-        }
-
-        setUsers(result.data.users);
-        console.log("result.data.users: ", result.data.users);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUsers();
-  }, []);
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-      />
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
+export default function AdminLanding() {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="Student List" {...a11yProps(0)} />
+          <Tab label="Course list" {...a11yProps(1)} />
+          <Tab label="Add Course" {...a11yProps(2)} />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <StudentList />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <AddCourse />
+      </TabPanel>
+    </Box>
   );
 }
