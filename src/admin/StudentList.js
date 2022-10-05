@@ -111,7 +111,7 @@ export default function StudentList() {
   return (
     <div style={{ height: 700, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={users}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}

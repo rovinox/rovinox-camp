@@ -8,16 +8,16 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../component/course";
 import { green } from "@mui/material/colors";
+import Divider from "@mui/material/Divider";
 
 export default function CourseListDrawer({
   setCurrentCourse,
   openDrawer,
-  setOpenDrawer,
   toggleDrawer,
 }) {
   const list = () => (
     <Box
-      sx={{ width: 250, background: green["A100"] }}
+      sx={{ width: 300, background: green["A100"] }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -32,7 +32,7 @@ export default function CourseListDrawer({
               height: 35,
             }}
           >
-            <Typography>Day {course.day}&nbsp;</Typography>
+            <Typography>Day {course.day}&nbsp;-&nbsp; </Typography>
             <ListItemText primary={course.title} />
           </ListItem>
         ))}

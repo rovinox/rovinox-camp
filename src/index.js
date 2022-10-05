@@ -6,12 +6,22 @@ import StudentLanding from "./student/StudentLanding.js";
 import Login from "./student/Login";
 import SignUp from "./student/Signup";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { purple, teal, green } from "@mui/material/colors";
 import { AuthProvider } from "./context/AuthProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import Apply from "./component/Apply";
 import AdminLanding from "./admin/AdminLanding";
+import useAuth from "./hooks/useAuth";
+const CurrentUserRole = ({ Component }) => {
+  const { auth } = useAuth();
+  console.log("vv8", auth);
+  return auth.role === "admin" ? <Component /> : <Navigate to="/student" />;
+};
 
 const router = createBrowserRouter([
   {

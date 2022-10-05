@@ -17,6 +17,17 @@ import Day15 from "./course/Day15";
 import Day16 from "./course/Day16";
 import Day17 from "./course/Day17";
 import Day18 from "./course/Day18";
+import Day19 from "./course/Day19";
+import Day20 from "./course/Day20";
+import Day21 from "./course/Day21";
+import Day22 from "./course/Day22";
+import Day23 from "./course/Day23";
+import Day24 from "./course/Day24";
+import Day25 from "./course/Day25";
+import Day26 from "./course/Day26";
+import Day27 from "./course/Day27";
+import Day28 from "./course/Day28";
+import Day29 from "./course/Day29";
 import CourseLanding from "./CourseLanding";
 
 export default function CourseContent({ day }) {
@@ -57,6 +68,28 @@ export default function CourseContent({ day }) {
       return <Day17 />;
     case 18:
       return <Day18 />;
+    case 19:
+      return <Day19 />;
+    case 20:
+      return <Day20 />;
+    case 21:
+      return <Day21 />;
+    case 22:
+      return <Day22 />;
+    case 23:
+      return <Day23 />;
+    case 24:
+      return <Day24 />;
+    case 25:
+      return <Day25 />;
+    case 26:
+      return <Day26 />;
+    case 27:
+      return <Day27 />;
+    case 28:
+      return <Day28 />;
+    case 29:
+      return <Day29 />;
     default:
       return <CourseLanding />;
   }

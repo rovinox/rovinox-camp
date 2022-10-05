@@ -63,10 +63,10 @@ export default function Login() {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
+      console.log(JSON.stringify("vv9", response));
       //console.log(JSON.stringify(response));
-      const accessToken = response?.data?.accessToken;
-      setAuth({ email, password: pwd, accessToken });
+      const { accessToken, role } = response?.data;
+      setAuth({ email, role, password: pwd, accessToken });
       setEmail("");
       setPwd("");
       //navigate(from, { replace: true });

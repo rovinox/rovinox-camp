@@ -32,23 +32,35 @@ export default function StudentLanding() {
 
   console.log(currentCourse);
 
-  // React.useEffect(() => {
-  //   const getUser = async () => {
-  //     try {
-  //       const result = await axios.get("http://localhost:8080/valid");
-  //       console.log("vv1", result);
-  //       // if (result?.data) {
-  //       //   setActiveStudent(true);
-  //       // } else {
-  //       //   setActiveStudent(false);
-  //       //   navigate("/login");
-  //       // }
-  //     } catch (error) {
-  //       console.error(error?.message);
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const result = await axiosPrivate.get(
+          "/usersession",
+          {
+            email: "a@aa.com",
+          },
+          {
+            headers: {
+              authorization: `Bearer ${auth.accessToken}`,
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+        console.log("vv1", result);
+        // if (result?.data) {
+        //   setActiveStudent(true);
+        // } else {
+        //   setActiveStudent(false);
+        //   navigate("/login");
+        // }
+      } catch (error) {
+        console.error(error?.message);
+      }
+    };
+    getUser();
+  }, []);
   useEffect(() => {
     const controller = new AbortController();
     const getUser = async () => {
@@ -60,15 +72,15 @@ export default function StudentLanding() {
         //     authorization: `Bearer ${auth.accessToken}`,
         //   },
         // });
-        const response = await axios.post("/valid", {
-          headers: {
-            authorization: `Bearer ${auth.accessToken}`,
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
-        console.log("vv1", `Bearer ${auth.accessToken}`);
-        console.log(response.data);
+        // const response = await axios.post("/valid", {
+        //   headers: {
+        //     authorization: `Bearer ${auth.accessToken}`,
+        //     "Content-Type": "application/json",
+        //   },
+        //   withCredentials: true,
+        // });
+        // console.log("vv1", `Bearer ${auth.accessToken}`);
+        // console.log(response.data);
       } catch (error) {
         console.error(error);
       }

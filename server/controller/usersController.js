@@ -2,7 +2,7 @@ const Student = require("../model/student");
 
 const users = async (req, res) => {
   try {
-    const Users = await Student.find({}).select();
+    const Users = await Student.find();
     if (Users) {
       Users.forEach((user, index) => {
         console.log(user);

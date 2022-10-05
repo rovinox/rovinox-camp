@@ -45,7 +45,9 @@ const login = async (req, res) => {
       });
 
       // Send authorization roles and access token to user
-      res.json({ accessToken });
+      console.log("foundUser", foundUser);
+      res.header("Access-Control-Allow-Credentials", true);
+      res.json({ accessToken, role: foundUser.role });
     }
   }
 };
