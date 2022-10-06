@@ -60,16 +60,9 @@ app.use("/users", require("./routes/users"));
 app.use("/usersession", require("./routes/valid"));
 app.use("/addcourse", require("./routes/addCourse"));
 
-// app.all("*", (req, res) => {
-//   res.status(404);
-//   if (req.accepts("html")) {
-//     res.sendFile(path.join(__dirname, "views", "404.html"));
-//   } else if (req.accepts("json")) {
-//     res.json({ error: "404 Not Found" });
-//   } else {
-//     res.type("txt").send("404 Not Found");
-//   }
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
