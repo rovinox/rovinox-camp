@@ -20,6 +20,64 @@ export default function Day1({ day }) {
             {course.title}
           </Typography>
         ))}
+
+        <Typography sx={{ mb: 5 }} component="p">
+          What is HTML?
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>HTML stands for Hyper Text Markup Language</li>
+          <li>HTML is the standard markup language for creating Web pages</li>
+          <li>HTML describes the structure of a Web page</li>
+          <li>HTML consists of a series of elements</li>
+          <li>HTML elements tell the browser how to display the content</li>
+          <li>
+            HTML elements label pieces of content such as "this is a heading",
+            "this is a paragraph", "this is a link", etc.
+          </li>
+        </ul>
+        <Typography sx={{ m: 5 }} component="p">
+          you can read more about HTML{" "}
+          <a href="https://www.w3schools.com" target="_blank" rel="noreferrer">
+            Here
+          </a>
+        </Typography>
+
+        <Typography sx={{ mb: 5 }} component="p">
+          What is CSS?
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>CSS stands for Cascading Style Sheets</li>
+          <li>
+            CSS describes how HTML elements are to be displayed on screen,
+            paper, or in other media
+          </li>
+          <li>
+            CSS saves a lot of work. It can control the layout of multiple web
+            pages all at once
+          </li>
+          <li>External stylesheets are stored in CSS files</li>
+        </ul>
+        <Typography sx={{ m: 5 }} component="p">
+          you can read more about HTML{" "}
+          <a
+            href="https://www.w3schools.com/css/css_intro.asp"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Here
+          </a>
+        </Typography>
+
+        <Typography sx={{ m: 5 }} component="p">
+          Here is the link to today's classwork{" "}
+          <a
+            href="https://github.com/rovinox/html-css-part-1/tree/main/HTML-CSS-Practice-Problems"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Here
+          </a>
+        </Typography>
       </Box>
     </Container>
   );

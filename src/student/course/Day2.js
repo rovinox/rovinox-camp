@@ -20,6 +20,20 @@ export default function Day2({ day }) {
             {course.title}
           </Typography>
         ))}
+        <Typography sx={{ mt: 5 }} component="P">
+          we're going to continue to work on yesterday's project. Today we're
+          going to focus on Level 2 and Level 3
+        </Typography>
+        <Typography sx={{ mt: 2 }} component="P">
+          today we're also going to learn about{" "}
+          <a
+            href="https://www.w3schools.com/css/css3_flexbox_items.asp"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Flex-Box
+          </a>
+        </Typography>
       </Box>
     </Container>
   );
