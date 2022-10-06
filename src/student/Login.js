@@ -67,6 +67,7 @@ export default function Login() {
       //console.log(JSON.stringify(response));
       const { accessToken, role } = response?.data;
       setAuth({ email, role, password: pwd, accessToken });
+      localStorage.setItem("user", JSON.stringify(response.data));
       setEmail("");
       setPwd("");
       //navigate(from, { replace: true });

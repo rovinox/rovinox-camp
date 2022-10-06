@@ -33,63 +33,63 @@ import CourseLanding from "./CourseLanding";
 export default function CourseContent({ day }) {
   switch (day) {
     case 1:
-      return <Day1 />;
+      return <Day1 day={day} />;
     case 2:
-      return <Day2 />;
+      return <Day2 day={day} />;
     case 3:
-      return <Day3 />;
+      return <Day3 day={day} />;
     case 4:
-      return <Day4 />;
+      return <Day4 day={day} />;
     case 5:
-      return <Day5 />;
+      return <Day5 day={day} />;
     case 6:
-      return <Day6 />;
+      return <Day6 day={day} />;
     case 7:
-      return <Day7 />;
+      return <Day7 day={day} />;
     case 8:
-      return <Day8 />;
+      return <Day8 day={day} />;
     case 9:
-      return <Day9 />;
+      return <Day9 day={day} />;
     case 10:
-      return <Day10 />;
+      return <Day10 day={day} />;
     case 11:
-      return <Day11 />;
+      return <Day11 day={day} />;
     case 12:
-      return <Day12 />;
+      return <Day12 day={day} />;
     case 13:
-      return <Day13 />;
+      return <Day13 day={day} />;
     case 14:
-      return <Day14 />;
+      return <Day14 day={day} />;
     case 15:
-      return <Day15 />;
+      return <Day15 day={day} />;
     case 16:
-      return <Day16 />;
+      return <Day16 day={day} />;
     case 17:
-      return <Day17 />;
+      return <Day17 day={day} />;
     case 18:
-      return <Day18 />;
+      return <Day18 day={day} />;
     case 19:
-      return <Day19 />;
+      return <Day19 day={day} />;
     case 20:
-      return <Day20 />;
+      return <Day20 day={day} />;
     case 21:
-      return <Day21 />;
+      return <Day21 day={day} />;
     case 22:
-      return <Day22 />;
+      return <Day22 day={day} />;
     case 23:
-      return <Day23 />;
+      return <Day23 day={day} />;
     case 24:
-      return <Day24 />;
+      return <Day24 day={day} />;
     case 25:
-      return <Day25 />;
+      return <Day25 day={day} />;
     case 26:
-      return <Day26 />;
+      return <Day26 day={day} />;
     case 27:
-      return <Day27 />;
+      return <Day27 day={day} />;
     case 28:
-      return <Day28 />;
+      return <Day28 day={day} />;
     case 29:
-      return <Day29 />;
+      return <Day29 day={day} />;
     default:
       return <CourseLanding />;
   }

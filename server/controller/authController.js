@@ -24,20 +24,20 @@ const login = async (req, res) => {
         },
         process.env.ACCESS_TOKEN_SECRET,
         // 5 minutes or 15
-        { expiresIn: "30s" }
+        { expiresIn: "1h" }
       );
-      const refreshToken = jwt.sign(
-        { email: foundUser.email },
-        process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "1d" }
-      );
-      // Saving refreshToken with current user
-      foundUser.refreshToken = refreshToken;
-      const result = await foundUser.save();
-      console.log(result);
+      // const refreshToken = jwt.sign(
+      //   { email: foundUser.email },
+      //   process.env.REFRESH_TOKEN_SECRET,
+      //   { expiresIn: "1d" }
+      // );
+      // // Saving refreshToken with current user
+      // foundUser.refreshToken = refreshToken;
+      // const result = await foundUser.save();
+      // console.log(result);
 
       // Creates Secure Cookie with refresh token
-      res.cookie("jwt", refreshToken, {
+      res.cookie("jwt", accessToken, {
         httpOnly: true,
         secure: true,
         sameSite: "None",
@@ -46,8 +46,7 @@ const login = async (req, res) => {
 
       // Send authorization roles and access token to user
       console.log("foundUser", foundUser);
-      res.header("Access-Control-Allow-Credentials", true);
-      res.json({ accessToken, role: foundUser.role });
+      res.json({ accessToken, email, role: foundUser.role });
     }
   }
 };
