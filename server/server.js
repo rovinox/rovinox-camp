@@ -45,7 +45,7 @@ app.use(
 );
 
 //serve static files
-app.use("/", express.static(path.join(__dirname, "/public")));
+app.use(express.static(`${__dirname}/../build`));
 
 // routes
 app.use("/register", require("./routes/register"));
