@@ -63,7 +63,6 @@ export default function CourseTable() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: green["A100"],
         }}
         component={Paper}
       >

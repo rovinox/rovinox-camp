@@ -17,7 +17,7 @@ export default function CourseListDrawer({
 }) {
   const list = () => (
     <Box
-      sx={{ width: 300, background: green["A100"] }}
+      sx={{ width: 300 }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}

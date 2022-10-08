@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -88,6 +89,7 @@ const rows = [
 
 export default function StudentList() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -97,6 +99,7 @@ export default function StudentList() {
             user.id = index + 1;
             user.enabled = user.enabled ? "Yes" : "no";
           });
+          setLoading(false);
         }
 
         setUsers(result.data.users);
@@ -115,6 +118,10 @@ export default function StudentList() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+        components={{
+          LoadingOverlay: LinearProgress,
+        }}
+        loading={loading}
       />
     </div>
   );

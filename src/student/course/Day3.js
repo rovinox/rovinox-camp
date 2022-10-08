@@ -61,7 +61,8 @@ export default function Day3({ day }) {
         </Grid>
         <Typography sx={{ m: 5 }} component="P">
           After downloading it you need to install. During the install process
-          just go with the default settings and keep clicking on next.
+          just go with the default settings and keep clicking on next. when
+          you're done follow alone with this video.
         </Typography>
         <ReactPlayer
           height={800}
@@ -71,8 +72,15 @@ export default function Day3({ day }) {
           playing={false}
           url={"https://www.youtube.com/watch?v=vExsOTgIOGw"}
         />
-        <Typography id="mac" sx={{ m: 5 }} component="P">
+        <Typography id="mac" sx={{ m: 5 }} component="P" variant="h5">
           Here is the process of installing Git for Mac
+        </Typography>
+        <Typography id="mac" sx={{ m: 5 }} component="P">
+          first you need to follow{" "}
+          <a href="https://brew.sh/" target="_blank" rel="noreferrer">
+            this
+          </a>{" "}
+          instruction. Than Follow alone with the video.
         </Typography>
         <ReactPlayer
           height={800}

@@ -50,24 +50,24 @@ export default function AdminLanding() {
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
+        <Tabs value={value} onChange={handleChange}>
           <Tab label="Student List" {...a11yProps(0)} />
           <Tab label="Course list" {...a11yProps(1)} />
           <Tab label="Add Course" {...a11yProps(2)} />
+          <Tab label="Grade Homework" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <StudentList />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        add Course
       </TabPanel>
       <TabPanel value={value} index={2}>
         <AddCourse />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Grade homework
       </TabPanel>
     </Box>
   );

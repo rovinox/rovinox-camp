@@ -13,13 +13,28 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { useSelector, useDispatch } from "react-redux";
+import { changeToDark, changeToLight } from "../duck/themeSlice";
+import Stack from "@mui/material/Stack";
 
 const pages = ["Products", "Pricing", "Blog"];
 
 const Header = ({ toggleDrawer }) => {
+  const selectedTheme = useSelector((state) => state.changeTheme.theme);
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
+
+  const handleTheme = () => {
+    if (selectedTheme === "light") {
+      dispatch(changeToDark());
+    } else {
+      dispatch(changeToLight());
+    }
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,6 +60,34 @@ const Header = ({ toggleDrawer }) => {
       console.error(error?.message);
     }
   };
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = "#";
+
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  }
 
   return (
     <AppBar position="static">
@@ -97,11 +140,17 @@ const Header = ({ toggleDrawer }) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  <Button onClick={toggleDrawer(true)}>course</Button>
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  {" "}
+                  <Button>Admin</Button>
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -130,18 +179,23 @@ const Header = ({ toggleDrawer }) => {
               course
             </Button>
             <Button sx={{ my: 2, color: "white", display: "block" }}>
-              item2
-            </Button>
-            <Button sx={{ my: 2, color: "white", display: "block" }}>
-              item3
+              Admin
             </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Change Theme">
+              <IconButton sx={{ mr: 1 }} onClick={handleTheme}>
+                {selectedTheme === "dark" ? (
+                  <Brightness7Icon />
+                ) : (
+                  <Brightness4Icon />
+                )}
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                account{" "}
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                <Avatar {...stringAvatar("Kent Dodds")} />
               </IconButton>
             </Tooltip>
             <Menu
