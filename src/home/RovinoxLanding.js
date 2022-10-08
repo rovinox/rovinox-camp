@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Link } from "react";
+
 import "./RovinoxLanding.css";
 import vid1 from "../asset/vid1.mp4";
 import vid2 from "../asset/vid2.mp4";
@@ -10,6 +11,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { RovinoxTitle,CoursePromise } from "./RovinoxLanding.styled.tsx";
+
 export default function RovinoxLanding() {
   const navigate = useNavigate();
   const [currentVideo, setCurrentVideo] = useState(vid1);
