@@ -26,7 +26,7 @@ export default function StudentLanding() {
           },
           {
             headers: {
-              authorization: `Bearer ${""}`,
+              authorization: `Bearer ${"bdxfgdfg"}`,
               "Content-Type": "application/json",
             },
             withCredentials: true,
