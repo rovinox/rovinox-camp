@@ -12,3 +12,8 @@
   margin: 30px;
   width: 700px;
 }
+
+tbody tr:nth-child(odd){
+  background-color: #b9f6ca;
+  color: #fff;
+}

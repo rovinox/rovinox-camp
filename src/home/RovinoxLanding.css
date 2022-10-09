@@ -16,6 +16,10 @@ body {
   background: #03a9f4;
   mix-blend-mode: overlay;
 }
+#video_container {
+  background-color: rgba(0,0,0,0.2);
+  z-index: -2;
+}
 .header-client {
   position: absolute;
   color: #fff;
@@ -33,7 +37,23 @@ body {
   /* display: inline;
   height: 150px;
   width: 200; */
-  border: 1px solid red;
+  text-decoration: underline #EC572C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid transparent;
+
+}
+
+.links-client div:hover {
+  /* display: inline;
+  height: 150px;
+  width: 200; */
+  border-color: red;
+  text-decoration: none;
+  cursor: pointer;
+
 }
 .logo {
   margin-left: 40px;
