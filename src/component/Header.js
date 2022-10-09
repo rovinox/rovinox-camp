@@ -12,21 +12,24 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useSelector, useDispatch } from "react-redux";
 import { changeToDark, changeToLight } from "../duck/themeSlice";
-import Stack from "@mui/material/Stack";
+import { openDrawer, closeDrawer } from "../duck/drawerSlice";
 
-const pages = ["Products", "Pricing", "Blog"];
-
-const Header = ({ toggleDrawer }) => {
+const Header = () => {
   const selectedTheme = useSelector((state) => state.changeTheme.theme);
+  const isDrawer = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  console.log(location);
 
   const handleTheme = () => {
     if (selectedTheme === "light") {
@@ -34,6 +37,12 @@ const Header = ({ toggleDrawer }) => {
     } else {
       dispatch(changeToLight());
     }
+  };
+  const handleAdmin = () => {
+    navigate("/admin");
+  };
+  const handleStudent = () => {
+    navigate("/student");
   };
 
   const handleOpenNavMenu = (event) => {
@@ -142,13 +151,15 @@ const Header = ({ toggleDrawer }) => {
             >
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
-                  <Button onClick={toggleDrawer(true)}>course</Button>
+                  <Button onClick={() => dispatch(openDrawer())}>course</Button>
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
                   {" "}
-                  <Button>Admin</Button>
+                  {location.pathname !== "/admin" && (
+                    <Button onClick={handleAdmin}> Admin</Button>
+                  )}
                 </Typography>
               </MenuItem>
             </Menu>
@@ -172,15 +183,31 @@ const Header = ({ toggleDrawer }) => {
             ROVINOX
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={toggleDrawer(true)}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              course
-            </Button>
-            <Button sx={{ my: 2, color: "white", display: "block" }}>
-              Admin
-            </Button>
+            {location.pathname === "/admin" ? (
+              <Button
+                onClick={handleStudent}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Student
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  dispatch(openDrawer());
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                course
+              </Button>
+            )}
+            {location.pathname !== "/admin" && (
+              <Button
+                onClick={handleAdmin}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Admin
+              </Button>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

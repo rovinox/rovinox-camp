@@ -7,20 +7,18 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../component/course";
-import { green } from "@mui/material/colors";
-import Divider from "@mui/material/Divider";
+import { useSelector, useDispatch } from "react-redux";
+import { closeDrawer } from "../duck/drawerSlice";
 
-export default function CourseListDrawer({
-  setCurrentCourse,
-  openDrawer,
-  toggleDrawer,
-}) {
+export default function CourseListDrawer({ setCurrentCourse }) {
+  const isDrawer = useSelector((state) => state.drawer.open);
+  const dispatch = useDispatch();
   const list = () => (
     <Box
       sx={{ width: 300 }}
       role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
+      onClick={() => dispatch(closeDrawer())}
+      onKeyDown={() => dispatch(closeDrawer())}
     >
       <List>
         {courseList.map((course, index) => (
@@ -41,7 +39,11 @@ export default function CourseListDrawer({
   );
 
   return (
-    <Drawer anchor={"left"} open={openDrawer} onClose={toggleDrawer(false)}>
+    <Drawer
+      anchor={"left"}
+      open={isDrawer}
+      onClose={() => dispatch(closeDrawer())}
+    >
       {list()}
     </Drawer>
   );
