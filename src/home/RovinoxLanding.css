@@ -1,76 +1,25 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body {
-  overflow-x: hidden;
+.rovinoxLanding {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: stretch;
 }
 .overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   background: #03a9f4;
   mix-blend-mode: overlay;
 }
 #video_container {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: -2;
 }
-.header-client {
-  position: absolute;
-  color: #fff;
-  width: 100%;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  align-content: stretch;
-  z-index: 5;
-}
-.links-client div {
-  /* display: inline;
-  height: 150px;
-  width: 200; */
-  text-decoration: underline #EC572C;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  border: 1px solid transparent;
 
-}
-
-.links-client div:hover {
-  /* display: inline;
-  height: 150px;
-  width: 200; */
-  border-color: red;
-  text-decoration: none;
-  cursor: pointer;
-
-}
-.logo {
-  margin-left: 40px;
-  font-family: monospace;
-  font-weight: 700px;
-  letter-spacing: 0.3rem;
-}
-.links-client {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  align-content: stretch;
-  width: 500px;
-  margin-right: 20px;
-}
 .video-client {
   position: relative;
 }
@@ -80,13 +29,14 @@ video {
   object-fit: cover;
 }
 .heading-client {
-  position: absolute;
+  position: relative;
   color: #fff;
-  margin-top: 400px;
+  margin-top: -200px;
   margin-left: 50px;
   font-weight: 800;
   text-transform: uppercase;
 }
+
 .remote-client {
   display: flex;
   flex-direction: row;
@@ -95,11 +45,13 @@ video {
   align-items: stretch;
   align-content: stretch;
   margin-top: 40px;
+  width: 100%;
 }
 .remote-client p {
-  margin: 50px;
+  margin: 30px;
 }
 .remote-pic {
   height: 450px;
-  width: 350px;
+  width: 100%;
+  object-fit: cover;
 }

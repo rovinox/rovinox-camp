@@ -1,5 +1,22 @@
 import React, { useEffect, useState, Link } from "react";
-
+import {
+  Animator,
+  ScrollContainer,
+  ScrollPage,
+  batch,
+  Fade,
+  FadeIn,
+  FadeOut,
+  Move,
+  MoveIn,
+  MoveOut,
+  Sticky,
+  StickyIn,
+  StickyOut,
+  Zoom,
+  ZoomIn,
+  ZoomOut,
+} from "react-scroll-motion";
 import "./RovinoxLanding.css";
 import vid1 from "../asset/vid1.mp4";
 import vid2 from "../asset/vid2.mp4";
@@ -10,83 +27,88 @@ import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { RovinoxTitle,CoursePromise } from "./RovinoxLanding.styled.tsx";
+import { RovinoxTitle, CoursePromise } from "./RovinoxLanding.styled.tsx";
+import FAQ from "../component/FAQ";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Header from "./Header";
+import TestC from "./TestC";
 
 export default function RovinoxLanding() {
   const navigate = useNavigate();
   const [currentVideo, setCurrentVideo] = useState(vid1);
   const [courseMouse, setCourseMouse] = useState(false);
   const [courseDropdown, setCourseDropdown] = useState(false);
+  const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
+  const FadeUp = batch(Fade(), Move(), Sticky());
 
   const turnOnCourse = () => {
     setCourseMouse(true);
   };
   return (
-    <div>
-      <div className="vid-container">
-        <header className="header-client">
-          <h2 className="logo">Rovinox</h2>
-          <div className="links-client">
-            <div onMouseEnter={turnOnCourse}>Course</div>
-            <div>Tuition & Finance</div>
-            <div>About US</div>
-            <Button
-              onClick={() => {
-                navigate("/apply");
-              }}
-            >
-              <div>Apply</div>
-            </Button>
-          </div>
-        </header>
-        <div className="heading-client">
-          {/* <TypeAnimation
-            sequence={["Jumpstart your career in tech with Rovinox", 1000]}
-            wrapper="div"
-            cursor={false}
-            repeat={Infinity}
-            style={{ fontSize: "2em" }}
-          /> */}
-          <RovinoxTitle>Jumpstart your <span>career</span> in tech with Rovinox</RovinoxTitle>
-          <TypeAnimation
-            sequence={["It’s Time to Invest In  Your Future", 1000]}
-            wrapper="div"
-            cursor={false}
-            repeat={Infinity}
-            style={{ fontSize: "2em" }}
-          />
-        </div>
-        <div id='video_container'>
-          <video muted loop autoPlay style={{backgroundColor: 'rgba(0,0,0,0.7)'}}>
-            <source src={currentVideo} type="video/mp4" />
-          </video>
-        </div>
+    <div className="rovinoxLanding">
+      <Header />
+
+      <div id="video_container">
+        <video
+          muted
+          loop
+          autoPlay
+          style={{
+            backgroundColor: "rgba(0,0,0,0.7)",
+          }}
+        >
+          <source src={currentVideo} type="video/mp4" />
+        </video>
       </div>
+      <div className="heading-client">
+        <RovinoxTitle>
+          Jumpstart your <span className="orangeText">career</span> in tech with
+          Rovinox It’s Time to Invest In Your{" "}
+          <span className="orangeText">Future</span>
+        </RovinoxTitle>
+      </div>
+
       <div className="remote-client">
-        <img className="remote-pic" src={pic1} alt="pic" />
-        <div>
-          <CoursePromise>
-            {" "}
-            <CheckCircleIcon color="primary" /> Live, real-time instruction
-          </CoursePromise>
-          <CoursePromise>
-            {" "}
-            <CheckCircleIcon color="primary" /> Great Support from day-one to your first day in tech
-          </CoursePromise>
-          <CoursePromise>
-            {" "}
-            <CheckCircleIcon color="primary" /> Learn in-demand job ready skills to be come a SoftWare Developer
-          </CoursePromise>
-          <CoursePromise>
-            {" "}
-            <CheckCircleIcon color="primary" /> Dive into web development with fun and cool projects
-          </CoursePromise>
-          If you’d like to know more—call, email, or chat with us.
-          <br></br>
-          <Button color="primary">chat with us</Button>
-        </div>
+        <Grid sx={{ mt: 5 }} Grid container spacing={2}>
+          <Grid xs={12} md={6}>
+            <img className="remote-pic" src={pic1} alt="pic" />
+          </Grid>
+          <Grid xs={12} md={6}>
+            <CoursePromise>
+              {" "}
+              <CheckCircleIcon color="primary" /> Live, real-time instruction
+            </CoursePromise>
+            <CoursePromise>
+              {" "}
+              <CheckCircleIcon color="primary" /> Great Support from day-one to
+              your first day in tech
+            </CoursePromise>
+            <CoursePromise>
+              {" "}
+              <CheckCircleIcon color="primary" /> Learn in-demand job ready
+              skills to be come a SoftWare Developer
+            </CoursePromise>
+            <CoursePromise>
+              {" "}
+              <CheckCircleIcon color="primary" /> Dive into web development with
+              fun and cool projects
+            </CoursePromise>
+            <CoursePromise>
+              {" "}
+              If you’d like to know more—call, email, or chat with us.
+              <br></br>
+            </CoursePromise>
+            <Button sx={{ ml: 5 }} color="primary">
+              chat with us
+            </Button>
+          </Grid>
+        </Grid>
       </div>
       <CourseTable />
+      <FAQ />
+      <TestC />
     </div>
   );
 }

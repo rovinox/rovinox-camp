@@ -8,12 +8,8 @@
   width: 100%;
   margin-top: 40px;
 }
-.course-table-header p {
-  margin: 30px;
-  width: 700px;
-}
 
-tbody tr:nth-child(odd){
+tbody tr:nth-child(odd) {
   background-color: #b9f6ca;
   color: #fff;
 }
