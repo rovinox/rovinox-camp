@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -34,7 +33,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,7 +64,6 @@ export default function Login() {
       console.log(JSON.stringify("vv9", response));
       //console.log(JSON.stringify(response));
       const { accessToken, role } = response?.data;
-      setAuth({ email, role, password: pwd, accessToken });
       localStorage.setItem("user", JSON.stringify(response.data));
       setEmail("");
       setPwd("");

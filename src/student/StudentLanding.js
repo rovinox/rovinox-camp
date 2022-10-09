@@ -5,31 +5,14 @@ import CourseContent from "./CourseContent";
 import CourseListDrawer from "./CourseListDrawer";
 import NoCourse from "./NoCourse";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-//import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import Header from "../component/Header";
-//import useRefreshToken from "../hooks/useRefreshToken";
 
 export default function StudentLanding() {
-  const [openDrawer, setOpenDrawer] = useState(false);
   const [currentCourse, setCurrentCourse] = useState(0);
   const [activeStudent, setActiveStudent] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
-  //const refresh = useRefreshToken();
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
 
-    setOpenDrawer(open);
-  };
   const navigate = useNavigate();
-  //const axiosPrivate = useAxiosPrivate();
-  const { auth } = useAuth();
-  console.log("vv5", auth);
 
   console.log(currentCourse);
 
@@ -43,7 +26,7 @@ export default function StudentLanding() {
           },
           {
             headers: {
-              authorization: `Bearer ${auth.accessToken}`,
+              authorization: `Bearer ${""}`,
               "Content-Type": "application/json",
             },
             withCredentials: true,
@@ -83,7 +66,6 @@ export default function StudentLanding() {
             //   withCredentials: true,
           }
         );
-        console.log("vv1", `Bearer ${auth.accessToken}`);
         console.log(response.data);
       } catch (error) {
         console.error(error);
@@ -102,15 +84,9 @@ export default function StudentLanding() {
     <div>
       {activeStudent ? (
         <>
-          <Header toggleDrawer={toggleDrawer} />
+          <Header />
           <CourseContent day={currentCourse} />
-          <CourseListDrawer
-            currentCourse={currentCourse}
-            setCurrentCourse={setCurrentCourse}
-            openDrawer={openDrawer}
-            setOpenDrawer={setOpenDrawer}
-            toggleDrawer={toggleDrawer}
-          />
+          <CourseListDrawer setCurrentCourse={setCurrentCourse} />
         </>
       ) : (
         <NoCourse />
