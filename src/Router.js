@@ -9,6 +9,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Apply from "./component/Apply";
 import AdminLanding from "./admin/AdminLanding";
 import { useSelector } from "react-redux";
+import "./index.css";
 
 export default function Router() {
   const selectedTheme = useSelector((state) => state.changeTheme.theme);

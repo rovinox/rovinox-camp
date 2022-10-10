@@ -1,18 +1,15 @@
 import styled from "@emotion/styled";
 
 export const RovinoxTitle = styled.h2`
-    margin-left: 40px;
-    font-family: monospace;
-    font-size: 36px;
-    font-weight: 700px;
-    letter-spacing: 0.3rem;
-
-    span {
-        color: #EC572C;
-    }
-`
+  font-family: monospace;
+  padding: 5px;
+  letter-spacing: 0.3rem;
+  .orangeText {
+    color: #ec572c;
+  }
+`;
 
 export const CoursePromise = styled.p`
-    display: flex;
-    align-items: center;
-`
+  display: flex;
+  align-items: center;
+`;

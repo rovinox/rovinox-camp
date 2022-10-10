@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { purple, teal, green } from "@mui/material/colors";
 import axios from "axios";
 const LOGIN_URL = "/login";
 function Copyright(props) {
