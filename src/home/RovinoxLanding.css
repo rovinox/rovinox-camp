@@ -36,7 +36,21 @@ video {
   font-weight: 800;
   text-transform: uppercase;
 }
-
+.heading-client span {
+  position: relative;
+  display: inline-block;
+  font-size: 40px;
+  color: #fff;
+  text-transform: uppercase;
+  animation: flip 3s infinite;
+  animation-delay: calc(0.3s * var(--i));
+}
+@keyframes flip {
+  0%,
+  80% {
+    transform: rotateY(360deg);
+  }
+}
 .remote-client {
   display: flex;
   flex-direction: row;
@@ -54,4 +68,17 @@ video {
   height: 450px;
   width: 100%;
   object-fit: cover;
+}
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  background-color: white;
+  position: absolute;
+  z-index: 22;
 }

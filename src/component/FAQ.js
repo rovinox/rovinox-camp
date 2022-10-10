@@ -17,6 +17,9 @@ const Accordion = styled((props) => (
   "&:not(:last-child)": {
     borderBottom: 0,
   },
+  "&:last-child()": {
+    // color: "red",
+  },
   "&:before": {
     display: "none",
   },
@@ -52,7 +55,7 @@ export default function FAQ() {
   };
 
   return (
-    <Grid sx={{ m: 5 }} Grid container spacing={2}>
+    <Grid sx={{ mt: 8 }} Grid container spacing={2}>
       <Grid sx={{ mt: 4 }} xs={12} md={6}>
         <Typography sx={{ m: 5 }} component="h2" variant="h4">
           Frequently Asked Questions...
@@ -151,7 +154,7 @@ export default function FAQ() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <Typography sx={{ m: 2 }} component="p">
+        <Typography sx={{ m: 2, p: 3 }} component="p">
           Do you have a different question? Well, aren’t you precocious! Feel
           free to <Button color="primary">reach out to us</Button> any time
           about any old thing.
