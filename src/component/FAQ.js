@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import pic1 from "../asset/pic1.jpg";
+import vid3 from "../asset/vid3.mp4";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -160,8 +161,23 @@ export default function FAQ() {
           about any old thing.
         </Typography>
       </Grid>
-      <Grid xs={12} md={6}>
-        <img className="remote-pic" src={pic1} alt="pic" />
+      <Grid sx={{ mt: 10 }} xs={12} md={6}>
+        {/* <img className="remote-pic" src={pic1} alt="pic" /> */}
+        <video
+          className="remote-pic"
+          muted
+          loop
+          autoPlay
+          style={{
+            backgroundColor: "rgba(0,0,0,0.7)",
+          }}
+          onLoadedData={() => {
+            //setLoading(false);
+            console.log("I don't get called???");
+          }}
+        >
+          <source src={vid3} type="video/mp4" />
+        </video>
       </Grid>
     </Grid>
   );

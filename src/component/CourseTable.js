@@ -52,18 +52,24 @@ console.log(rows);
 export default function CourseTable() {
   return (
     <div className="course-table-header">
-      <h1>See What Cohorts Are Starting Soon</h1>
-      <Typography
-        sx={{
-          width: 450,
-          paddingLeft: 2,
-          paddingRight: 2,
-        }}
+      <div
+        data-aos="flip-left"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="2000"
       >
-        Ready to plan out your Bootcamp experience? Start by viewing the
-        upcoming course start dates. You can easily start your application once
-        you’ve chosen a cohort.
-      </Typography>
+        <h1>See What Cohorts Are Starting Soon</h1>
+        <Typography
+          sx={{
+            width: 450,
+            paddingLeft: 2,
+            paddingRight: 2,
+          }}
+        >
+          Ready to plan out your Bootcamp experience? Start by viewing the
+          upcoming course start dates. You can easily start your application
+          once you’ve chosen a cohort.
+        </Typography>
+      </div>
 
       <TableContainer
         sx={{
@@ -74,7 +80,10 @@ export default function CourseTable() {
         }}
         component={Paper}
       >
-        <Table sx={{ width: 1000 }} aria-label="simple table">
+        <Table
+          sx={{ width: 1000, overflow: "hidden" }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell>Course</TableCell>
@@ -86,6 +95,7 @@ export default function CourseTable() {
           <TableBody>
             {rows.map((row, index) => (
               <TableRow
+                data-aos="fade-up"
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >

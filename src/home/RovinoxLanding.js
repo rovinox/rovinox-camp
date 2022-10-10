@@ -14,8 +14,6 @@ import { useNavigate } from "react-router-dom";
 import { RovinoxTitle, CoursePromise } from "./RovinoxLanding.styled.tsx";
 import FAQ from "../component/FAQ";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Header from "./Header";
 import Loading from "./Loading";
 
@@ -28,7 +26,7 @@ export default function RovinoxLanding() {
 
   useEffect(() => {
     AOS.init({
-      duration: 400, // values from 0 to 3000, with step 50ms
+      duration: 800, // values from 0 to 3000, with step 50ms
     });
     // if (pic1) {
     //   setLoading(false);
@@ -62,9 +60,14 @@ export default function RovinoxLanding() {
         <Loading />
       ) : (
         <>
-          <div className="heading-client">
+          <div
+            data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="3000"
+            className="heading-client"
+          >
             <RovinoxTitle>
-              Jumpstart your
+              Jumpstart your{" "}
               <span style={{ "--i": 1 }} className="orangeText">
                 c
               </span>
@@ -82,8 +85,10 @@ export default function RovinoxLanding() {
               </span>
               <span style={{ "--i": 6 }} className="orangeText">
                 r
-              </span>
-              in tech with Rovinox. It’s Time to Invest In Your{" "}
+              </span>{" "}
+              in tech with Rovinox.
+              <br />
+              It’s Time to Invest In Your{" "}
               <span style={{ "--i": 7 }} className="orangeText">
                 F
               </span>
@@ -108,7 +113,9 @@ export default function RovinoxLanding() {
             <Grid sx={{ mt: 5 }} Grid container spacing={2}>
               <Grid xs={12} md={6}>
                 <img
-                  data-aos="slide-left"
+                  data-aos="flip-left"
+                  data-aos-easing="ease-out-cubic"
+                  data-aos-duration="500"
                   className="remote-pic"
                   src={pic1}
                   alt="pic"

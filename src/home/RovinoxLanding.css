@@ -35,16 +35,18 @@ video {
   margin-left: 50px;
   font-weight: 800;
   text-transform: uppercase;
+  font-size: 15px;
 }
+
 .heading-client span {
   position: relative;
   display: inline-block;
-  font-size: 40px;
   color: #fff;
   text-transform: uppercase;
   animation: flip 3s infinite;
   animation-delay: calc(0.3s * var(--i));
 }
+
 @keyframes flip {
   0%,
   80% {
@@ -82,3 +84,9 @@ video {
   position: absolute;
   z-index: 22;
 }
+/* @media screen and (min-width: 600px) {
+  .heading-client {
+    font-size: 10px;
+    
+  }
+} */
