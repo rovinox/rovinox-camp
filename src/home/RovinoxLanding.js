@@ -22,7 +22,7 @@ export default function RovinoxLanding() {
   const [currentVideo, setCurrentVideo] = useState(vid1);
   const [courseMouse, setCourseMouse] = useState(false);
   const [courseDropdown, setCourseDropdown] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     AOS.init({
@@ -37,10 +37,10 @@ export default function RovinoxLanding() {
     setCourseMouse(true);
   };
   return (
-    <div className="rovinoxLanding">
+    <div>
       {" "}
-      <Header />
-      <div id="video_container">
+      {/* <Header /> */}
+      {/* <div id="video_container">
         <video
           muted
           loop
@@ -55,12 +55,12 @@ export default function RovinoxLanding() {
         >
           <source src={currentVideo} type="video/mp4" />
         </video>
-      </div>
+      </div> */}
       {loading ? (
         <Loading />
       ) : (
         <>
-          <div
+          {/* <div
             data-aos="flip-left"
             data-aos-easing="ease-out-cubic"
             data-aos-duration="3000"
@@ -108,8 +108,8 @@ export default function RovinoxLanding() {
                 e
               </span>
             </RovinoxTitle>
-          </div>
-          <div className="remote-client">
+          </div> */}
+          {/* <div className="remote-client">
             <Grid sx={{ mt: 5 }} Grid container spacing={2}>
               <Grid xs={12} md={6}>
                 <img
@@ -152,7 +152,7 @@ export default function RovinoxLanding() {
                 </Button>
               </Grid>
             </Grid>
-          </div>
+          </div> */}
           <CourseTable />
           <FAQ />{" "}
         </>

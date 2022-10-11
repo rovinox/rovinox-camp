@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import StudentList from "./StudentList";
-import AddCourse from "../admin/AddCourse";
+import AddBatch from "./AddBatch";
 import Header from "../component/Header";
 
 function TabPanel(props) {
@@ -56,7 +56,7 @@ export default function AdminLanding() {
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Student List" {...a11yProps(0)} />
             <Tab label="Course list" {...a11yProps(1)} />
-            <Tab label="Add Course" {...a11yProps(2)} />
+            <Tab label="Add Batch" {...a11yProps(2)} />
             <Tab label="Grade Homework" {...a11yProps(3)} />
           </Tabs>
         </Box>
@@ -64,10 +64,10 @@ export default function AdminLanding() {
           <StudentList />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          add Course
+          Course list
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <AddCourse />
+          <AddBatch />
         </TabPanel>
         <TabPanel value={value} index={3}>
           Grade homework

@@ -1,16 +1,15 @@
-const Course = require("../model/course");
+const Batch = require("../model/batch");
 
-const addCourse = async (req, res) => {
+const addBatch = async (req, res) => {
   const { startDate, endDate, course, cost } = req.body;
-
+  console.log({ startDate, endDate, course, cost });
   try {
-    const result = await Course.create({
-      startDate,
-      endDate,
+    const result = await Batch.create({
+      startDate: startDate.Moment._d,
+      endDate: endDate.Moment._d,
       course,
       cost,
     });
-
     console.log(result);
     if (result) {
       res.status(201).json({ success: `New user created!` });
@@ -20,4 +19,4 @@ const addCourse = async (req, res) => {
   }
 };
 
-module.exports = { addCourse };
+module.exports = { addBatch };

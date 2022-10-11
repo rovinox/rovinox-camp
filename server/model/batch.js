@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const studentSchema = new Schema({
+const batchSchema = new Schema({
   startDate: {
     type: String,
     required: true,
@@ -24,4 +24,4 @@ const studentSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("course", studentSchema);
+module.exports = mongoose.model("batch", batchSchema);

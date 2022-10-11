@@ -9,7 +9,7 @@ const connectDB = require("./config/dbConn");
 const verifyJWT = require("./middleware/verifyJWT");
 const session = require("express-session");
 
-const PORT = process.env.SERVER_PORT || 3500;
+const PORT = process.env.SERVER_PORT || 8080;
 
 // Connect to MongoDB
 connectDB();
@@ -48,17 +48,18 @@ app.use(
 app.use(express.static(`${__dirname}/../build`));
 
 // routes
+app.use("/addbatch", require("./routes/addbatch"));
 app.use("/register", require("./routes/register"));
 app.use("/login", require("./routes/login"));
 app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 app.use("/email", require("./routes/email"));
-app.use("/course", require("./routes/course"));
 
 // app.use(verifyJWT);
 app.use("/users", require("./routes/users"));
+app.use("/gethomework", require("./routes/gethomework"));
 app.use("/usersession", require("./routes/valid"));
-app.use("/addcourse", require("./routes/addCourse"));
+app.use("/submithomework", require("./routes/submitHomework"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../build/index.html"));
