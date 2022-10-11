@@ -7,9 +7,12 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import HomeworkSubmission from "../../component/HomeworkSubmission";
+import GradeHomework from "../GradeHomework";
+
 export default function Day4({ day }) {
   const selectedDay = courseList.filter((item) => item.day === day);
-
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = user?.role === "admin";
   return (
     <Container component="main">
       <Box
@@ -38,7 +41,11 @@ export default function Day4({ day }) {
           </a>{" "}
           is the link to homework{" "}
         </Typography>
-        <HomeworkSubmission selectedDay={selectedDay} />
+        {isAdmin ? (
+          <GradeHomework selectedDay={selectedDay} />
+        ) : (
+          <HomeworkSubmission selectedDay={selectedDay} />
+        )}
       </Box>
     </Container>
   );

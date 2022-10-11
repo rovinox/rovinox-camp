@@ -29,10 +29,11 @@ function Copyright(props) {
   );
 }
 
-export default function Apply() {
-  const [selectedCourse, setSelectedCourse] = useState(null);
+export default function AddBatch() {
   const [startDate, setStartDate] = useState(moment(new Date()));
   const [endDate, setEndDate] = useState(moment(new Date()));
+  const [selectedCost, setSelectedCost] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   const handleStartDate = (newValue) => {
     setStartDate(newValue);
@@ -43,17 +44,15 @@ export default function Apply() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const user = {
-      email: data.get("email"),
-      phoneNumber: data.get("phoneNumber"),
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
+    const batch = {
+      startDate,
+      endDate,
+      cost: selectedCost,
       course: selectedCourse,
     };
-    console.log(user);
+    console.log(batch);
     try {
-      const result = await axios.post("http://localhost:8080/email", user);
+      const result = await axios.post("http://localhost:8080/addbatch", batch);
       console.log(result);
     } catch (error) {
       console.error(error?.message);
@@ -61,25 +60,25 @@ export default function Apply() {
   };
   const courseList = [
     {
-      value: 1,
-      label: "Full-Stack ",
+      value: "Full-Stack",
+      label: "Full-Stack",
     },
   ];
   const cost = [
     {
-      value: 2000,
+      value: "2000",
       label: "$2000",
     },
     {
-      value: 3000,
+      value: "3000",
       label: "$3000",
     },
     {
-      value: 4000,
+      value: "4000",
       label: "$4000",
     },
     {
-      value: 5000,
+      value: "5000",
       label: "$5000",
     },
   ];
@@ -129,7 +128,7 @@ export default function Apply() {
                   name="course"
                   select
                   label="Course"
-                  value={courseList.value}
+                  //value={courseList.value}
                 >
                   {courseList.map((option) => (
                     <MenuItem
@@ -144,14 +143,14 @@ export default function Apply() {
                 <TextField
                   required
                   fullWidth
-                  name="course"
+                  name="cost"
                   select
-                  label="Course"
+                  label="Cost"
                   value={cost.value}
                 >
                   {cost.map((option) => (
                     <MenuItem
-                      onClick={() => setSelectedCourse(option.value)}
+                      onClick={() => setSelectedCost(option.value)}
                       key={option.value}
                       value={option.value}
                     >

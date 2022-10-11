@@ -1,14 +1,14 @@
-const Course = require("../model/course");
+const Batch = require("../model/batch");
 
-const course = async (req, res) => {
+const batch = async (req, res) => {
   try {
-    const Users = await Course.find({}).select();
-    if (Users) {
-      res.status(200).json({ users: Users });
+    const foundBatch = await Batch.find({}).select();
+    if (foundBatch) {
+      res.status(200).json({ batch: foundBatch });
     }
   } catch (err) {
     res.json("No data found");
   }
 };
 
-module.exports = { course };
+module.exports = { batch };
