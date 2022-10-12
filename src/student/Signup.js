@@ -9,6 +9,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import axios from "axios";
+import MenuItem from "@mui/material/MenuItem";
 
 function Copyright(props) {
   return (
@@ -27,6 +28,23 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
+  const [selectedBatch, setSelectedBatch] = useState(null);
+  const [batch, setBatch] = useState([]);
+
+  useEffect(() => {
+    const getBatch = async () => {
+      try {
+        const result = await axios.get("http://localhost:8080/getbatch");
+        console.log("result: ", result);
+
+        setBatch(result.data.batch);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getBatch();
+    console.log("data", batch);
+  }, []);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -35,6 +53,7 @@ export default function SignUp() {
       password: data.get("password"),
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
+      //batchId: selectedCourse,
     };
     try {
       const result = await axios.post("http://localhost:8080/register", user);
@@ -84,6 +103,27 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
+              {/* <TextField
+                required
+                fullWidth
+                name="course"
+                select
+                label="Course"
+                value={batch.}
+              >
+                {batch.length &&
+                  batch.map((option) => (
+                    <MenuItem
+                      onClick={() => setSelectedBatch(option.value)}
+                      key={option._id}
+                      value={option._id}
+                    >
+                      data
+                    </MenuItem>
+                  ))}
+              </TextField> */}
+            </Grid>
+            <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
@@ -93,6 +133,7 @@ export default function SignUp() {
                 autoComplete="email"
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
                 required

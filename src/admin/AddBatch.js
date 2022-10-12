@@ -45,8 +45,8 @@ export default function AddBatch() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const batch = {
-      startDate,
-      endDate,
+      startDate: moment(startDate).format(),
+      endDate: moment(endDate).format(),
       cost: selectedCost,
       course: selectedCourse,
     };

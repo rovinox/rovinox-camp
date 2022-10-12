@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import HomeworkSubmission from "../../component/HomeworkSubmission";
 import GradeHomework from "../GradeHomework";
 
-export default function Day4({ day }) {
+export default function Day4({ day, batchId }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   const user = JSON.parse(localStorage.getItem("user"));
   const isAdmin = user?.role === "admin";
@@ -42,7 +42,7 @@ export default function Day4({ day }) {
           is the link to homework{" "}
         </Typography>
         {isAdmin ? (
-          <GradeHomework selectedDay={selectedDay} />
+          <GradeHomework batchId={batchId} selectedDay={selectedDay} />
         ) : (
           <HomeworkSubmission selectedDay={selectedDay} />
         )}

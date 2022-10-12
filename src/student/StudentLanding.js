@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import CourseContent from "./CourseContent";
 import CourseListDrawer from "./CourseListDrawer";
 import NoCourse from "./NoCourse";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../component/Header";
 
 export default function StudentLanding() {
@@ -13,7 +13,8 @@ export default function StudentLanding() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
-
+  const { state } = useLocation();
+  const batchId = 445;
   console.log(currentCourse);
 
   useEffect(() => {
@@ -85,7 +86,7 @@ export default function StudentLanding() {
       {activeStudent ? (
         <>
           <Header />
-          <CourseContent day={currentCourse} />
+          <CourseContent batchId={batchId} day={currentCourse} />
           <CourseListDrawer setCurrentCourse={setCurrentCourse} />
         </>
       ) : (

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,6 +11,9 @@ import "./courseTable.css";
 import { Button } from "@mui/material";
 import { green } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 function createData(Course, ScheduleAndTime, Tuition, DeadlineToEnroll) {
   return { Course, ScheduleAndTime, Tuition, DeadlineToEnroll };
@@ -48,8 +51,32 @@ const rows = [
     "Nov 01, 2022"
   ),
 ];
-console.log(rows);
+
 export default function CourseTable() {
+  let navigate = useNavigate();
+  const [batch, setBatch] = useState([]);
+
+  useEffect(() => {
+    const getBatch = async () => {
+      try {
+        const result = await axios.get("http://localhost:8080/getbatch");
+        console.log("result: ", result);
+
+        setBatch(result.data.batch);
+      } catch (e) {}
+    };
+    getBatch();
+    console.log("data", batch);
+  }, []);
+
+  const handleApply = (id) => {
+    navigate("/apply", {
+      state: {
+        id,
+      },
+    });
+  };
+
   return (
     <div className="course-table-header">
       <div
@@ -93,24 +120,34 @@ export default function CourseTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
-              <TableRow
-                data-aos="fade-up"
-                key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.Course}
-                </TableCell>
-                <TableCell align="right">{row.ScheduleAndTime}</TableCell>
-                <TableCell align="right">{row.Tuition}</TableCell>
-                <TableCell align="right">{row.DeadlineToEnroll}</TableCell>
-                <TableCell align="right">
-                  {" "}
-                  <Button color="primary">Apply</Button>{" "}
-                </TableCell>
-              </TableRow>
-            ))}
+            {batch?.length &&
+              batch.map((row, index) => (
+                <TableRow
+                  data-aos="fade-up"
+                  key={index}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.course}
+                  </TableCell>
+                  <TableCell align="right">
+                    Tues,Thurs 6:30PM - 9:00PM{" "}
+                  </TableCell>
+                  <TableCell align="right">{row.cost}</TableCell>
+                  <TableCell align="right">
+                    {moment(row.startDate).format("MMM Do YY")}
+                  </TableCell>
+                  <TableCell align="right">
+                    {" "}
+                    <Button
+                      onClick={() => handleApply(row._id)}
+                      color="primary"
+                    >
+                      Apply
+                    </Button>{" "}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
