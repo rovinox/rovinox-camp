@@ -1,7 +1,7 @@
 const HomeWork = require("../model/homeWork");
 
 const getHomework = async (req, res) => {
-  const { day } = req.body;
+  const { day, batchId } = req.body;
   console.log("day", day);
   try {
     const foundHomeWork = await HomeWork.find({ day }).populate({

@@ -45,7 +45,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-export default function GradeHomework({ selectedDay }) {
+export default function GradeHomework({ selectedDay, batchId }) {
   const [homework, setHomeWork] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(0);
@@ -59,6 +59,7 @@ export default function GradeHomework({ selectedDay }) {
       try {
         const result = await axios.post("http://localhost:8080/gethomework", {
           day: selectedDay[0].day,
+          batchId,
         });
 
         if (result?.data.homeWork) {

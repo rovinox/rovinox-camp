@@ -5,14 +5,14 @@ const addBatch = async (req, res) => {
   console.log({ startDate, endDate, course, cost });
   try {
     const result = await Batch.create({
-      startDate: startDate.Moment._d,
-      endDate: endDate.Moment._d,
+      startDate,
+      endDate,
       course,
       cost,
     });
     console.log(result);
     if (result) {
-      res.status(201).json({ success: `New user created!` });
+      res.status(201).json({ batch: result, success: `New user created!` });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });

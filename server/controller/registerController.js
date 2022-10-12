@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const handleNewUser = async (req, res) => {
-  const { email, password, lastName, firstName } = req.body;
+  const { batchId, email, password, lastName, firstName } = req.body;
   if (!email || !password)
     return res
       .status(400)
@@ -23,6 +23,7 @@ const handleNewUser = async (req, res) => {
       password: hashedPwd,
       lastName,
       firstName,
+      batchId,
     });
 
     console.log(result);

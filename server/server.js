@@ -48,6 +48,7 @@ app.use(
 app.use(express.static(`${__dirname}/../build`));
 
 // routes
+app.use("/getbatch", require("./routes/getBatch"));
 app.use("/addbatch", require("./routes/addbatch"));
 app.use("/register", require("./routes/register"));
 app.use("/login", require("./routes/login"));

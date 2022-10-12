@@ -1,8 +1,8 @@
 const Batch = require("../model/batch");
 
-const batch = async (req, res) => {
+const getBatch = async (req, res) => {
   try {
-    const foundBatch = await Batch.find({}).select();
+    const foundBatch = await Batch.find({});
     if (foundBatch) {
       res.status(200).json({ batch: foundBatch });
     }
@@ -11,4 +11,4 @@ const batch = async (req, res) => {
   }
 };
 
-module.exports = { batch };
+module.exports = { getBatch };

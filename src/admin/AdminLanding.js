@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import StudentList from "./StudentList";
 import AddBatch from "./AddBatch";
 import Header from "../component/Header";
+import CourseTable from "../component/CourseTable";
+import GradeHomework from "./GradeHomework";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,7 +53,7 @@ export default function AdminLanding() {
   return (
     <>
       <Header />
-      <Box sx={{ width: "100%" }}>
+      <Box component="div" sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Student List" {...a11yProps(0)} />
@@ -70,7 +72,7 @@ export default function AdminLanding() {
           <AddBatch />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Grade homework
+          <GradeHomework />
         </TabPanel>
       </Box>
     </>

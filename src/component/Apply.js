@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -28,6 +29,8 @@ function Copyright(props) {
 }
 
 export default function Apply() {
+  const { state } = useLocation();
+  console.log("props", state);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   const handleSubmit = async (event) => {

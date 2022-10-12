@@ -30,66 +30,66 @@ import Day28 from "./course/Day28";
 import Day29 from "./course/Day29";
 import CourseLanding from "./CourseLanding";
 
-export default function CourseContent({ day }) {
+export default function CourseContent({ day, batchId }) {
   switch (day) {
     case 1:
-      return <Day1 day={day} />;
+      return <Day1 day={day} batchId={batchId} />;
     case 2:
-      return <Day2 day={day} />;
+      return <Day2 day={day} batchId={batchId} />;
     case 3:
-      return <Day3 day={day} />;
+      return <Day3 day={day} batchId={batchId} />;
     case 4:
-      return <Day4 day={day} />;
+      return <Day4 day={day} batchId={batchId} />;
     case 5:
-      return <Day5 day={day} />;
+      return <Day5 day={day} batchId={batchId} />;
     case 6:
-      return <Day6 day={day} />;
+      return <Day6 day={day} batchId={batchId} />;
     case 7:
-      return <Day7 day={day} />;
+      return <Day7 day={day} batchId={batchId} />;
     case 8:
-      return <Day8 day={day} />;
+      return <Day8 day={day} batchId={batchId} />;
     case 9:
-      return <Day9 day={day} />;
+      return <Day9 day={day} batchId={batchId} />;
     case 10:
-      return <Day10 day={day} />;
+      return <Day10 day={day} batchId={batchId} />;
     case 11:
-      return <Day11 day={day} />;
+      return <Day11 day={day} batchId={batchId} />;
     case 12:
-      return <Day12 day={day} />;
+      return <Day12 day={day} batchId={batchId} />;
     case 13:
-      return <Day13 day={day} />;
+      return <Day13 day={day} batchId={batchId} />;
     case 14:
-      return <Day14 day={day} />;
+      return <Day14 day={day} batchId={batchId} />;
     case 15:
-      return <Day15 day={day} />;
+      return <Day15 day={day} batchId={batchId} />;
     case 16:
-      return <Day16 day={day} />;
+      return <Day16 day={day} batchId={batchId} />;
     case 17:
-      return <Day17 day={day} />;
+      return <Day17 day={day} batchId={batchId} />;
     case 18:
-      return <Day18 day={day} />;
+      return <Day18 day={day} batchId={batchId} />;
     case 19:
-      return <Day19 day={day} />;
+      return <Day19 day={day} batchId={batchId} />;
     case 20:
-      return <Day20 day={day} />;
+      return <Day20 day={day} batchId={batchId} />;
     case 21:
-      return <Day21 day={day} />;
+      return <Day21 day={day} batchId={batchId} />;
     case 22:
-      return <Day22 day={day} />;
+      return <Day22 day={day} batchId={batchId} />;
     case 23:
-      return <Day23 day={day} />;
+      return <Day23 day={day} batchId={batchId} />;
     case 24:
-      return <Day24 day={day} />;
+      return <Day24 day={day} batchId={batchId} />;
     case 25:
-      return <Day25 day={day} />;
+      return <Day25 day={day} batchId={batchId} />;
     case 26:
-      return <Day26 day={day} />;
+      return <Day26 day={day} batchId={batchId} />;
     case 27:
-      return <Day27 day={day} />;
+      return <Day27 day={day} batchId={batchId} />;
     case 28:
-      return <Day28 day={day} />;
+      return <Day28 day={day} batchId={batchId} />;
     case 29:
-      return <Day29 day={day} />;
+      return <Day29 day={day} batchId={batchId} />;
     default:
       return <CourseLanding />;
   }
