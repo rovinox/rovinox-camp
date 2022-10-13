@@ -13,6 +13,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { DeveloperBoardOffSharp } from "@mui/icons-material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import LinearProgress from "@mui/material/LinearProgress";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -100,9 +101,8 @@ const IOSSwitch = styled((props) => (
 }));
 export default function GradeHomework({ selectedDay, batchId }) {
   const [homework, setHomeWork] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(null);
-  const [markContemplated, setMarkContemplated] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -127,7 +127,6 @@ export default function GradeHomework({ selectedDay, batchId }) {
       });
 
       if (result?.data.homeWork) {
-        setLoading(false);
         setHomeWork(result.data.homeWork);
       }
 
@@ -138,6 +137,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
   };
 
   const handMarkAsGraded = async (homeWorkId, graded) => {
+    setLoading(true);
     try {
       const result = await axios.put("http://localhost:8080/gradehomework", {
         homeWorkId,
@@ -222,6 +222,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
                       >
                         <Typography sx={{ mr: 3 }}>mark as graded? </Typography>
                         <Typography>No</Typography>
+                        <LinearProgress color="success" />
                         <FormControlLabel
                           onClick={() =>
                             handMarkAsGraded(item._id, item.graded)
@@ -236,6 +237,9 @@ export default function GradeHomework({ selectedDay, batchId }) {
                         <Typography>Yes</Typography>
                       </Grid>
                     </Grid>
+                    {loading && (
+                      <LinearProgress sx={{ mt: 1 }} color="success" />
+                    )}
                   </AccordionDetails>
                 </Accordion>
               );

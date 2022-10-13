@@ -30,66 +30,66 @@ import Day28 from "./course/Day28";
 import Day29 from "./course/Day29";
 import CourseLanding from "./CourseLanding";
 
-export default function CourseContent({ day, batchId }) {
+export default function CourseContent({ day, batchId, isAdmin }) {
   switch (day) {
     case 1:
-      return <Day1 day={day} batchId={batchId} />;
+      return <Day1 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 2:
-      return <Day2 day={day} batchId={batchId} />;
+      return <Day2 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 3:
-      return <Day3 day={day} batchId={batchId} />;
+      return <Day3 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 4:
-      return <Day4 day={day} batchId={batchId} />;
+      return <Day4 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 5:
-      return <Day5 day={day} batchId={batchId} />;
+      return <Day5 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 6:
-      return <Day6 day={day} batchId={batchId} />;
+      return <Day6 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 7:
-      return <Day7 day={day} batchId={batchId} />;
+      return <Day7 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 8:
-      return <Day8 day={day} batchId={batchId} />;
+      return <Day8 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 9:
-      return <Day9 day={day} batchId={batchId} />;
+      return <Day9 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 10:
-      return <Day10 day={day} batchId={batchId} />;
+      return <Day10 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 11:
-      return <Day11 day={day} batchId={batchId} />;
+      return <Day11 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 12:
-      return <Day12 day={day} batchId={batchId} />;
+      return <Day12 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 13:
-      return <Day13 day={day} batchId={batchId} />;
+      return <Day13 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 14:
-      return <Day14 day={day} batchId={batchId} />;
+      return <Day14 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 15:
-      return <Day15 day={day} batchId={batchId} />;
+      return <Day15 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 16:
-      return <Day16 day={day} batchId={batchId} />;
+      return <Day16 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 17:
-      return <Day17 day={day} batchId={batchId} />;
+      return <Day17 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 18:
-      return <Day18 day={day} batchId={batchId} />;
+      return <Day18 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 19:
-      return <Day19 day={day} batchId={batchId} />;
+      return <Day19 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 20:
-      return <Day20 day={day} batchId={batchId} />;
+      return <Day20 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 21:
-      return <Day21 day={day} batchId={batchId} />;
+      return <Day21 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 22:
-      return <Day22 day={day} batchId={batchId} />;
+      return <Day22 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 23:
-      return <Day23 day={day} batchId={batchId} />;
+      return <Day23 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 24:
-      return <Day24 day={day} batchId={batchId} />;
+      return <Day24 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 25:
-      return <Day25 day={day} batchId={batchId} />;
+      return <Day25 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 26:
-      return <Day26 day={day} batchId={batchId} />;
+      return <Day26 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 27:
-      return <Day27 day={day} batchId={batchId} />;
+      return <Day27 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 28:
-      return <Day28 day={day} batchId={batchId} />;
+      return <Day28 day={day} batchId={batchId} isAdmin={isAdmin} />;
     case 29:
-      return <Day29 day={day} batchId={batchId} />;
+      return <Day29 day={day} batchId={batchId} isAdmin={isAdmin} />;
     default:
       return <CourseLanding />;
   }

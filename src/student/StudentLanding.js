@@ -83,13 +83,17 @@ export default function StudentLanding(...prop) {
       controller.abort();
     };
   }, []);
-
+  const isAdmin = true;
   return (
     <div>
       {activeStudent ? (
         <>
           <Header />
-          <CourseContent batchId={batchId} day={currentCourse} />
+          <CourseContent
+            isAdmin={isAdmin}
+            batchId={batchId}
+            day={currentCourse}
+          />
           <CourseListDrawer setCurrentCourse={setCurrentCourse} />
         </>
       ) : (

@@ -9,12 +9,13 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import moment from "moment";
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "batch", headerName: "Batch", width: 250 },
   { field: "firstName", headerName: "First name", width: 130 },
   { field: "lastName", headerName: "last name", width: 130 },
   { field: "email", headerName: "Email", width: 320 },
-  { field: "enabled", headerName: "Enabled", width: 100 },
+  { field: "active", headerName: "Enabled", width: 100 },
   { field: "role", headerName: "Role", width: 100 },
 ];
 
@@ -30,7 +31,10 @@ export default function StudentList() {
         if (result?.data?.users) {
           result.data.users.forEach((user, index) => {
             user.id = index + 1;
-            user.enabled = user.enabled ? "Yes" : "no";
+            user.batch = `${moment(user.batchId.startDate).format(
+              "MMM Do YY"
+            )} - ${moment(user.batchId.endDate).format("MMM Do YY")}`;
+            user.active = user.enabled ? "Yes" : "no";
           });
           setLoading(false);
         }
@@ -137,7 +141,7 @@ export default function StudentList() {
                     name="enabled"
                     select
                     label="Enabled"
-                    value={selectedStudent.enabled === "Yes" ? "Yes" : "No"}
+                    value={selectedStudent.enabled}
                   >
                     {enableList.map((option, index) => (
                       <MenuItem
@@ -155,10 +159,20 @@ export default function StudentList() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3 }}
                 // onClick={handleSubmit}
               >
                 submit
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={() => setSelectedStudent("")}
+              >
+                cancel
               </Button>
             </Box>
           </Box>

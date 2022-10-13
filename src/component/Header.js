@@ -70,8 +70,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 const Header = () => {
   const selectedTheme = useSelector((state) => state.changeTheme.theme);
-  const isDrawer = useSelector((state) => state);
 
+  console.log(selectedTheme);
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);

@@ -22,7 +22,9 @@ const submitHomework = async (req, res) => {
         link,
       });
       if (result) {
-        res.status(201).json({ success: `New user created!` });
+        res
+          .status(201)
+          .json({ message: `Homework has been updated successfully` });
       }
     }
 
