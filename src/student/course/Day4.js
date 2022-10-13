@@ -9,10 +9,10 @@ import Button from "@mui/material/Button";
 import HomeworkSubmission from "../../component/HomeworkSubmission";
 import GradeHomework from "../GradeHomework";
 
-export default function Day4({ day, batchId }) {
+export default function Day4({ day, batchId, isAdmin }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   const user = JSON.parse(localStorage.getItem("user"));
-  const isAdmin = true;
+
   return (
     <Container component="main">
       <Box
