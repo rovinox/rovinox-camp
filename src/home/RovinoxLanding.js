@@ -11,7 +11,7 @@ import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { RovinoxTitle, CoursePromise } from "./RovinoxLanding.styled.tsx";
+import { RovinoxTitle, CoursePromise,ApplyButton } from "./RovinoxLanding.styled.tsx";
 import FAQ from "../component/FAQ";
 import Grid from "@mui/material/Grid";
 import Header from "./Header";
@@ -39,8 +39,7 @@ export default function RovinoxLanding() {
   };
   return (
     <div>
-      {" "}
-      <Header />
+        <Header />
       <div id="video_container">
         <video
           muted
@@ -79,7 +78,7 @@ export default function RovinoxLanding() {
                 r
               </span>
               <span style={{ "--i": 4 }} className="orangeText">
-                r
+                e
               </span>
               <span style={{ "--i": 5 }} className="orangeText">
                 e
