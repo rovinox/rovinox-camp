@@ -13,8 +13,9 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
+import { RovinoxTitle, CoursePromise,ApplyButton } from "./RovinoxLanding.styled.tsx";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["Courses", "Pricing", "About Us"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
@@ -128,14 +129,14 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Button
+            <ApplyButton
               onClick={() => {
                 navigate("/apply");
               }}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Apply
-            </Button>
+            </ApplyButton>
           </Box>
         </Toolbar>
       </Container>
