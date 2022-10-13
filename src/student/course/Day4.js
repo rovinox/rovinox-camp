@@ -12,7 +12,7 @@ import GradeHomework from "../GradeHomework";
 export default function Day4({ day, batchId }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   const user = JSON.parse(localStorage.getItem("user"));
-  const isAdmin = user?.role === "admin";
+  const isAdmin = true;
   return (
     <Container component="main">
       <Box

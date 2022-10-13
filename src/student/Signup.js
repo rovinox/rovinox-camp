@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
-
+import moment from "moment";
 function Copyright(props) {
   return (
     <Typography
@@ -28,7 +28,7 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-  const [selectedBatch, setSelectedBatch] = useState(null);
+  const [selectedBatch, setSelectedBatch] = useState("null");
   const [batch, setBatch] = useState([]);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function SignUp() {
       password: data.get("password"),
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
-      //batchId: selectedCourse,
+      batchId: selectedBatch,
     };
     try {
       const result = await axios.post("http://localhost:8080/register", user);
@@ -102,27 +102,29 @@ export default function SignUp() {
                 autoComplete="family-name"
               />
             </Grid>
-            <Grid item xs={12}>
-              {/* <TextField
-                required
-                fullWidth
-                name="course"
-                select
-                label="Course"
-                value={batch.}
-              >
-                {batch.length &&
-                  batch.map((option) => (
+            {batch.length && (
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="course"
+                  select
+                  label="Course"
+                  value={selectedBatch}
+                >
+                  {batch.map((option) => (
                     <MenuItem
-                      onClick={() => setSelectedBatch(option.value)}
+                      onClick={() => setSelectedBatch(option._id)}
                       key={option._id}
                       value={option._id}
                     >
-                      data
+                      {moment(option.startDate).format("MMM Do YY")} -
+                      {moment(option.endDate).format("MMM Do YY")}
                     </MenuItem>
                   ))}
-              </TextField> */}
-            </Grid>
+                </TextField>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <TextField
                 required

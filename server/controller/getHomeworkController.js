@@ -4,10 +4,15 @@ const getHomework = async (req, res) => {
   const { day, batchId } = req.body;
   console.log("day", day);
   try {
-    const foundHomeWork = await HomeWork.find({ day }).populate({
-      path: "studentId",
-      select: ["lastName", "firstName"],
-    });
+    const foundHomeWork = await HomeWork.find({ day }).populate([
+      {
+        path: "studentId",
+        select: ["lastName", "firstName"],
+      },
+      {
+        path: "batchId",
+      },
+    ]);
     if (foundHomeWork) {
       res.status(200).json({ homeWork: foundHomeWork, message: "data found" });
     }

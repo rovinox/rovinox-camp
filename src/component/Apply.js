@@ -151,7 +151,7 @@ export default function Apply() {
                 name="course"
                 select
                 label="Course"
-                value={courseList.value}
+                //value={courseList.value}
               >
                 {courseList.map((option) => (
                   <MenuItem

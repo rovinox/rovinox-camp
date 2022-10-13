@@ -9,6 +9,7 @@ import AddBatch from "./AddBatch";
 import Header from "../component/Header";
 import CourseTable from "../component/CourseTable";
 import GradeHomework from "./GradeHomework";
+import Test from "./Test";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,6 +76,7 @@ export default function AdminLanding() {
           <GradeHomework />
         </TabPanel>
       </Box>
+      {/* <Test /> */}
     </>
   );
 }

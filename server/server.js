@@ -61,6 +61,7 @@ app.use("/users", require("./routes/users"));
 app.use("/gethomework", require("./routes/gethomework"));
 app.use("/usersession", require("./routes/valid"));
 app.use("/submithomework", require("./routes/submitHomework"));
+app.use("/gradehomework", require("./routes/gradeHomework"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../build/index.html"));

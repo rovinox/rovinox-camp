@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 import { Typography } from "@mui/material";
 import moment from "moment";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
 function createData(course, startDate, endDate) {
@@ -32,16 +32,11 @@ export default function GradeHomework() {
       try {
         const result = await axios.get("http://localhost:8080/getbatch");
         console.log("result: ", result);
-
         setBatch(result.data.batch);
       } catch (e) {}
     };
     getBatch();
-    console.log("data", batch);
-    // if (pic1) {
-    //   setLoading(false);
-    // }
-  });
+  }, []);
   const handleBatch = (id) => {
     navigate("/student", {
       state: {
@@ -68,7 +63,7 @@ export default function GradeHomework() {
             {batch.length &&
               batch.map((row) => (
                 <TableRow
-                  key={row.course}
+                  key={row._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -79,7 +74,6 @@ export default function GradeHomework() {
                     {moment(row.endDate).format("MMM Do YY")}
                   </TableCell>
                   <TableCell align="right">
-                    {" "}
                     <Button
                       onClick={() => handleBatch(row._id)}
                       color="primary"

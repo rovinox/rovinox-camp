@@ -9,7 +9,10 @@ import axios from "axios";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Grid from "@mui/material/Grid";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { DeveloperBoardOffSharp } from "@mui/icons-material";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -45,87 +48,202 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
+const IOSSwitch = styled((props) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 42,
+  height: 26,
+  padding: 0,
+  "& .MuiSwitch-switchBase": {
+    padding: 0,
+    margin: 2,
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
+        opacity: 1,
+        border: 0,
+      },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: 0.5,
+      },
+    },
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
+    },
+    "&.Mui-disabled .MuiSwitch-thumb": {
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
+    },
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
+    width: 22,
+    height: 22,
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+    opacity: 1,
+    transition: theme.transitions.create(["background-color"], {
+      duration: 500,
+    }),
+  },
+}));
 export default function GradeHomework({ selectedDay, batchId }) {
   const [homework, setHomeWork] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expanded, setExpanded] = useState(0);
+  const [expanded, setExpanded] = useState(null);
+  const [markContemplated, setMarkContemplated] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
   useEffect(() => {
-    const getUsers = async () => {
-      console.log("day", selectedDay[0].day);
-      try {
-        const result = await axios.post("http://localhost:8080/gethomework", {
-          day: selectedDay[0].day,
-          batchId,
-        });
+    if (!batchId) {
+      setTimeout(() => {
+        navigate("/admin");
+      }, 3000);
+    }
 
-        if (result?.data.homeWork) {
-          setLoading(false);
-          setHomeWork(result.data.homeWork);
-        }
-
-        console.log("result.data", result.data.homeWork);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     getUsers();
   }, []);
+
+  const getUsers = async () => {
+    console.log("day", selectedDay[0].day);
+    try {
+      const result = await axios.post("http://localhost:8080/gethomework", {
+        day: selectedDay[0].day,
+        batchId,
+      });
+
+      if (result?.data.homeWork) {
+        setLoading(false);
+        setHomeWork(result.data.homeWork);
+      }
+
+      console.log("result.data", result.data.homeWork);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handMarkAsGraded = async (homeWorkId, graded) => {
+    try {
+      const result = await axios.put("http://localhost:8080/gradehomework", {
+        homeWorkId,
+        graded: !graded,
+      });
+
+      if (result?.data) {
+        setLoading(false);
+        getUsers();
+      }
+
+      console.log("result.data", result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div>
-      {homework.length &&
-        homework.map((item, index) => {
-          return (
-            <Accordion
-              sx={{ width: 800 }}
-              key={index}
-              expanded={expanded === index}
-              onChange={handleChange(index)}
-            >
-              <AccordionSummary
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="space-evenly"
-                  alignItems="center"
+      {batchId ? (
+        <div>
+          {homework.length &&
+            homework.map((item, index) => {
+              return (
+                <Accordion
+                  sx={{ width: 800 }}
+                  key={index}
+                  expanded={expanded === index}
+                  onChange={handleChange(index)}
                 >
-                  <Grid xs={4}>
-                    {item.studentId.firstName} {item.studentId.lastName}
-                  </Grid>
-                  <Grid xs={4}>
-                    Graded:{" "}
-                    {item.graded ? (
-                      <CheckCircleIcon color="primary" />
-                    ) : (
-                      <CancelIcon sx={{ color: "red" }} />
-                    )}
-                  </Grid>
-                  <Grid xs={4}>
-                    Submitted:{" "}
-                    {item.link ? (
-                      <CheckCircleIcon sx={{ mt: 1 }} color="primary" />
-                    ) : (
-                      <CancelIcon sx={{ color: "red" }} />
-                    )}
-                  </Grid>
-                </Grid>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  <a href={item.link} target="_blank" rel="noreferrer">
-                    Homework Link
-                  </a>
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          );
-        })}
+                  <AccordionSummary
+                    aria-controls="panel1d-content"
+                    id="panel1d-header"
+                  >
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                    >
+                      <Grid item xs={4}>
+                        Name: {item.studentId.firstName}{" "}
+                        {item.studentId.lastName}
+                      </Grid>
+                      <Grid item xs={4}>
+                        Graded:{" "}
+                        {item.graded ? (
+                          <CheckCircleIcon color="primary" />
+                        ) : (
+                          <CancelIcon sx={{ color: "red" }} />
+                        )}
+                      </Grid>
+                      <Grid item xs={4}>
+                        Submitted:{" "}
+                        {item.link ? (
+                          <CheckCircleIcon sx={{ mt: 1 }} color="primary" />
+                        ) : (
+                          <CancelIcon sx={{ color: "red" }} />
+                        )}
+                      </Grid>
+                    </Grid>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                    >
+                      <Grid item xs={6}>
+                        <Typography>
+                          <a href={item.link} target="_blank" rel="noreferrer">
+                            Homework Link
+                          </a>
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        container
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="flex-end"
+                        xs={6}
+                      >
+                        <Typography sx={{ mr: 3 }}>mark as graded? </Typography>
+                        <Typography>No</Typography>
+                        <FormControlLabel
+                          onClick={() =>
+                            handMarkAsGraded(item._id, item.graded)
+                          }
+                          control={
+                            <IOSSwitch
+                              sx={{ ml: 3 }}
+                              defaultChecked={item.graded}
+                            />
+                          }
+                        />
+                        <Typography>Yes</Typography>
+                      </Grid>
+                    </Grid>
+                  </AccordionDetails>
+                </Accordion>
+              );
+            })}
+        </div>
+      ) : (
+        <Typography>Please Select a Batch</Typography>
+      )}
     </div>
   );
 }
