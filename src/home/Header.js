@@ -38,7 +38,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar sx={{ boxShadow: "none", background: "none" }} position="absolute">
+    <AppBar sx={{ boxShadow: "none", background: "#19b6fa" }} position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

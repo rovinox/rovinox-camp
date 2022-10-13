@@ -39,8 +39,7 @@ export default function RovinoxLanding() {
   };
   return (
     <div>
-      {" "}
-      <Header />
+        <Header />
       <div id="video_container">
         <video
           muted
