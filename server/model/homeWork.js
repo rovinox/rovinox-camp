@@ -6,6 +6,10 @@ const homeWorkSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "student",
   },
+  batchId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "batch",
+  },
   link: {
     type: String,
     required: true,

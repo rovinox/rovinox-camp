@@ -2,7 +2,7 @@ const Homework = require("../model/homeWork");
 const Student = require("../model/student");
 
 const submitHomework = async (req, res) => {
-  const { homeWorkId, course, day, graded, link, email } = req.body;
+  const { homeWorkId, day, graded, link, email } = req.body;
 
   try {
     if (graded) {
@@ -16,7 +16,7 @@ const submitHomework = async (req, res) => {
 
       const result = await Homework.create({
         studentId: foundStudent._id,
-        course,
+        batchId: foundStudent.batchId,
         day,
         graded,
         link,

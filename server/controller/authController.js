@@ -46,7 +46,12 @@ const login = async (req, res) => {
 
       // Send authorization roles and access token to user
       console.log("foundUser", foundUser);
-      res.json({ accessToken, email, role: foundUser.role });
+      res.json({
+        accessToken,
+        email,
+        role: foundUser.role,
+        batchId: foundUser.batchId,
+      });
     }
   }
 };
