@@ -19,7 +19,7 @@ const columns = [
   { field: "role", headerName: "Role", width: 100 },
 ];
 
-export default function StudentList() {
+export default function StudentList({ batch }) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -56,6 +56,13 @@ export default function StudentList() {
     { value: false, label: "No" },
     { value: true, label: "Yes" },
   ];
+  const batchList = batch.map((option) => {
+    return {
+      value: option._id,
+      label: `${moment(option.startDate).format("MMM Do YY")} -
+                          ${moment(option.endDate).format("MMM Do YY")}`,
+    };
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
     setSelectedStudent("");
@@ -73,7 +80,7 @@ export default function StudentList() {
         editMode={"row"}
         onCellClick={(props) => {
           setSelectedStudent(props.row);
-          console.log(props.row.enabled);
+          console.log(props.row);
         }}
         components={{
           LoadingOverlay: LinearProgress,
@@ -115,6 +122,28 @@ export default function StudentList() {
                     value={selectedStudent.lastName}
                   />
                 </Grid>
+                {batchList.length && (
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="batch"
+                      select
+                      label="Batch"
+                      value={selectedStudent.batchId._id}
+                    >
+                      {batchList.map((option, index) => (
+                        <MenuItem
+                          // onClick={() => setSelectedBatch(option._id)}
+                          key={index}
+                          value={option.value}
+                        >
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                )}
 
                 <Grid item xs={12}>
                   <TextField

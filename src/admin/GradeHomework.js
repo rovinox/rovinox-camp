@@ -12,24 +12,9 @@ import moment from "moment";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
-function createData(course, startDate, endDate) {
-  return { course, startDate, endDate };
-}
-
-export default function GradeHomework() {
-  const [batch, setBatch] = useState([]);
+export default function GradeHomework({ batch }) {
   let navigate = useNavigate();
 
-  useEffect(() => {
-    const getBatch = async () => {
-      try {
-        const result = await axios.get("http://localhost:8080/getbatch");
-        console.log("result: ", result);
-        setBatch(result.data.batch);
-      } catch (e) {}
-    };
-    getBatch();
-  }, []);
   const handleBatch = (id) => {
     navigate("/student", {
       state: {
@@ -37,7 +22,6 @@ export default function GradeHomework() {
       },
     });
   };
-
   return (
     <div>
       <TableContainer>
