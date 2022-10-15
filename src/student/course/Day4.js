@@ -3,15 +3,10 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../../component/course";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import HomeworkSubmission from "../../component/HomeworkSubmission";
-import GradeHomework from "../GradeHomework";
+import HomeworkList from "../../component/HomeworkList";
 
 export default function Day4({ day, batchId, isAdmin }) {
   const selectedDay = courseList.filter((item) => item.day === day);
-  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <Container component="main">
@@ -41,11 +36,11 @@ export default function Day4({ day, batchId, isAdmin }) {
           </a>{" "}
           is the link to homework{" "}
         </Typography>
-        {isAdmin ? (
-          <GradeHomework batchId={batchId} selectedDay={selectedDay} />
-        ) : (
-          <HomeworkSubmission selectedDay={selectedDay} />
-        )}
+        <HomeworkList
+          isAdmin={isAdmin}
+          batchId={batchId}
+          selectedDay={selectedDay}
+        />
       </Box>
     </Container>
   );

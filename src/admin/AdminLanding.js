@@ -10,6 +10,7 @@ import Header from "../component/Header";
 import CourseTable from "../component/CourseTable";
 import GradeHomework from "./GradeHomework";
 import Test from "./Test";
+import axios from "axios";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,6 +51,18 @@ export default function AdminLanding() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [batch, setBatch] = useState([]);
+
+  useEffect(() => {
+    const getBatch = async () => {
+      try {
+        const result = await axios.get("http://localhost:8080/getbatch");
+        console.log("result: ", result);
+        setBatch(result.data.batch);
+      } catch (e) {}
+    };
+    getBatch();
+  }, []);
 
   return (
     <>
@@ -64,7 +77,7 @@ export default function AdminLanding() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <StudentList />
+          <StudentList batch={batch} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           Course list
@@ -73,7 +86,7 @@ export default function AdminLanding() {
           <AddBatch />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <GradeHomework />
+          <GradeHomework batch={batch} />
         </TabPanel>
       </Box>
       {/* <Test /> */}

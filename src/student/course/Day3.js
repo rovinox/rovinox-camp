@@ -6,8 +6,10 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { courseList } from "../../component/course";
 import gitPic from "../../asset/gitDownload.png";
 import ReactPlayer from "react-player";
+
 export default function Day3({ day }) {
   const selectedDay = courseList.filter((item) => item.day === day);
+
   return (
     <Container component="main">
       <Box

@@ -11,9 +11,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Grid from "@mui/material/Grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import { DeveloperBoardOffSharp } from "@mui/icons-material";
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
+import { useSelector } from "react-redux";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -103,18 +102,14 @@ export default function GradeHomework({ selectedDay, batchId }) {
   const [homework, setHomeWork] = useState([]);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(null);
-  const navigate = useNavigate();
+  const gradeHomeView = useSelector(
+    (state) => state.changeGradeHomeView.gradeHomeView
+  );
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
   useEffect(() => {
-    if (!batchId) {
-      setTimeout(() => {
-        navigate("/admin");
-      }, 3000);
-    }
-
     getUsers();
   }, []);
 
@@ -157,8 +152,8 @@ export default function GradeHomework({ selectedDay, batchId }) {
   return (
     <div>
       {batchId ? (
-        <div>
-          {homework.length &&
+        <>
+          {homework.length > 0 &&
             homework.map((item, index) => {
               return (
                 <Accordion
@@ -244,9 +239,15 @@ export default function GradeHomework({ selectedDay, batchId }) {
                 </Accordion>
               );
             })}
-        </div>
+        </>
       ) : (
-        <Typography>Please Select a Batch</Typography>
+        <>
+          {gradeHomeView && (
+            <Typography variant="h5">
+              Please select a batch from admin dashboard
+            </Typography>
+          )}
+        </>
       )}
     </div>
   );

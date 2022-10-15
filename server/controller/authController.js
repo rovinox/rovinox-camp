@@ -7,24 +7,22 @@ const login = async (req, res) => {
   const foundUser = await Student.findOne({ email });
 
   if (!foundUser) {
-    res.status(401).json("Incorrect email or password");
+    res.status(401).json({ message: "Incorrect email or password" });
   } else {
     const authenticated = await bcrypt.compareSync(
       password,
       foundUser.password
     );
     if (!authenticated) {
-      res.status(401).json("Incorrect email or password");
+      res.status(401).json({ message: "Incorrect email or password" });
     } else {
       const accessToken = jwt.sign(
         {
-          UserInfo: {
-            email: foundUser.email,
-          },
+          user: foundUser,
         },
         process.env.ACCESS_TOKEN_SECRET,
         // 5 minutes or 15
-        { expiresIn: "1h" }
+        { expiresIn: "1d" }
       );
       // const refreshToken = jwt.sign(
       //   { email: foundUser.email },
@@ -48,9 +46,12 @@ const login = async (req, res) => {
       console.log("foundUser", foundUser);
       res.json({
         accessToken,
+        firstName: foundUser.firstName,
+        lastName: foundUser.lastName,
         email,
         role: foundUser.role,
         batchId: foundUser.batchId,
+        enabled: foundUser.enabled,
       });
     }
   }

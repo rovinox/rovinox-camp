@@ -11,7 +11,10 @@ const handleNewUser = async (req, res) => {
 
   // check for duplicate usernames in the db
   const duplicate = await Student.findOne({ email }).exec();
-  if (duplicate) return res.sendStatus(409); //Conflict
+  if (duplicate)
+    return res
+      .status(409)
+      .json({ message: "This email address already exists" }); //Conflict
 
   try {
     //encrypt the password
@@ -35,29 +38,35 @@ const handleNewUser = async (req, res) => {
           },
         },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "10s" }
-      );
-      const refreshToken = jwt.sign(
-        { email: result.email },
-        process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: "1d" }
       );
+      // const refreshToken = jwt.sign(
+      //   { email: result.email },
+      //   process.env.REFRESH_TOKEN_SECRET,
+      //   { expiresIn: "1d" }
+      // );
       // Saving refreshToken with current user
-      result.refreshToken = refreshToken;
-      const addedToken = await result.save();
-      console.log(addedToken);
+      // result.refreshToken = refreshToken;
+      // const addedToken = await result.save();
+      // console.log(addedToken);
 
       // Creates Secure Cookie with refresh token
-      res.cookie("jwt", refreshToken, {
+      res.cookie("jwt", accessToken, {
         httpOnly: true,
         secure: true,
         sameSite: "None",
         maxAge: 24 * 60 * 60 * 1000,
       });
 
-      res
-        .status(201)
-        .json({ success: `New user ${email} created!`, accessToken });
+      res.status(200).json({
+        accessToken,
+        firstName: result.firstName,
+        lastName: result.lastName,
+        email,
+        role: result.role,
+        batchId: result.batchId,
+        enabled: result.enabled,
+      });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });

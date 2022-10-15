@@ -31,7 +31,7 @@ export default function HomeworkSubmission({ selectedDay }) {
         setLoading(false);
         setTimeout(() => {
           setMessage("");
-        }, 3000);
+        }, 5000);
       }
       console.log(result);
     } catch (error) {

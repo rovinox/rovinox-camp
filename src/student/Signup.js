@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 function Copyright(props) {
   return (
     <Typography
@@ -28,8 +29,10 @@ function Copyright(props) {
 }
 
 export default function SignUp() {
-  const [selectedBatch, setSelectedBatch] = useState("null");
+  const [selectedBatch, setSelectedBatch] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [batch, setBatch] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getBatch = async () => {
@@ -39,7 +42,7 @@ export default function SignUp() {
 
         setBatch(result.data.batch);
       } catch (e) {
-        console.log(e);
+        console.log(e.response?.status);
       }
     };
     getBatch();
@@ -58,8 +61,20 @@ export default function SignUp() {
     try {
       const result = await axios.post("http://localhost:8080/register", user);
       console.log(result);
-    } catch (error) {
-      console.error(error?.message);
+      if (result.status === 200) {
+        localStorage.setItem("user", JSON.stringify(result.data));
+        if (user?.role === "student") {
+          navigate("/student");
+        } else {
+          navigate("/admin");
+        }
+      }
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 409) {
+        setErrMsg("This email address already exists");
+      }
     }
   };
 
@@ -166,6 +181,11 @@ export default function SignUp() {
           </Grid>
         </Box>
       </Box>
+      {errMsg && (
+        <Typography variant="h6" sx={{ mt: 2, color: "red" }}>
+          {errMsg}
+        </Typography>
+      )}
       <Copyright sx={{ mt: 5 }} />
     </Container>
   );
