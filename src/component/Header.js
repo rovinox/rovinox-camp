@@ -70,6 +70,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 const Header = () => {
   const selectedTheme = useSelector((state) => state.changeTheme.theme);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   console.log(selectedTheme);
   const dispatch = useDispatch();
@@ -249,7 +250,7 @@ const Header = () => {
                 course
               </Button>
             )}
-            {location.pathname !== "/admin" && (
+            {location.pathname !== "/admin" && user.role !== "student" && (
               <Button
                 onClick={handleAdmin}
                 sx={{ my: 2, color: "white", display: "block" }}
@@ -265,7 +266,13 @@ const Header = () => {
             />
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar {...stringAvatar("Kent Dodds")} />
+                <Avatar
+                  {...stringAvatar(
+                    `${user?.firstName.charAt(0).toUpperCase()} ${user?.lastName
+                      .charAt(0)
+                      .toUpperCase()}`
+                  )}
+                />
               </IconButton>
             </Tooltip>
             <Menu

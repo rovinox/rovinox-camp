@@ -57,7 +57,7 @@ export default function Login() {
         JSON.stringify({ email, password: pwd }),
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          // withCredentials: true,
         }
       );
       console.log(JSON.stringify("vv9", response));
@@ -74,7 +74,7 @@ export default function Login() {
       } else if (err.response?.status === 400) {
         setErrMsg("Missing email name or Password");
       } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized");
+        setErrMsg("Incorrect email or password");
       } else {
         setErrMsg("Login Failed");
       }
@@ -161,8 +161,16 @@ export default function Login() {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-              {errMsg && <Typography ref={errRef}>{errMsg}</Typography>}
             </Grid>
+            {errMsg && (
+              <Typography
+                variant="h6"
+                sx={{ mt: 2, color: "red" }}
+                ref={errRef}
+              >
+                {errMsg}
+              </Typography>
+            )}
             <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>

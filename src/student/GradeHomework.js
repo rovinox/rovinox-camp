@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import LinearProgress from "@mui/material/LinearProgress";
+import { useSelector } from "react-redux";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -101,6 +102,9 @@ export default function GradeHomework({ selectedDay, batchId }) {
   const [homework, setHomeWork] = useState([]);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(null);
+  const gradeHomeView = useSelector(
+    (state) => state.changeGradeHomeView.gradeHomeView
+  );
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -147,87 +151,104 @@ export default function GradeHomework({ selectedDay, batchId }) {
   };
   return (
     <div>
-      {homework.length > 0 &&
-        homework.map((item, index) => {
-          return (
-            <Accordion
-              sx={{ width: 800 }}
-              key={index}
-              expanded={expanded === index}
-              onChange={handleChange(index)}
-            >
-              <AccordionSummary
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="space-evenly"
-                  alignItems="center"
+      {batchId ? (
+        <>
+          {homework.length > 0 &&
+            homework.map((item, index) => {
+              return (
+                <Accordion
+                  sx={{ width: 800 }}
+                  key={index}
+                  expanded={expanded === index}
+                  onChange={handleChange(index)}
                 >
-                  <Grid item xs={4}>
-                    Name: {item.studentId.firstName} {item.studentId.lastName}
-                  </Grid>
-                  <Grid item xs={4}>
-                    Graded:{" "}
-                    {item.graded ? (
-                      <CheckCircleIcon color="primary" />
-                    ) : (
-                      <CancelIcon sx={{ color: "red" }} />
-                    )}
-                  </Grid>
-                  <Grid item xs={4}>
-                    Submitted:{" "}
-                    {item.link ? (
-                      <CheckCircleIcon sx={{ mt: 1 }} color="primary" />
-                    ) : (
-                      <CancelIcon sx={{ color: "red" }} />
-                    )}
-                  </Grid>
-                </Grid>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="space-evenly"
-                  alignItems="center"
-                >
-                  <Grid item xs={6}>
-                    <Typography>
-                      <a href={item.link} target="_blank" rel="noreferrer">
-                        Homework Link
-                      </a>
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    container
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="flex-end"
-                    xs={6}
+                  <AccordionSummary
+                    aria-controls="panel1d-content"
+                    id="panel1d-header"
                   >
-                    <Typography sx={{ mr: 3 }}>mark as graded? </Typography>
-                    <Typography>No</Typography>
-                    <LinearProgress color="success" />
-                    <FormControlLabel
-                      onClick={() => handMarkAsGraded(item._id, item.graded)}
-                      control={
-                        <IOSSwitch
-                          sx={{ ml: 3 }}
-                          defaultChecked={item.graded}
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                    >
+                      <Grid item xs={4}>
+                        Name: {item.studentId.firstName}{" "}
+                        {item.studentId.lastName}
+                      </Grid>
+                      <Grid item xs={4}>
+                        Graded:{" "}
+                        {item.graded ? (
+                          <CheckCircleIcon color="primary" />
+                        ) : (
+                          <CancelIcon sx={{ color: "red" }} />
+                        )}
+                      </Grid>
+                      <Grid item xs={4}>
+                        Submitted:{" "}
+                        {item.link ? (
+                          <CheckCircleIcon sx={{ mt: 1 }} color="primary" />
+                        ) : (
+                          <CancelIcon sx={{ color: "red" }} />
+                        )}
+                      </Grid>
+                    </Grid>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                    >
+                      <Grid item xs={6}>
+                        <Typography>
+                          <a href={item.link} target="_blank" rel="noreferrer">
+                            Homework Link
+                          </a>
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        container
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="flex-end"
+                        xs={6}
+                      >
+                        <Typography sx={{ mr: 3 }}>mark as graded? </Typography>
+                        <Typography>No</Typography>
+                        <LinearProgress color="success" />
+                        <FormControlLabel
+                          onClick={() =>
+                            handMarkAsGraded(item._id, item.graded)
+                          }
+                          control={
+                            <IOSSwitch
+                              sx={{ ml: 3 }}
+                              defaultChecked={item.graded}
+                            />
+                          }
                         />
-                      }
-                    />
-                    <Typography>Yes</Typography>
-                  </Grid>
-                </Grid>
-                {loading && <LinearProgress sx={{ mt: 1 }} color="success" />}
-              </AccordionDetails>
-            </Accordion>
-          );
-        })}
+                        <Typography>Yes</Typography>
+                      </Grid>
+                    </Grid>
+                    {loading && (
+                      <LinearProgress sx={{ mt: 1 }} color="success" />
+                    )}
+                  </AccordionDetails>
+                </Accordion>
+              );
+            })}
+        </>
+      ) : (
+        <>
+          {gradeHomeView && (
+            <Typography variant="h5">
+              Please select a batch from admin dashboard
+            </Typography>
+          )}
+        </>
+      )}
     </div>
   );
 }

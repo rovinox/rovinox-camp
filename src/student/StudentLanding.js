@@ -9,9 +9,9 @@ import Header from "../component/Header";
 
 export default function StudentLanding(...prop) {
   const [currentCourse, setCurrentCourse] = useState(0);
-  const [activeStudent, setActiveStudent] = useState(true);
-  const user = JSON.parse(localStorage.getItem("user"));
-
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [activeStudent, setActiveStudent] = useState(0);
+  // const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const params = useLocation();
   //console.log("state: ", state);
@@ -21,69 +21,30 @@ export default function StudentLanding(...prop) {
   //const batchId = 54165;
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    setActiveStudent(user?.enabled);
+    setIsAdmin(user?.enabled);
     const getUser = async () => {
       try {
-        const result = await axios.get(
-          "/usersession",
-          {
-            email: "a@aa.com",
+        const result = await axios.get("http://localhost:8080/usersession", {
+          headers: {
+            authorization: `Bearer ${user?.accessToken}`,
+            "Content-Type": "application/json",
           },
-          {
-            headers: {
-              authorization: `Bearer ${"bdxfgdfg"}`,
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
-        );
+          //withCredentials: true,
+        });
         console.log("vv1", result);
-        // if (result?.data) {
-        //   setActiveStudent(true);
-        // } else {
-        //   setActiveStudent(false);
-        //   navigate("/login");
-        // }
+        if (!result?.data?.login) {
+          navigate("/login");
+        }
       } catch (error) {
         console.error(error?.message);
       }
     };
-    //getUser();
-  }, []);
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const getUser = async () => {
-      try {
-        const response = await axios.post(
-          "/usersession",
-          { email: user.email },
-          {
-            headers: {
-              authorization: `Bearer ${user.accessToken}`,
-            },
-            // });
-            // const response = await axios.post("/valid", {
-            //   headers: {
-            //     authorization: `Bearer ${auth.accessToken}`,
-            //     "Content-Type": "application/json",
-            //   },
-            //   withCredentials: true,
-          }
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    console.log("user", user);
-    console.log("vv1", `Bearer ${user.accessToken}`);
-    console.log("vv2", `Bearer ${user.email}`);
     getUser();
-    return () => {
-      controller.abort();
-    };
   }, []);
-  const isAdmin = true;
+
   return (
     <div>
       {activeStudent ? (

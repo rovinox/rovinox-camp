@@ -33,16 +33,16 @@ app.use(express.json());
 //middleware for cookies
 app.use(cookieParser());
 
-app.use(
-  session({
-    secret: process.env.ACCESS_TOKEN_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24,
-    },
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.ACCESS_TOKEN_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       maxAge: 1000 * 60 * 60 * 24,
+//     },
+//   })
+// );
 
 //serve static files
 app.use(express.static(`${__dirname}/../build`));
@@ -62,6 +62,7 @@ app.use("/gethomework", require("./routes/gethomework"));
 app.use("/usersession", require("./routes/valid"));
 app.use("/submithomework", require("./routes/submitHomework"));
 app.use("/gradehomework", require("./routes/gradeHomework"));
+app.use("/getprogress", require("./routes/getProgress"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../build/index.html"));
