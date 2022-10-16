@@ -16,7 +16,8 @@ import FAQ from "../component/FAQ";
 import Grid from "@mui/material/Grid";
 import Header from "./Header";
 import Loading from "./Loading";
-
+import { Widget } from 'react-chat-widget';
+import 'react-chat-widget/lib/styles.css';
 export default function RovinoxLanding() {
   const navigate = useNavigate();
   const [currentVideo, setCurrentVideo] = useState(vid1);
@@ -113,7 +114,7 @@ export default function RovinoxLanding() {
               </span>
             </RovinoxTitle>
           </div>
-          <div>
+          <div style={{marginTop: '99px'}}>
             <Grid sx={{ mt: 5 }} Grid container spacing={2}>
               <Grid xs={12} md={6}>
                 <img
@@ -161,6 +162,7 @@ export default function RovinoxLanding() {
           <FAQ />{" "}
         </>
       )}
+      <Widget />
     </div>
   );
 }
