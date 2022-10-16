@@ -36,3 +36,24 @@ export const ApplyButton = styled.a`
     cursor: pointer;
   }
 `;
+
+export const CoursePacketButton  = styled.a`
+  background-color: #05aae1;
+  border-radius: 4px;
+  box-shadow: 0px 6px 6px rgb(11 31 39 / 8%);
+  color: #fff !important;
+  font: 16px/19px ProximaNova-Bold, tahoma, verdana, arial, sans-serif;
+  font-weight: 600;
+  margin-left: 5px;
+  padding: 23px 10px;
+  text-align: center;
+  text-decoration: none !important;
+  transition: 0.21s;
+  vertical-align: middle;
+  margin-top: 220px;
+  
+  &:hover {
+    cursor: pointer;
+    background: red;
+  }
+`

@@ -11,7 +11,7 @@ import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { RovinoxTitle, CoursePromise,ApplyButton } from "./RovinoxLanding.styled.tsx";
+import { RovinoxTitle, CoursePromise,ApplyButton,CoursePacketButton } from "./RovinoxLanding.styled.tsx";
 import FAQ from "../component/FAQ";
 import Grid from "@mui/material/Grid";
 import Header from "./Header";
@@ -40,7 +40,7 @@ export default function RovinoxLanding() {
   return (
     <div>
         <Header />
-      <div id="video_container">
+      <div className="video_container">
         <video
           muted
           loop
@@ -55,6 +55,10 @@ export default function RovinoxLanding() {
         >
           <source src={currentVideo} type="video/mp4" />
         </video>
+        <div className="land-tech-job-section">
+          <h2>Land Your Dream Job In Tech</h2>
+          <CoursePacketButton>Get Free Course Packet</CoursePacketButton>
+        </div>
       </div>
       {loading ? (
         <Loading />

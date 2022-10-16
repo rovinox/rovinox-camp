@@ -16,9 +16,37 @@
   background: #03a9f4;
   mix-blend-mode: overlay;
 }
-#video_container {
+
+.video_container {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: -2;
+  position: relative;
+}
+
+.land-tech-job-section {
+  position: absolute;
+  top: 20px;
+  right: 260px;
+  margin: 120px;
+  margin-top: 250px;
+  width: 560px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.video_container  h2 {
+  position: absolute;
+
+  line-height: 1;
+  color: white;
+  text-align: center;
+  font-size: 60px;
+ 
+  font: 60px/70px ProximaNova-Bold, tahoma, verdana, arial, sans-serif;
+  font-weight: 550;
+  display: block;
 }
 
 .video-client {
