@@ -114,8 +114,8 @@ export default function RovinoxLanding() {
               </span>
             </RovinoxTitle>
           </div>
-          <div style={{marginTop: '99px'}}>
-            <Grid sx={{ mt: 5 }} Grid container spacing={2}>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#e6e6e6', padding: '0px'}}>
+            <Grid sx={{ mt: 5 }}  Grid container spacing={2}>
               <Grid xs={12} md={6}>
                 <img
                   data-aos="flip-left"
@@ -126,7 +126,7 @@ export default function RovinoxLanding() {
                   alt="pic"
                 />
               </Grid>
-              <Grid xs={12} md={6}>
+              <Grid xs={12} md={6} style={{display: "flex",  justifyContent: 'center', flexDirection: 'column'}}>
                 <CoursePromise data-aos="slide-left">
                   {" "}
                   <CheckCircleIcon color="primary" /> Live, real-time
@@ -158,11 +158,32 @@ export default function RovinoxLanding() {
               </Grid>
             </Grid>
           </div>
+        <div id="about">
+          <div class="container">
+              <div class="course-row">
+                  <div class="col-md-4">
+                      <img src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777628/quality_q31k6u.png" class="aboutImage" />
+                      <h2 style={{color: 'red'}}>High Quality Lectures</h2>
+                      <p>All lectures have been very well prepared for the best learning experience of future developers.</p>
+                  </div>
+                  <div class="col-md-4">
+                      <img src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777629/tools_yorndk.png" class="aboutImage" />
+                      <h2>+80H of Rich Content</h2>
+                      <p>Learn all major Web Technologies: HTML5, CSS3, Javascript, JQuery, Twitter Bootstrap, PHP, mySQL, Wordpress, Ajax, XML, JSON, Mobile Apps, API's: Google Maps, Facebook and MORE!</p>
+                  </div>
+                  <div class="col-md-4">
+                      <img src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777627/help_dfec8u.png" class="aboutImage" />
+                      <h2>Get Help Anytime!</h2>
+                      <p>Post your questions in the forums of the course where myself and thousands of students are happy to help!</p>
+                  </div>
+              </div>
+          </div>
+      </div>
           <CourseTable />
           <FAQ />{" "}
         </>
       )}
-      <Widget />
+      <Widget subtitle="Please Inlude phone number in the message" title="Welcome To Rovinox" />
     </div>
   );
 }

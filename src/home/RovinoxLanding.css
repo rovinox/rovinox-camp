@@ -119,3 +119,29 @@ video {
     
   }
 } */
+
+.container{
+  max-width: 1000px;   
+}
+#about{
+  color: #fff;
+  text-align: center;
+  padding-top: 100px;
+  width: 100%;
+}
+#about h2{
+  font-weight: bold;
+}
+#about p{
+  font-size: 17px;
+  margin-bottom: 30px;
+}
+.aboutImage{
+  height: 120px;   
+}
+
+.course-row {
+  display: flex;
+  background-color: #e6e6e6;
+  width: 100%;
+}
