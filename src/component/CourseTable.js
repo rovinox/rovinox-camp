@@ -114,9 +114,9 @@ export default function CourseTable() {
           <TableHead>
             <TableRow>
               <TableCell>Course</TableCell>
-              <TableCell align="right">Schedule and time</TableCell>
-              <TableCell align="right">Tuition</TableCell>
-              <TableCell align="right">Deadline to Enroll</TableCell>
+              <TableCell  align="right">Schedule and time</TableCell>
+              <TableCell  align="right">Tuition</TableCell>
+              <TableCell  align="right">Deadline to Enroll</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -127,17 +127,17 @@ export default function CourseTable() {
                   key={index}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell  component="th" scope="row">
                     {row.course}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell  align="right">
                     Tues,Thurs 6:30PM - 9:00PM{" "}
                   </TableCell>
-                  <TableCell align="right">{row.cost}</TableCell>
-                  <TableCell align="right">
+                  <TableCell  align="right">{row.cost}</TableCell>
+                  <TableCell  align="right">
                     {moment(row.startDate).format("MMM Do YY")}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell  align="right">
                     {" "}
                     <Button
                       onClick={() => handleApply(row._id)}

@@ -10,6 +10,7 @@
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #b9f6ca;
-  color: #fff;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(200,200,237,1) 0%, rgba(151,219,233,1) 49%);
 }
+
