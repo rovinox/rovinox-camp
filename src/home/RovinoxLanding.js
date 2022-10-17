@@ -18,8 +18,6 @@ import Header from "./Header";
 import Loading from "./Loading";
 import { Widget } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { BsYoutube, BsFacebook, BsTwitter } from 'react-icons/bs';
 import { BiSend } from 'react-icons/bi';
 
