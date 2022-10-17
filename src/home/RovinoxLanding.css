@@ -289,9 +289,15 @@ footer.section__footer .footer-col a.social i {
 	outline: none;
 }
 
-.social  {
-  color: white;
-  background-color: wheat;
+.social a  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+}
+
+.iconic {
+  margin-top: 12px;
 }
 
 ul,

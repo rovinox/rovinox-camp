@@ -20,6 +20,9 @@ import { Widget } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { BsYoutube, BsFacebook, BsTwitter } from 'react-icons/bs';
+import { BiSend } from 'react-icons/bi';
+
 export default function RovinoxLanding() {
   const navigate = useNavigate();
   const [currentVideo, setCurrentVideo] = useState(vid1);
@@ -190,15 +193,21 @@ export default function RovinoxLanding() {
 			<div class="container__footer">
 				<div class="row">
 				<div class="footer-col">
-					<h4>Lorem ipsum dolor sit</h4>
-					<a class="social codepen">
-						<i class="fa-brands fa-codepen"></i>
+					<h4>Keep In Toucht</h4>
+					<a className="social codepen">
+            <div className="iconic">
+              <BsYoutube /> 
+            </div>
 					</a>
 					<a class="social instagram">
-						<i class="fa-brands fa-instagram"></i>
+          <div className="iconic">
+              <BsFacebook /> 
+            </div>
 					</a>
 					<a class="social youtube">
-						<i class="fa-brands fa-youtube"></i>
+          <div className="iconic">
+              <BsTwitter /> 
+            </div>
 					</a>
 				</div>
 				<div class="footer-col">
@@ -233,6 +242,7 @@ export default function RovinoxLanding() {
 						<div class="email__field">
 							<input id="email" type="email" name="email" placeholder="E-mail" />
 							<button class="form-control submit">
+              <BiSend /> 
 							</button>
 						</div>
 					</form>
