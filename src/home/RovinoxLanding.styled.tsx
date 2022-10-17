@@ -12,6 +12,10 @@ export const RovinoxTitle = styled.h2`
 export const CoursePromise = styled.p`
   display: flex;
   align-items: center;
+  color: white;
+  margin-left: 30px;
+  font-size: 24px;
+  font-weight: 600;
 `;
 
 export const ApplyButton = styled.a`
@@ -51,7 +55,7 @@ export const CoursePacketButton  = styled.a`
   transition: 0.21s;
   vertical-align: middle;
   margin-top: 220px;
-  
+
   &:hover {
     cursor: pointer;
     background: red;

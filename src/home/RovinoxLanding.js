@@ -114,7 +114,7 @@ export default function RovinoxLanding() {
               </span>
             </RovinoxTitle>
           </div>
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#e6e6e6', padding: '0px'}}>
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#000000', padding: '0px'}}>
             <Grid sx={{ mt: 5 }}  Grid container spacing={2}>
               <Grid xs={12} md={6}>
                 <img
@@ -147,11 +147,11 @@ export default function RovinoxLanding() {
                   <CheckCircleIcon color="primary" /> Dive into web development
                   with fun and cool projects
                 </CoursePromise>
-                <CoursePromise data-aos="slide-left">
+                {/* <CoursePromise data-aos="slide-left">
                   {" "}
                   If you’d like to know more—call, email, or chat with us.
                   <br></br>
-                </CoursePromise>
+                </CoursePromise> */}
                 <Button data-aos="slide-right" sx={{ ml: 5 }} color="primary">
                   chat with us
                 </Button>
@@ -163,18 +163,18 @@ export default function RovinoxLanding() {
               <div class="course-row">
                   <div class="col-md-4">
                       <img src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777628/quality_q31k6u.png" class="aboutImage" />
-                      <h2 style={{color: 'red'}}>High Quality Lectures</h2>
+                      <h2>High Quality Lectures</h2>
                       <p>All lectures have been very well prepared for the best learning experience of future developers.</p>
                   </div>
                   <div class="col-md-4">
                       <img src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777629/tools_yorndk.png" class="aboutImage" />
-                      <h2>+80H of Rich Content</h2>
-                      <p>Learn all major Web Technologies: HTML5, CSS3, Javascript, JQuery, Twitter Bootstrap, PHP, mySQL, Wordpress, Ajax, XML, JSON, Mobile Apps, API's: Google Maps, Facebook and MORE!</p>
+                      <h2>In-demand, Job Ready Skills</h2>
+                      <p>Learn all major Web Technologies: HTML5, CSS3, Javascript, Mobile Apps, API's: Google Maps, Facebook and MORE!</p>
                   </div>
                   <div class="col-md-4">
                       <img src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777627/help_dfec8u.png" class="aboutImage" />
                       <h2>Get Help Anytime!</h2>
-                      <p>Post your questions in the forums of the course where myself and thousands of students are happy to help!</p>
+                      <p>Getting Stuck? Ask questions any time directly any time and we are happy to help!</p>
                   </div>
               </div>
           </div>
