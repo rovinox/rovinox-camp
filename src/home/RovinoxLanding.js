@@ -132,32 +132,32 @@ export default function RovinoxLanding() {
               <Grid xs={12} md={6} style={{display: "flex",  justifyContent: 'center', flexDirection: 'column'}}>
                 <CoursePromise data-aos="slide-left">
                   {" "}
-                  <CheckCircleIcon color="primary" /> Live, real-time
+                  <CheckCircleIcon color="primary" /> <p>Live, real-time</p> 
                   instruction
                 </CoursePromise>
                 <CoursePromise data-aos="slide-right">
                   {" "}
-                  <CheckCircleIcon color="primary" /> Great Support from day-one
-                  to your first day in tech
+                  <CheckCircleIcon color="primary" /> <p>Great Support from day-one
+                  to your first day in tech</p> 
                 </CoursePromise>
                 <CoursePromise data-aos="slide-left">
                   {" "}
-                  <CheckCircleIcon color="primary" /> Learn in-demand job ready
-                  skills to be come a SoftWare Developer
+                  <CheckCircleIcon color="primary" /> <p>Learn in-demand job ready
+                  skills to be come a SoftWare Developer</p>
                 </CoursePromise>
                 <CoursePromise data-aos="slide-right">
                   {" "}
-                  <CheckCircleIcon color="primary" /> Dive into web development
-                  with fun and cool projects
+                  <CheckCircleIcon color="primary" /> <p>Dive into web development
+                  with fun and cool projects</p> 
                 </CoursePromise>
                 {/* <CoursePromise data-aos="slide-left">
                   {" "}
                   If you’d like to know more—call, email, or chat with us.
                   <br></br>
                 </CoursePromise> */}
-                <Button data-aos="slide-right" sx={{ ml: 5 }} color="primary">
+                {/* <Button data-aos="slide-right" sx={{ ml: 5 }} color="primary">
                   chat with us
-                </Button>
+                </Button> */}
               </Grid>
             </Grid>
           </div>

@@ -16,6 +16,12 @@ export const CoursePromise = styled.p`
   margin-left: 30px;
   font-size: 24px;
   font-weight: 600;
+  padding: 12px;
+
+  p {
+    margin: 0;
+    margin-left: 7px;
+  }
 `;
 
 export const ApplyButton = styled.a`
