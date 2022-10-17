@@ -56,7 +56,7 @@ export default function FAQ() {
   };
 
   return (
-    <Grid sx={{ mt: 8 }} Grid container spacing={2}>
+    <Grid sx={{ mt: 8, p: 10 }} Grid container spacing={2}>
       <Grid sx={{ mt: 4 }} xs={12} md={6}>
         <Typography sx={{ m: 5 }} component="h2" variant="h4">
           Frequently Asked Questions...
@@ -161,7 +161,7 @@ export default function FAQ() {
           about any old thing.
         </Typography>
       </Grid>
-      <Grid sx={{ mt: 10 }} xs={12} md={6}>
+      <Grid sx={{ mt: 10, ml: 10 }} xs={12} md={4}>
         {/* <img className="remote-pic" src={pic1} alt="pic" /> */}
         <video
           className="remote-pic"
