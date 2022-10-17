@@ -18,6 +18,8 @@ import Header from "./Header";
 import Loading from "./Loading";
 import { Widget } from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 export default function RovinoxLanding() {
   const navigate = useNavigate();
   const [currentVideo, setCurrentVideo] = useState(vid1);
@@ -179,8 +181,67 @@ export default function RovinoxLanding() {
               </div>
           </div>
       </div>
+      <div className="courseTableContainer">
+
+      </div>
           <CourseTable />
           <FAQ />{" "}
+          <footer class="section__footer">
+			<div class="container__footer">
+				<div class="row">
+				<div class="footer-col">
+					<h4>Lorem ipsum dolor sit</h4>
+					<a class="social codepen">
+						<i class="fa-brands fa-codepen"></i>
+					</a>
+					<a class="social instagram">
+						<i class="fa-brands fa-instagram"></i>
+					</a>
+					<a class="social youtube">
+						<i class="fa-brands fa-youtube"></i>
+					</a>
+				</div>
+				<div class="footer-col">
+					<h4>Company Info</h4>
+					<ul>
+						<li>
+							<a href="#">About Us</a>
+						</li>
+						<li>
+							<a href="#">Privacy Policy</a>
+						</li>
+						<li>
+							<a href="#">Terms of Service</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Blog Posts</h4>
+					<ul>
+						<li>
+							<a href="#">FAQ</a>
+						</li>
+						<li>
+							<a href="#">Payment options</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Subscribe</h4>
+					<p>Subscribe to our newsletter to stay updated on courses</p>
+					<form name="email-form">
+						<div class="email__field">
+							<input id="email" type="email" name="email" placeholder="E-mail" />
+							<button class="form-control submit">
+							</button>
+						</div>
+					</form>
+				</div>
+				</div>
+			</div>
+		</footer>
+
+
         </>
       )}
       <Widget subtitle="Please Inlude phone number in the message" title="Welcome To Rovinox" />
