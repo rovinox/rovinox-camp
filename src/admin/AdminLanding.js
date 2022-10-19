@@ -7,11 +7,10 @@ import Box from "@mui/material/Box";
 import StudentList from "./StudentList";
 import AddBatch from "./AddBatch";
 import Header from "../component/Header";
-import CourseTable from "../component/CourseTable";
 import GradeHomework from "./GradeHomework";
-import Test from "./Test";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import RemoveBatch from "./RemoveBatch";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,7 +76,7 @@ export default function AdminLanding() {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Student List" {...a11yProps(0)} />
-            <Tab label="Course list" {...a11yProps(1)} />
+            <Tab label="Remove Batch" {...a11yProps(1)} />
             <Tab label="Add Batch" {...a11yProps(2)} />
             <Tab label="Grade Homework" {...a11yProps(3)} />
           </Tabs>
@@ -86,7 +85,7 @@ export default function AdminLanding() {
           <StudentList batch={batch} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Course list
+          <RemoveBatch batch={batch} />
         </TabPanel>
         <TabPanel value={value} index={2}>
           <AddBatch />

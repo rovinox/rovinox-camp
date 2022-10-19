@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -93,7 +92,7 @@ export default function Apply() {
         <Typography sx={{ mb: 5 }} component="h1" variant="h5">
           Apply
         </Typography>
-        <Typography component="p">
+        <Typography>
           Your application is the first step to your new future. You'll need
           about{" "}
           <Typography component="span" variant="h5">

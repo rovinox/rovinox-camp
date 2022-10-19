@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -11,6 +11,8 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { toast } from "react-toastify";
+import ReactToastify from "../component/ReactToastify";
 const LOGIN_URL = "/login";
 function Copyright(props) {
   return (
@@ -31,22 +33,8 @@ function Copyright(props) {
 export default function Login() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/student";
-
   const emailRef = useRef();
-  const errRef = useRef();
-  //const history = useHistory();
-  // useEffect(() => {
-  //   emailRef.current.focus();
-  // }, []);
-
-  // useEffect(() => {
-  //   setErrMsg("");
-  // }, [email, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,29 +49,26 @@ export default function Login() {
         }
       );
       console.log(JSON.stringify("vv9", response));
-      //console.log(JSON.stringify(response));
-      const { accessToken, role } = response?.data;
       localStorage.setItem("user", JSON.stringify(response.data));
       setEmail("");
       setPwd("");
-      //navigate(from, { replace: true });
       navigate("/student");
     } catch (err) {
       if (!err?.response) {
-        setErrMsg("No Server Response");
+        toast.error("No Server Response");
       } else if (err.response?.status === 400) {
-        setErrMsg("Missing email name or Password");
+        toast.error("Missing email name or Password");
       } else if (err.response?.status === 401) {
-        setErrMsg("Incorrect email or password");
+        toast.error("Incorrect email or password");
       } else {
-        setErrMsg("Login Failed");
+        toast.error("Login Failed");
       }
-      //errRef.current.focus();
     }
   };
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
+      <ReactToastify />
       <Grid
         item
         xs={false}
@@ -162,15 +147,6 @@ export default function Login() {
                 </Link>
               </Grid>
             </Grid>
-            {errMsg && (
-              <Typography
-                variant="h6"
-                sx={{ mt: 2, color: "red" }}
-                ref={errRef}
-              >
-                {errMsg}
-              </Typography>
-            )}
             <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>

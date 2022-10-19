@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -12,6 +12,8 @@ import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ReactToastify from "../component/ReactToastify";
 function Copyright(props) {
   return (
     <Typography
@@ -30,7 +32,7 @@ function Copyright(props) {
 
 export default function SignUp() {
   const [selectedBatch, setSelectedBatch] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+
   const [batch, setBatch] = useState([]);
   const navigate = useNavigate();
 
@@ -71,15 +73,16 @@ export default function SignUp() {
       }
     } catch (err) {
       if (!err?.response) {
-        setErrMsg("No Server Response");
+        toast.error("No Server Response");
       } else if (err.response?.status === 409) {
-        setErrMsg("This email address already exists");
+        toast.error("This email address already exists");
       }
     }
   };
 
   return (
     <Container component="main" maxWidth="xs">
+      <ReactToastify />
       <Box
         sx={{
           marginTop: 8,
@@ -181,11 +184,6 @@ export default function SignUp() {
           </Grid>
         </Box>
       </Box>
-      {errMsg && (
-        <Typography variant="h6" sx={{ mt: 2, color: "red" }}>
-          {errMsg}
-        </Typography>
-      )}
       <Copyright sx={{ mt: 5 }} />
     </Container>
   );
