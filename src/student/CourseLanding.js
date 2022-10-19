@@ -1,6 +1,4 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 
@@ -66,7 +64,11 @@ export default function CourseLanding() {
           />
         </Grid>
         <Typography variant="h6">
-          <a href="https://www.mongodb.com/mern-stack" target="_blank">
+          <a
+            href="https://www.mongodb.com/mern-stack"
+            target="_blank"
+            rel="noreferrer"
+          >
             What is the MERN stack?
           </a>
         </Typography>

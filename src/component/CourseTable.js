@@ -5,53 +5,13 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
 import "./courseTable.css";
 import { Button } from "@mui/material";
-import { green } from "@mui/material/colors";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-
-function createData(Course, ScheduleAndTime, Tuition, DeadlineToEnroll) {
-  return { Course, ScheduleAndTime, Tuition, DeadlineToEnroll };
-}
-
-const rows = [
-  createData(
-    "Full-Stack",
-    "Tues,Thurs 6:30PM - 9:00PM",
-    "$5,000",
-    "Nov 01, 2022"
-  ),
-  createData(
-    "Full-Stack",
-    "Tues,Thurs 6:30PM - 9:00PM",
-    "$5,000",
-    "Nov 01, 2022"
-  ),
-  createData(
-    "Full-Stack",
-    "Tues,Thurs 6:30PM - 9:00PM",
-    "$5,000",
-    "Nov 01, 2022"
-  ),
-  createData(
-    "Full-Stack",
-    "Tues,Thurs 6:30PM - 9:00PM",
-    "$5,000",
-    "Nov 01, 2022"
-  ),
-  createData(
-    "Full-Stack",
-    "Tues,Thurs 6:30PM - 9:00PM",
-    "$5,000",
-    "Nov 01, 2022"
-  ),
-];
 
 export default function CourseTable() {
   let navigate = useNavigate();
@@ -64,7 +24,9 @@ export default function CourseTable() {
         console.log("result: ", result);
 
         setBatch(result.data.batch);
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     };
     getBatch();
     console.log("data", batch);
@@ -93,11 +55,7 @@ export default function CourseTable() {
           }}
         >
           <h1>See What Cohorts Are Starting Soon</h1>
-          <Typography
-          // sx={{
-          //   padding: 15,
-          // }}
-          >
+          <Typography>
             Ready to plan out your Bootcamp experience? Start by viewing the
             upcoming course start dates. You can easily start your application
             once you’ve chosen a cohort.

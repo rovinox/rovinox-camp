@@ -2,26 +2,15 @@ import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import moment from "moment";
 import { toast } from "react-toastify";
 import ReactToastify from "../component/ReactToastify.js";
-import {
-  PieChart,
-  Pie,
-  Sector,
-  Cell,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { PieChart, Pie, Cell, Legend } from "recharts";
 
 const columns = [
   { field: "batch", headerName: "Batch", width: 250 },
@@ -69,7 +58,7 @@ export default function StudentList({ batch }) {
     { name: "Total Number of Homework", value: 30 },
   ];
   const roleList = [
-    { value: "admin", label: "admin" },
+    { value: "admin", label: "Admin" },
     { value: "student", label: "Student" },
   ];
   const enableList = [
@@ -133,7 +122,7 @@ export default function StudentList({ batch }) {
     }
   };
   return (
-    <div style={{ height: 500, width: "100%" }}>
+    <div style={{ height: 540, width: "100%" }}>
       <ReactToastify />
       <DataGrid
         rows={users}

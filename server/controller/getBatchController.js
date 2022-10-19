@@ -2,7 +2,7 @@ const Batch = require("../model/batch");
 
 const getBatch = async (req, res) => {
   try {
-    const foundBatch = await Batch.find({});
+    const foundBatch = await Batch.find({ enabled: true });
     if (foundBatch) {
       res.status(200).json({ batch: foundBatch });
     }

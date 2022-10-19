@@ -2,8 +2,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useEffect, useState } from "react";
-import Typography from "@mui/material/Typography";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import ReactToastify from "../component/ReactToastify.js";
 

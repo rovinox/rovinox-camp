@@ -1,24 +1,18 @@
-import { Button } from "@mui/material";
 import axios from "../api/axios";
 import { useEffect, useState } from "react";
 import CourseContent from "./CourseContent";
 import CourseListDrawer from "./CourseListDrawer";
 import NoCourse from "./NoCourse";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../component/Header";
 
 export default function StudentLanding(...prop) {
   const [currentCourse, setCurrentCourse] = useState(0);
   const [isAdmin, setIsAdmin] = useState(false);
   const [activeStudent, setActiveStudent] = useState(false);
-  // const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const params = useLocation();
-  //console.log("state: ", state);
-
   const batchId = params?.state?.batchId;
-  console.log("user?.batchId;: ", batchId);
-  //const batchId = 54165;
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));

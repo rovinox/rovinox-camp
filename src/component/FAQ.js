@@ -6,9 +6,7 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
-import pic1 from "../asset/pic1.jpg";
 import vid3 from "../asset/vid3.mp4";
 
 const Accordion = styled((props) => (

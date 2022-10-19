@@ -102,7 +102,6 @@ const IOSSwitch = styled((props) => (
 }));
 export default function GradeHomework({ selectedDay, batchId }) {
   const [homework, setHomeWork] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(null);
   const gradeHomeView = useSelector(
     (state) => state.changeGradeHomeView.gradeHomeView
@@ -144,8 +143,6 @@ export default function GradeHomework({ selectedDay, batchId }) {
     });
     console.log(newHomework);
     setHomeWork(newHomework);
-
-    setLoading(true);
     try {
       const result = await axios.put("http://localhost:8080/gradehomework", {
         homeWorkId,
@@ -154,7 +151,6 @@ export default function GradeHomework({ selectedDay, batchId }) {
 
       if (result?.data) {
         toast.success(`${result?.data?.message}`);
-        setLoading(false);
         getUsers();
       }
 

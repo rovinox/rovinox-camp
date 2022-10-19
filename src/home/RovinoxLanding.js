@@ -1,11 +1,6 @@
-import React, { useEffect, useState, Link } from "react";
-
-// import AOS from "aos";
-// import "aos/dist/aos.css";
+import { useState } from "react";
 import "./RovinoxLanding.css";
 import vid1 from "../asset/vid1.mp4";
-import vid2 from "../asset/vid2.mp4";
-import vid3 from "../asset/vid3.mp4";
 import pic1 from "../asset/pic1.jpg";
 import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -14,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import {
   RovinoxTitle,
   CoursePromise,
-  ApplyButton,
   CoursePacketButton,
 } from "./RovinoxLanding.styled.tsx";
 import FAQ from "../component/FAQ";
@@ -122,26 +116,23 @@ export default function RovinoxLanding() {
               >
                 <CoursePromise>
                   {" "}
-                  <CheckCircleIcon color="primary" /> <p>Live, real-time</p>
-                  instruction
+                  <CheckCircleIcon color="primary" />
+                  Live, real-time instruction
                 </CoursePromise>
                 <CoursePromise>
                   {" "}
-                  <CheckCircleIcon color="primary" />{" "}
-                  <p>Great Support from day-one to your first day in tech</p>
+                  <CheckCircleIcon color="primary" /> Great Support from day-one
+                  to your first day in tech
                 </CoursePromise>
                 <CoursePromise>
                   {" "}
-                  <CheckCircleIcon color="primary" />{" "}
-                  <p>
-                    Learn in-demand job ready skills to be come a SoftWare
-                    Developer
-                  </p>
+                  <CheckCircleIcon color="primary" /> Learn in-demand job ready
+                  skills to be come a SoftWare Developer
                 </CoursePromise>
                 <CoursePromise>
                   {" "}
-                  <CheckCircleIcon color="primary" />{" "}
-                  <p>Dive into web development with fun and cool projects</p>
+                  <CheckCircleIcon color="primary" /> Dive into web development
+                  with fun and cool projects
                 </CoursePromise>
               </Grid>
             </Grid>
@@ -259,7 +250,7 @@ export default function RovinoxLanding() {
         </>
       )}
       <Widget
-        subtitle="Please Inlude phone number in the message"
+        subtitle="Please Include phone number in the message"
         title="Welcome To Rovinox"
       />
     </div>
