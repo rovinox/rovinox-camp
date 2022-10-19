@@ -11,8 +11,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Grid from "@mui/material/Grid";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import LinearProgress from "@mui/material/LinearProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import ReactToastify from "../component/ReactToastify.js";
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -132,6 +134,17 @@ export default function GradeHomework({ selectedDay, batchId }) {
   };
 
   const handMarkAsGraded = async (homeWorkId, graded) => {
+    const cloneHomework = [...homework];
+    const newHomework = cloneHomework.map((homework) => {
+      if (homeWorkId === homework._id) {
+        return { ...homework, loading: true };
+      } else {
+        return { ...homework, loading: false };
+      }
+    });
+    console.log(newHomework);
+    setHomeWork(newHomework);
+
     setLoading(true);
     try {
       const result = await axios.put("http://localhost:8080/gradehomework", {
@@ -140,6 +153,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
       });
 
       if (result?.data) {
+        toast.success(`${result?.data?.message}`);
         setLoading(false);
         getUsers();
       }
@@ -147,10 +161,12 @@ export default function GradeHomework({ selectedDay, batchId }) {
       console.log("result.data", result.data);
     } catch (err) {
       console.log(err);
+      toast.error(`${err?.message}`);
     }
   };
   return (
     <div>
+      <ReactToastify />
       {batchId ? (
         <>
           {homework.length > 0 &&
@@ -215,26 +231,28 @@ export default function GradeHomework({ selectedDay, batchId }) {
                         justifyContent="flex-end"
                         xs={6}
                       >
-                        <Typography sx={{ mr: 3 }}>mark as graded? </Typography>
-                        <Typography>No</Typography>
-                        <LinearProgress color="success" />
-                        <FormControlLabel
-                          onClick={() =>
-                            handMarkAsGraded(item._id, item.graded)
-                          }
-                          control={
-                            <IOSSwitch
-                              sx={{ ml: 3 }}
-                              defaultChecked={item.graded}
+                        {item.loading ? (
+                          <CircularProgress sx={{ mt: 1 }} color="success" />
+                        ) : (
+                          <>
+                            <Typography>No</Typography>
+
+                            <FormControlLabel
+                              onClick={() =>
+                                handMarkAsGraded(item._id, item.graded)
+                              }
+                              control={
+                                <IOSSwitch
+                                  sx={{ ml: 3 }}
+                                  defaultChecked={item.graded}
+                                />
+                              }
                             />
-                          }
-                        />
-                        <Typography>Yes</Typography>
+                            <Typography>Yes</Typography>
+                          </>
+                        )}
                       </Grid>
                     </Grid>
-                    {loading && (
-                      <LinearProgress sx={{ mt: 1 }} color="success" />
-                    )}
                   </AccordionDetails>
                 </Accordion>
               );

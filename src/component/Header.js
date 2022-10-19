@@ -115,6 +115,7 @@ const Header = () => {
       console.log("vv2", result);
 
       navigate("/login");
+      localStorage.setItem("user", JSON.stringify({}));
     } catch (error) {
       console.error(error?.message);
     }

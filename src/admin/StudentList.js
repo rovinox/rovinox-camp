@@ -9,16 +9,20 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import moment from "moment";
-import React, { PureComponent } from "react";
+import { toast } from "react-toastify";
+import ReactToastify from "../component/ReactToastify.js";
 import {
   PieChart,
   Pie,
   Sector,
   Cell,
   Tooltip,
+  Legend,
   ResponsiveContainer,
 } from "recharts";
+
 const columns = [
   { field: "batch", headerName: "Batch", width: 250 },
   { field: "firstName", headerName: "First name", width: 130 },
@@ -33,28 +37,30 @@ export default function StudentList({ batch }) {
   const [loading, setLoading] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [homeworkCount, setHomeWorkCount] = useState(null);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const result = await axios.get("http://localhost:8080/users");
-        if (result?.data?.users) {
-          result.data.users.forEach((user, index) => {
-            user.id = index + 1;
-            user.batch = `${moment(user.batchId.startDate).format(
-              "MMM Do YY"
-            )} - ${moment(user.batchId.endDate).format("MMM Do YY")}`;
-            user.active = user.enabled ? "Yes" : "no";
-          });
-          setLoading(false);
-        }
-
-        setUsers(result.data.users);
-        console.log("result.data.users: ", result.data.users);
-      } catch (err) {
-        console.log(err);
+  const [batchId, setBatchId] = useState(selectedStudent?.batchId?._id);
+  const [role, setRole] = useState(selectedStudent?.role);
+  const [enabled, setEnabled] = useState(selectedStudent?.enabled);
+  const getUsers = async () => {
+    try {
+      const result = await axios.get("http://localhost:8080/users");
+      if (result?.data?.users) {
+        result.data.users.forEach((user, index) => {
+          user.id = index + 1;
+          user.batch = `${moment(user.batchId.startDate).format(
+            "MMM Do YY"
+          )} - ${moment(user.batchId.endDate).format("MMM Do YY")}`;
+          user.active = user.enabled ? "Yes" : "no";
+        });
+        setLoading(false);
       }
-    };
+
+      setUsers(result.data.users);
+      console.log("result.data.users: ", result.data.users);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
     getUsers();
   }, []);
   const COLORS = ["#00C49F", "#FF8042", "#FFBB28", "#FF8042"];
@@ -77,15 +83,41 @@ export default function StudentList({ batch }) {
                           ${moment(option.endDate).format("MMM Do YY")}`,
     };
   });
-  const handleSubmit = (e) => {
+  console.log("sdgsgzsdg", batchList);
+  const handleSubmit = async (e) => {
+    const id = selectedStudent._id;
+    console.log("id: ", id);
     e.preventDefault();
-    setSelectedStudent("");
+    console.log({
+      batchId,
+      role,
+      enabled,
+      id,
+    });
+
+    try {
+      const result = await axios.put("http://localhost:8080/updatestudent", {
+        batchId,
+        role,
+        enabled,
+        id,
+      });
+      if (result?.data?.message) {
+        toast.success(`${result?.data?.message}`);
+        getUsers();
+      }
+
+      console.log("setHomeWorkCount000000 ", result);
+    } catch (err) {
+      toast.error(`${err?.message}`);
+    }
   };
-  const handleProgress = async (studentId) => {
+  const handleProgress = async (studentId, batchId) => {
     console.log("studentId", studentId);
     try {
       const result = await axios.post("http://localhost:8080/getprogress", {
         studentId,
+        batchId,
       });
       if (result.data?.homeWork?.length > 0) {
         setHomeWorkCount(result.data?.homeWork?.length);
@@ -100,9 +132,9 @@ export default function StudentList({ batch }) {
       console.log(err);
     }
   };
-
   return (
     <div style={{ height: 500, width: "100%" }}>
+      <ReactToastify />
       <DataGrid
         rows={users}
         columns={columns}
@@ -114,8 +146,12 @@ export default function StudentList({ batch }) {
         editMode={"row"}
         onCellClick={(props) => {
           setSelectedStudent(props.row);
-          handleProgress(props.row._id);
-          console.log(props.row._id);
+          handleProgress(props.row._id, props.row.batchId._id);
+          setRole(props.row.role);
+          setEnabled(props.row.enabled);
+          setBatchId(props.row.batchId._id);
+
+          console.log(props.row);
         }}
         components={{
           LoadingOverlay: LinearProgress,
@@ -132,7 +168,7 @@ export default function StudentList({ batch }) {
             }}
           >
             {homeworkCount && (
-              <PieChart width={200} height={200}>
+              <PieChart width={250} height={250}>
                 <Pie
                   data={data}
                   cx="50%"
@@ -149,7 +185,7 @@ export default function StudentList({ batch }) {
                     />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Legend />
               </PieChart>
             )}
 
@@ -186,14 +222,13 @@ export default function StudentList({ batch }) {
                       name="batch"
                       select
                       label="Batch"
-                      value={selectedStudent.batchId._id}
+                      value={batchId}
+                      onChange={(e) => {
+                        setBatchId(e.target.value);
+                      }}
                     >
                       {batchList.map((option, index) => (
-                        <MenuItem
-                          // onClick={() => setSelectedBatch(option._id)}
-                          key={index}
-                          value={option.value}
-                        >
+                        <MenuItem key={index} value={option.value.trim()}>
                           {option.label}
                         </MenuItem>
                       ))}
@@ -207,14 +242,11 @@ export default function StudentList({ batch }) {
                     name="role"
                     select
                     label="Role"
-                    value={selectedStudent.role}
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
                   >
                     {roleList.map((option, index) => (
-                      <MenuItem
-                        // onClick={() => setSelectedBatch(option._id)}
-                        key={index}
-                        value={option.value}
-                      >
+                      <MenuItem key={index} value={option.value}>
                         {option.label}
                       </MenuItem>
                     ))}
@@ -226,14 +258,11 @@ export default function StudentList({ batch }) {
                     name="enabled"
                     select
                     label="Enabled"
-                    value={selectedStudent.enabled}
+                    value={enabled}
+                    onChange={(e) => setEnabled(e.target.value)}
                   >
                     {enableList.map((option, index) => (
-                      <MenuItem
-                        // onClick={() => setSelectedBatch(option._id)}
-                        key={index}
-                        value={option.value}
-                      >
+                      <MenuItem key={index} value={option.value}>
                         {option.label}
                       </MenuItem>
                     ))}

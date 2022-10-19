@@ -62,6 +62,7 @@ app.use("/gethomework", require("./routes/gethomework"));
 app.use("/usersession", require("./routes/valid"));
 app.use("/submithomework", require("./routes/submitHomework"));
 app.use("/gradehomework", require("./routes/gradeHomework"));
+app.use("/updatestudent", require("./routes/updateStudent"));
 app.use("/getprogress", require("./routes/getProgress"));
 
 app.get("*", (req, res) => {

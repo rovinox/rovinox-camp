@@ -11,6 +11,8 @@ import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import ReactToastify from "../component/ReactToastify.js";
+import { toast } from "react-toastify";
 
 function Copyright(props) {
   return (
@@ -47,8 +49,12 @@ export default function Apply() {
     try {
       const result = await axios.post("http://localhost:8080/email", user);
       console.log(result);
-    } catch (error) {
-      console.error(error?.message);
+      if (result?.data?.message) {
+        toast.success(`${result?.data?.message}`);
+      }
+    } catch (err) {
+      console.error(err?.message);
+      toast.error(`${err?.message}`);
     }
   };
   const courseList = [
@@ -72,6 +78,7 @@ export default function Apply() {
 
   return (
     <Container component="main" maxWidth="xs">
+      <ReactToastify />
       <Box
         sx={{
           marginTop: 8,

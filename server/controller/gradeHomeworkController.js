@@ -9,7 +9,7 @@ const gradeHomework = async (req, res) => {
     result.save();
 
     if (result) {
-      res.status(201).json({ success: `homeWork has been saved successfully` });
+      res.status(201).json({ message: `homeWork has been saved successfully` });
     }
 
     // console.log(result);

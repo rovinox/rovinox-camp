@@ -4,10 +4,11 @@ import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
+import { toast } from "react-toastify";
+import ReactToastify from "../component/ReactToastify.js";
 
 import axios from "axios";
 export default function HomeworkSubmission({ selectedDay }) {
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -26,16 +27,12 @@ export default function HomeworkSubmission({ selectedDay }) {
         "http://localhost:8080/submithomework",
         payload
       );
-      if (result?.data) {
-        setMessage(result.data.message);
-        setLoading(false);
-        setTimeout(() => {
-          setMessage("");
-        }, 5000);
+      if (result?.data?.message) {
+        toast.success(`${result?.data?.message}`);
       }
       console.log(result);
-    } catch (error) {
-      console.error(error?.message);
+    } catch (err) {
+      toast.error(`${err?.message}`);
     }
   };
   return (
@@ -45,13 +42,13 @@ export default function HomeworkSubmission({ selectedDay }) {
       onSubmit={submitHomework}
       sx={{ mt: 3, width: 700 }}
     >
+      <ReactToastify />
       <TextField required fullWidth label="GitHub Link" name="githubLink" />
 
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         submit
       </Button>
       {loading && <LinearProgress color="success" />}
-      <Typography>{message}</Typography>
     </Box>
   );
 }

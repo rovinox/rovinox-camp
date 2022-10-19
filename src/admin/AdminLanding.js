@@ -11,6 +11,7 @@ import CourseTable from "../component/CourseTable";
 import GradeHomework from "./GradeHomework";
 import Test from "./Test";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,6 +48,8 @@ function a11yProps(index) {
 
 export default function AdminLanding() {
   const [value, setValue] = useState(0);
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -54,6 +57,9 @@ export default function AdminLanding() {
   const [batch, setBatch] = useState([]);
 
   useEffect(() => {
+    if (user?.role === "student") {
+      navigate("/student");
+    }
     const getBatch = async () => {
       try {
         const result = await axios.get("http://localhost:8080/getbatch");

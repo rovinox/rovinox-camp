@@ -12,7 +12,9 @@ const addBatch = async (req, res) => {
     });
     console.log(result);
     if (result) {
-      res.status(201).json({ batch: result, success: `New user created!` });
+      res
+        .status(201)
+        .json({ batch: result, message: `Batch cerated successfully` });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
