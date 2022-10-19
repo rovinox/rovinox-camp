@@ -9,6 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { toast } from "react-toastify";
+import ReactToastify from "../component/ReactToastify";
 
 import moment from "moment";
 import axios from "axios";
@@ -54,8 +56,11 @@ export default function AddBatch() {
     try {
       const result = await axios.post("http://localhost:8080/addbatch", batch);
       console.log(result);
-    } catch (error) {
-      console.error(error?.message);
+      if (result?.data?.message) {
+        toast.success(`${result?.data?.message}`);
+      }
+    } catch (err) {
+      toast.error(`${err?.message}`);
     }
   };
   const courseList = [
@@ -86,6 +91,7 @@ export default function AddBatch() {
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Container component="main" maxWidth="md">
+        <ReactToastify />
         <Box
           sx={{
             marginTop: 8,

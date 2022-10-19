@@ -10,7 +10,7 @@ import Header from "../component/Header";
 export default function StudentLanding(...prop) {
   const [currentCourse, setCurrentCourse] = useState(0);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [activeStudent, setActiveStudent] = useState(0);
+  const [activeStudent, setActiveStudent] = useState(false);
   // const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const params = useLocation();
