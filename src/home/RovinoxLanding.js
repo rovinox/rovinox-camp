@@ -12,19 +12,32 @@ import FAQ from "../component/FAQ";
 import Grid from "@mui/material/Grid";
 import Header from "./Header";
 import Loading from "./Loading";
-//import "animate.css";
+import { purple, teal, green } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Widget } from "react-chat-widget";
+import CssBaseline from "@mui/material/CssBaseline";
 import "react-chat-widget/lib/styles.css";
 import { BsYoutube, BsFacebook, BsTwitter } from "react-icons/bs";
 import { BiSend } from "react-icons/bi";
 import TrackVisibility from "react-on-screen";
-
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: teal[500],
+    },
+    secondary: {
+      main: purple[500],
+    },
+  },
+});
 export default function RovinoxLanding() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Header />
       <IntroVideo setLoading={setLoading} />
       {loading ? (
@@ -188,11 +201,10 @@ export default function RovinoxLanding() {
           </footer>
         </div>
       )}
-
       <Widget
         subtitle="Please Include phone number in the message"
         title="Welcome To Rovinox"
       />
-    </div>
+    </ThemeProvider>
   );
 }
