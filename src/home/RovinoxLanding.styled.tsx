@@ -61,7 +61,7 @@ export const CoursePacketButton = styled.a`
   text-decoration: none !important;
   transition: 0.21s;
   vertical-align: middle;
-  margin-top: 220px;
+  // margin-top: 220px;
 
   &:hover {
     cursor: pointer;

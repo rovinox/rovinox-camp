@@ -106,7 +106,8 @@ export default function RemoveBatch({ batch }) {
                         handleOpen();
                         setBatchId(row._id);
                       }}
-                      color="primary"
+                      variant="contained"
+                      color="error"
                     >
                       Delete
                     </Button>{" "}
