@@ -9,12 +9,6 @@
   margin-top: 40px;
 }
 
-tbody tr:nth-child(odd) {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(200, 200, 237, 1) 0%,
-    rgba(151, 219, 233, 1) 49%
-  );
+.course-table tbody tr:nth-child(odd) {
+  background: linear-gradient(to right, #211c33, #3a2336);
 }

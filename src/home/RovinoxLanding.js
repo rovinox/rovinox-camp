@@ -30,7 +30,7 @@ export default function RovinoxLanding() {
       {loading ? (
         <Loading />
       ) : (
-        <>
+        <div className="main-landing">
           <div className="simple-linear"></div>
           <div
             style={{
@@ -186,7 +186,7 @@ export default function RovinoxLanding() {
               </div>
             </div>
           </footer>
-        </>
+        </div>
       )}
 
       <Widget
