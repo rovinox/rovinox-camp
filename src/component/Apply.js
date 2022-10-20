@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -12,6 +12,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import ReactToastify from "../component/ReactToastify.js";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 function Copyright(props) {
   return (
@@ -31,9 +32,33 @@ function Copyright(props) {
 
 export default function Apply() {
   const { state } = useLocation();
-  console.log("props", state);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const batchId = state?.id;
+  const [selectedBatch, setSelectedBatch] = useState(batchId);
+  const [batch, setBatch] = useState([]);
 
+  useEffect(() => {
+    const getBatch = async () => {
+      try {
+        const result = await axios.get("http://localhost:8080/getbatch");
+        console.log("result: ", result);
+
+        setBatch(result.data.batch);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getBatch();
+    console.log("data", batch);
+  }, []);
+  const batchList =
+    batch.length > 0 &&
+    batch.map((option) => {
+      return {
+        value: option._id,
+        label: `${moment(option.startDate).format("MMM Do YY")} -
+                          ${moment(option.endDate).format("MMM Do YY")}`,
+      };
+    });
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,7 +67,7 @@ export default function Apply() {
       phoneNumber: data.get("phoneNumber"),
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
-      course: selectedCourse,
+      batch: selectedBatch,
     };
     console.log(user);
     try {
@@ -56,24 +81,6 @@ export default function Apply() {
       toast.error(`${err?.message}`);
     }
   };
-  const courseList = [
-    {
-      value: 1,
-      label: "Full-Stack Jul 05, Tues,Thurs 6:30PM - 9:00PM",
-    },
-    {
-      value: 2,
-      label: "Full-Stack Oct 22, Tues,Thurs 6:30PM - 9:00PM",
-    },
-    {
-      value: 3,
-      label: "Full-Stack Nov 05, Tues,Thurs 6:30PM - 9:00PM",
-    },
-    {
-      value: 4,
-      label: "Full-Stack Dec 05, Tues,Thurs 6:30PM - 9:00PM",
-    },
-  ];
 
   return (
     <Container component="main" maxWidth="xs">
@@ -157,17 +164,18 @@ export default function Apply() {
                 name="course"
                 select
                 label="Course"
-                //value={courseList.value}
+                value={selectedBatch}
               >
-                {courseList.map((option) => (
-                  <MenuItem
-                    onClick={() => setSelectedCourse(option.value)}
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </MenuItem>
-                ))}
+                {batchList.length > 0 &&
+                  batchList.map((option) => (
+                    <MenuItem
+                      onClick={() => setSelectedBatch(option.value)}
+                      key={option.value}
+                      value={option.value}
+                    >
+                      {option.label}
+                    </MenuItem>
+                  ))}
               </TextField>
             </Grid>
           </Grid>
