@@ -61,11 +61,11 @@ export default function CourseTable() {
       },
     });
   };
-
+  const now = moment();
   return (
     <div className="course-table">
       <Grid sx={{ mt: 9, pr: 5, pl: 5 }} Grid container spacing={2}>
-        <Grid sx={{ textAlign: "center" }} xs={12} md={6}>
+        <Grid sx={{ textAlign: "center" }} xs={12} md={4}>
           <div
             style={{
               display: "flex",
@@ -87,7 +87,7 @@ export default function CourseTable() {
         </Grid>
         <Grid
           xs={12}
-          md={6}
+          md={8}
           style={{
             display: "flex",
             justifyContent: "center",
@@ -106,6 +106,9 @@ export default function CourseTable() {
               <TableHead>
                 <StyledTableRow>
                   <StyledTableCell>Course</StyledTableCell>
+                  <StyledTableCell align="right">
+                    Start/End Date
+                  </StyledTableCell>
                   <StyledTableCell align="right">
                     Schedule and time
                   </StyledTableCell>
@@ -129,17 +132,31 @@ export default function CourseTable() {
                         {row.course}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        Tues,Thurs 6:30PM - 9:00PM{" "}
+                        {moment(row.startDate).format("MMM Do")} -
+                        {moment(row.endDate).format("MMM Do")}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {row.cost}
+                        Mon,Thurs,Fri 6PM-9PM{" "}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        ${row.cost}
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {moment(row.startDate).format("MMM Do YY")}
+                        {/* {now.diff(row.startDate, "days") - 5 > 0 ? (
+                          <Typography color="error">Expired</Typography>
+                        ) : (
+                          `${now.diff(row.startDate, "days") - 5} Days Left`
+                        )} */}
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {" "}
                         <Button
+                          // disabled={
+                          //   now.diff(row.startDate, "days") - 5 < 0
+                          //     ? true
+                          //     : false
+                          // }
                           sx={{
                             background:
                               "linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%)",
