@@ -2,23 +2,22 @@ import { useState } from "react";
 import "./RovinoxLanding.css";
 import vid1 from "../asset/vid1.mp4";
 import pic1 from "../asset/pic1.jpg";
+import IntroVideo from "./IntroVideo";
 import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import {
-  RovinoxTitle,
-  CoursePromise,
-  CoursePacketButton,
-} from "./RovinoxLanding.styled.tsx";
+import { CoursePromise } from "./RovinoxLanding.styled.tsx";
 import FAQ from "../component/FAQ";
 import Grid from "@mui/material/Grid";
 import Header from "./Header";
 import Loading from "./Loading";
+//import "animate.css";
 import { Widget } from "react-chat-widget";
 import "react-chat-widget/lib/styles.css";
 import { BsYoutube, BsFacebook, BsTwitter } from "react-icons/bs";
 import { BiSend } from "react-icons/bi";
+import TrackVisibility from "react-on-screen";
 
 export default function RovinoxLanding() {
   const navigate = useNavigate();
@@ -27,71 +26,11 @@ export default function RovinoxLanding() {
   return (
     <div>
       <Header />
-      <div className="video_container">
-        <video
-          muted
-          loop
-          autoPlay
-          style={{
-            backgroundColor: "rgba(0,0,0,0.7)",
-          }}
-          onLoadedData={() => setLoading(false)}
-        >
-          <source src={vid1} type="video/mp4" />
-        </video>
-        <div className="land-tech-job-section">
-          <h2>Land Your Dream Job In Tech</h2>
-          <CoursePacketButton>Get Free Course Packet</CoursePacketButton>
-        </div>
-      </div>
+      <IntroVideo setLoading={setLoading} />
       {loading ? (
         <Loading />
       ) : (
         <>
-          <div className="heading-client">
-            <RovinoxTitle>
-              Jumpstart your{" "}
-              <span style={{ "--i": 1 }} className="orangeText">
-                c
-              </span>
-              <span style={{ "--i": 2 }} className="orangeText">
-                a
-              </span>
-              <span style={{ "--i": 3 }} className="orangeText">
-                r
-              </span>
-              <span style={{ "--i": 4 }} className="orangeText">
-                e
-              </span>
-              <span style={{ "--i": 5 }} className="orangeText">
-                e
-              </span>
-              <span style={{ "--i": 6 }} className="orangeText">
-                r
-              </span>{" "}
-              in tech with Rovinox.
-              <br />
-              It’s Time to Invest In Your{" "}
-              <span style={{ "--i": 7 }} className="orangeText">
-                F
-              </span>
-              <span style={{ "--i": 8 }} className="orangeText">
-                u
-              </span>
-              <span style={{ "--i": 9 }} className="orangeText">
-                t
-              </span>
-              <span style={{ "--i": 10 }} className="orangeText">
-                u
-              </span>
-              <span style={{ "--i": 11 }} className="orangeText">
-                r
-              </span>
-              <span style={{ "--i": 12 }} className="orangeText">
-                e
-              </span>
-            </RovinoxTitle>
-          </div>
           <div className="simple-linear"></div>
           <div
             style={{
@@ -103,7 +42,7 @@ export default function RovinoxLanding() {
           >
             <Grid Grid container spacing={2}>
               <Grid xs={12} md={6}>
-                <img className="remote-pic" src={pic1} alt="pic" style={{}} />
+                <img className="remote-pic" src={pic1} alt="pic" />
               </Grid>
               <Grid
                 xs={12}
@@ -249,6 +188,7 @@ export default function RovinoxLanding() {
           </footer>
         </>
       )}
+
       <Widget
         subtitle="Please Include phone number in the message"
         title="Welcome To Rovinox"

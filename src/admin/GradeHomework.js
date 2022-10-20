@@ -132,6 +132,7 @@ export default function GradeHomework({ batch }) {
                       <Button
                         onClick={() => handleBatch(row._id)}
                         color="primary"
+                        variant="contained"
                       >
                         Grade
                       </Button>{" "}
