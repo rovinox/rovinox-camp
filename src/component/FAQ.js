@@ -55,7 +55,7 @@ export default function FAQ() {
 
   return (
     <Grid sx={{ mt: 8, p: 5 }} Grid container spacing={2}>
-      <Grid sx={{ mt: 4 }} xs={12} md={6}>
+      <Grid sx={{ mt: 4, pr: 2 }} xs={12} md={6}>
         <Typography sx={{ m: 5 }} component="h2" variant="h4">
           Frequently Asked Questions...
         </Typography>

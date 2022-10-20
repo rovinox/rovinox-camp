@@ -12,7 +12,7 @@ export default function ProductHero({ setLoading }) {
     <ProductHeroLayout setLoading={setLoading}>
       <TrackVisibility>
         {({ isVisible }) => (
-          <div className={isVisible ? "sapple" : ""}>
+          <div>
             <Typography
               sx={{ mt: 10 }}
               color="inherit"
