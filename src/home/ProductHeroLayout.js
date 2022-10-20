@@ -18,7 +18,7 @@ const ProductHeroLayoutRoot = styled("section")(({ theme }) => ({
 }));
 
 function ProductHeroLayout(props) {
-  const { children, setLoading } = props;
+  const { children } = props;
 
   return (
     <ProductHeroLayoutRoot>
@@ -56,7 +56,7 @@ function ProductHeroLayout(props) {
             zIndex: -2,
           }}
         >
-          <video muted loop autoPlay onLoadedData={() => setLoading(false)}>
+          <video muted loop autoPlay>
             <source src={vid1} type="video/mp4" />
           </video>
         </Box>

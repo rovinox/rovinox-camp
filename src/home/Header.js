@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,6 +17,21 @@ const pages = ["Courses", "Pricing", "About Us"];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -24,12 +39,17 @@ const Header = () => {
     setAnchorElNav(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (item) => {
     setAnchorElNav(null);
+    if (item === "Login") {
+    }
   };
 
   return (
-    <AppBar sx={{ boxShadow: "none", background: "#19b6fa" }} position="fixed">
+    <AppBar
+      sx={{ boxShadow: "none", background: !scrolled ? "none" : "#19b6fa" }}
+      position="fixed"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -117,7 +137,14 @@ const Header = () => {
               </Button>
             ))}
           </Box>
-
+          <MenuItem
+            onClick={() => {
+              navigate("/login");
+            }}
+            sx={{ mr: 5 }}
+          >
+            <Typography textAlign="center">LOGIN</Typography>
+          </MenuItem>
           <Box sx={{ flexGrow: 0 }}>
             <ApplyButton
               onClick={() => {

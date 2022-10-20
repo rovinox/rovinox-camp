@@ -7,13 +7,14 @@ import {
   CoursePacketButton,
 } from "../home/RovinoxLanding.styled.tsx";
 
-export default function ProductHero({ setLoading }) {
+export default function ProductHero() {
   return (
-    <ProductHeroLayout setLoading={setLoading}>
-      <TrackVisibility>
-        {({ isVisible }) => (
-          <div>
+    <ProductHeroLayout>
+      <div>
+        <TrackVisibility>
+          {({ isVisible }) => (
             <Typography
+              className={isVisible ? "zoom-in-out-box" : ""}
               sx={{ mt: 10 }}
               color="inherit"
               align="center"
@@ -22,9 +23,9 @@ export default function ProductHero({ setLoading }) {
             >
               Land Your Dream Job In Tech
             </Typography>
-          </div>
-        )}
-      </TrackVisibility>
+          )}
+        </TrackVisibility>
+      </div>
       <Typography
         color="inherit"
         align="center"
