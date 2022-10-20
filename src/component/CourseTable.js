@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -12,6 +11,29 @@ import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { ApplyButton } from "../home/RovinoxLanding.styled.tsx";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import { styled } from "@mui/material/styles";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#9E3584",
+    fontSize: 15,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 15,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 export default function CourseTable() {
   let navigate = useNavigate();
@@ -82,40 +104,54 @@ export default function CourseTable() {
           >
             <Table sx={{ overflow: "hidden" }} aria-label="simple table">
               <TableHead>
-                <TableRow>
-                  <TableCell>Course</TableCell>
-                  <TableCell align="right">Schedule and time</TableCell>
-                  <TableCell align="right">Tuition</TableCell>
-                  <TableCell align="right">Deadline to Enroll</TableCell>
-                </TableRow>
+                <StyledTableRow>
+                  <StyledTableCell>Course</StyledTableCell>
+                  <StyledTableCell align="right">
+                    Schedule and time
+                  </StyledTableCell>
+                  <StyledTableCell align="right">Tuition</StyledTableCell>
+                  <StyledTableCell align="right">
+                    Deadline to Enroll
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    Select a Batch to Apply
+                  </StyledTableCell>
+                </StyledTableRow>
               </TableHead>
               <TableBody>
                 {batch?.length &&
                   batch.map((row, index) => (
-                    <TableRow
+                    <StyledTableRow
                       key={index}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">
+                      <StyledTableCell component="th" scope="row">
                         {row.course}
-                      </TableCell>
-                      <TableCell align="right">
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
                         Tues,Thurs 6:30PM - 9:00PM{" "}
-                      </TableCell>
-                      <TableCell align="right">{row.cost}</TableCell>
-                      <TableCell align="right">
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {row.cost}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
                         {moment(row.startDate).format("MMM Do YY")}
-                      </TableCell>
-                      <TableCell align="right">
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
                         {" "}
                         <Button
+                          sx={{
+                            background:
+                              "linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%)",
+                            color: "white",
+                          }}
                           onClick={() => handleApply(row._id)}
                           variant="outlined"
                         >
                           Apply
                         </Button>{" "}
-                      </TableCell>
-                    </TableRow>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   ))}
               </TableBody>
             </Table>
