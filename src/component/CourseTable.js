@@ -65,7 +65,7 @@ export default function CourseTable() {
   return (
     <div className="course-table">
       <Grid sx={{ mt: 9, pr: 5, pl: 5 }} Grid container spacing={2}>
-        <Grid sx={{ textAlign: "center" }} xs={12} md={4}>
+        <Grid sx={{ textAlign: "center" }} xs={12} md={12}>
           <div
             style={{
               display: "flex",
@@ -78,7 +78,7 @@ export default function CourseTable() {
             }}
           >
             <h1>See What Cohorts Are Starting Soon</h1>
-            <Typography>
+            <Typography sx={{ mb: 10 }}>
               Ready to plan out your Bootcamp experience? Start by viewing the
               upcoming course start dates. You can easily start your application
               once you’ve chosen a cohort.
@@ -87,7 +87,7 @@ export default function CourseTable() {
         </Grid>
         <Grid
           xs={12}
-          md={8}
+          md={12}
           style={{
             display: "flex",
             justifyContent: "center",
@@ -125,7 +125,7 @@ export default function CourseTable() {
                 {batch?.length &&
                   batch.map((row, index) => (
                     <StyledTableRow
-                      key={index}
+                      key={row._id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <StyledTableCell component="th" scope="row">

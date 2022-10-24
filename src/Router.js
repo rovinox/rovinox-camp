@@ -10,6 +10,9 @@ import Apply from "./component/Apply";
 import AdminLanding from "./admin/AdminLanding";
 import { useSelector } from "react-redux";
 import "./index.css";
+import AboutUs from "./component/AboutUs.js";
+import CareerSupport from "./component/CareerSupport.js";
+import Pricing from "./component/Pricing.js";
 
 export default function Router() {
   const selectedTheme = useSelector((state) => state.changeTheme.theme);
@@ -35,6 +38,9 @@ export default function Router() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/admin" element={<AdminLanding />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/support" element={<CareerSupport />} />
+          <Route path="/pricing" element={<Pricing />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

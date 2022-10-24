@@ -19,7 +19,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import "react-chat-widget/lib/styles.css";
 import { BsYoutube, BsFacebook, BsTwitter } from "react-icons/bs";
 import { BiSend } from "react-icons/bi";
-import TrackVisibility from "react-on-screen";
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -41,7 +40,6 @@ export default function RovinoxLanding() {
       <IntroVideo />
 
       <div className="main-landing">
-        <div className="simple-linear"></div>
         <div
           style={{
             display: "flex",

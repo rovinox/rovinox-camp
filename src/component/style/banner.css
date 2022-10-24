@@ -1,0 +1,77 @@
+.banner {
+  background: #b5c3d5;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  background-color: #ff6347;
+}
+.banner > h2 {
+  font-size: 2.5em;
+  width: 50%;
+}
+
+.eligibility-and-application-process-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.eligibility-top-part {
+  margin-left: 4rem;
+}
+.li-point {
+  padding: 0.8rem;
+  margin-left: 1rem;
+  display: flex;
+  flex-flow: row;
+  min-height: 100px;
+  position: relative;
+}
+span.number {
+  margin-right: 100px;
+  text-align: center;
+  width: 1.5rem;
+  height: 1rem;
+  background-color: #ff6347;
+  border-radius: 50%;
+  z-index: 1;
+}
+span.line {
+  position: absolute;
+  height: 100%;
+  border: solid #ff6347 0.1em;
+  top: 1.5rem;
+  left: 1.2rem;
+}
+li:last-child span.line {
+  display: none;
+}
+.blob {
+  padding: 1rem;
+  padding-top: 0;
+  border: 1px solid black;
+  border-top: none;
+}
+.eligibility-list-container ul li::before {
+  position: absolute;
+  left: 7.2rem;
+  top: 1.5rem;
+}
+@media (max-width: 830px) {
+  .eligibility-list-container ul li::before {
+    position: absolute;
+    left: 6.5rem;
+    top: 2rem;
+  }
+  span.number {
+    width: 3.5rem;
+  }
+}
+@media (max-width: 500px) {
+  span.number {
+    width: 8rem;
+  }
+}

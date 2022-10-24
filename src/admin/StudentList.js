@@ -22,6 +22,7 @@ const columns = [
 ];
 
 export default function StudentList({ batch }) {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -85,18 +86,20 @@ export default function StudentList({ batch }) {
     });
 
     try {
-      const result = await axios.put("http://localhost:8080/updatestudent", {
-        batchId,
-        role,
-        enabled,
-        id,
-      });
-      if (result?.data?.message) {
-        toast.success(`${result?.data?.message}`);
-        getUsers();
+      if (user.role === "admin") {
+        const result = await axios.put("http://localhost:8080/updatestudent", {
+          batchId,
+          role,
+          enabled,
+          id,
+        });
+        if (result?.data?.message) {
+          toast.success(`${result?.data?.message}`);
+          getUsers();
+        }
+      } else {
+        toast.error(`you don't have access to modify student`);
       }
-
-      console.log("setHomeWorkCount000000 ", result);
     } catch (err) {
       toast.error(`${err?.message}`);
     }
@@ -110,10 +113,8 @@ export default function StudentList({ batch }) {
       });
       if (result.data?.homeWork?.length > 0) {
         setHomeWorkCount(result.data?.homeWork?.length);
-        console.log("setHomeWorkCount ", result.data?.homeWork?.length);
       } else {
         setHomeWorkCount(null);
-        console.log("setHomeWorkCount2222222222222 ", homeworkCount);
       }
 
       console.log("setHomeWorkCount ", result);
@@ -154,6 +155,7 @@ export default function StudentList({ batch }) {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              mt: 5,
             }}
           >
             {homeworkCount && (
