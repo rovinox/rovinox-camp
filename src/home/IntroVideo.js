@@ -1,31 +1,26 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import ProductHeroLayout from "./ProductHeroLayout";
-import TrackVisibility from "react-on-screen";
 import {
   RovinoxTitle,
   CoursePacketButton,
 } from "../home/RovinoxLanding.styled.tsx";
+import MotionAnimation from "../component/MotionAnimation";
 
 export default function ProductHero() {
   return (
     <ProductHeroLayout>
-      <div>
-        <TrackVisibility>
-          {({ isVisible }) => (
-            <Typography
-              className={isVisible ? "zoom-in-out-box" : ""}
-              sx={{ mt: 10 }}
-              color="inherit"
-              align="center"
-              variant="h2"
-              marked="center"
-            >
-              Land Your Dream Job In Tech
-            </Typography>
-          )}
-        </TrackVisibility>
-      </div>
+      <MotionAnimation xSlide={300}>
+        <Typography
+          sx={{ mt: 10 }}
+          color="inherit"
+          align="center"
+          variant="h2"
+          marked="center"
+        >
+          Land Your Dream Job In Tech
+        </Typography>
+      </MotionAnimation>
       <Typography
         color="inherit"
         align="center"

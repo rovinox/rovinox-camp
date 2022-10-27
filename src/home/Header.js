@@ -13,7 +13,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { ApplyButton } from "./RovinoxLanding.styled.tsx";
 
-const pages = ["Courses", "Pricing", "About Us"];
+const pages = ["Pricing", "Career Support", "About Us"];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -41,7 +41,17 @@ const Header = () => {
 
   const handleCloseNavMenu = (item) => {
     setAnchorElNav(null);
+  };
+  const handleNavLInk = (item) => {
+    console.log(item);
     if (item === "Login") {
+      navigate("/login");
+    } else if (item === "About Us") {
+      navigate("/about");
+    } else if (item === "Career Support") {
+      navigate("/support");
+    } else if (item === "Pricing") {
+      navigate("/pricing");
     }
   };
 
@@ -101,7 +111,7 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handleNavLInk(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -130,7 +140,7 @@ const Header = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleNavLInk(page)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}

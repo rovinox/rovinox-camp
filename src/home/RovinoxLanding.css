@@ -239,7 +239,7 @@ footer.section__footer .footer-col h4::before {
   bottom: -0.6rem;
   width: 3rem;
   height: 0.125rem;
-  background: #e91e63;
+  background: linear-gradient(135deg, #06ffbd 0%, #ff0097 100%);
 }
 
 footer .footer-col ul li:not(:last-child) {

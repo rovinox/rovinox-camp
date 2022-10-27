@@ -11,9 +11,18 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import ReactToastify from "../component/ReactToastify.js";
 import { PieChart, Pie, Cell, Legend } from "recharts";
-
+const Rsoan = () => {
+  return <span>hi</span>;
+};
 const columns = [
-  { field: "batch", headerName: "Batch", width: 250 },
+  {
+    field: "batch",
+    headerName: "Batch",
+    width: 250,
+    // renderCell: (props) => {
+    //   console.log("line", props);
+    // },
+  },
   { field: "firstName", headerName: "First name", width: 130 },
   { field: "lastName", headerName: "last name", width: 130 },
   { field: "email", headerName: "Email", width: 320 },
@@ -22,6 +31,7 @@ const columns = [
 ];
 
 export default function StudentList({ batch }) {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -34,10 +44,10 @@ export default function StudentList({ batch }) {
       const result = await axios.get("http://localhost:8080/users");
       if (result?.data?.users) {
         result.data.users.forEach((user, index) => {
-          user.id = index + 1;
-          user.batch = `${moment(user.batchId.startDate).format(
+          user.id = user._id;
+          user.batch = `${moment(user.batchId?.startDate).format(
             "MMM Do YY"
-          )} - ${moment(user.batchId.endDate).format("MMM Do YY")}`;
+          )} - ${moment(user.batchId?.endDate).format("MMM Do YY")}`;
           user.active = user.enabled ? "Yes" : "no";
         });
         setLoading(false);
@@ -85,18 +95,20 @@ export default function StudentList({ batch }) {
     });
 
     try {
-      const result = await axios.put("http://localhost:8080/updatestudent", {
-        batchId,
-        role,
-        enabled,
-        id,
-      });
-      if (result?.data?.message) {
-        toast.success(`${result?.data?.message}`);
-        getUsers();
+      if (user.role === "admin") {
+        const result = await axios.put("http://localhost:8080/updatestudent", {
+          batchId,
+          role,
+          enabled,
+          id,
+        });
+        if (result?.data?.message) {
+          toast.success(`${result?.data?.message}`);
+          getUsers();
+        }
+      } else {
+        toast.error(`you don't have access to modify student`);
       }
-
-      console.log("setHomeWorkCount000000 ", result);
     } catch (err) {
       toast.error(`${err?.message}`);
     }
@@ -110,10 +122,8 @@ export default function StudentList({ batch }) {
       });
       if (result.data?.homeWork?.length > 0) {
         setHomeWorkCount(result.data?.homeWork?.length);
-        console.log("setHomeWorkCount ", result.data?.homeWork?.length);
       } else {
         setHomeWorkCount(null);
-        console.log("setHomeWorkCount2222222222222 ", homeworkCount);
       }
 
       console.log("setHomeWorkCount ", result);
@@ -154,6 +164,7 @@ export default function StudentList({ batch }) {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              mt: 5,
             }}
           >
             {homeworkCount && (

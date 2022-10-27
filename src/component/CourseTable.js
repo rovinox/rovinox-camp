@@ -23,6 +23,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 15,
   },
+  [`&.${tableCellClasses.table}`]: {
+    border: "2px solid red",
+  },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -40,18 +43,35 @@ export default function CourseTable() {
   const [batch, setBatch] = useState([]);
 
   useEffect(() => {
+    let newBatch = [];
     const getBatch = async () => {
       try {
         const result = await axios.get("http://localhost:8080/getbatch");
-        console.log("result: ", result);
-
-        setBatch(result.data.batch);
+        if (result.data.batch) {
+          result.data.batch.forEach((item) => {
+            var startDate = moment([
+              moment(moment(item.startDate) - 7 * 24 * 3600 * 1000).format(
+                "MM-DD-YY"
+              ),
+            ]);
+            var now = moment([moment().format("MM-DD-YY")]);
+            let dateDiff = startDate.diff(now, "days");
+            if (dateDiff === 0) {
+              item.isExpired = true;
+              newBatch.push(item);
+            } else {
+              item.isExpired = false;
+              newBatch.push(item);
+            }
+          });
+          setBatch(newBatch);
+          console.log("data", newBatch);
+        }
       } catch (e) {
         console.log(e);
       }
     };
     getBatch();
-    console.log("data", batch);
   }, []);
 
   const handleApply = (id) => {
@@ -61,11 +81,10 @@ export default function CourseTable() {
       },
     });
   };
-  const now = moment();
   return (
     <div className="course-table">
       <Grid sx={{ mt: 9, pr: 5, pl: 5 }} Grid container spacing={2}>
-        <Grid sx={{ textAlign: "center" }} xs={12} md={4}>
+        <Grid sx={{ textAlign: "center" }} xs={12} md={12}>
           <div
             style={{
               display: "flex",
@@ -73,34 +92,33 @@ export default function CourseTable() {
               alignItems: "center",
               flexDirection: "column",
               padding: "20px",
-              height: "100%",
-              width: "100%",
             }}
           >
             <h1>See What Cohorts Are Starting Soon</h1>
-            <Typography>
+            <Typography sx={{ mb: 10 }}>
               Ready to plan out your Bootcamp experience? Start by viewing the
               upcoming course start dates. You can easily start your application
               once you’ve chosen a cohort.
             </Typography>
           </div>
         </Grid>
-        <Grid
-          xs={12}
-          md={8}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
+        <Grid xs={12} md={12}>
           <TableContainer
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "none",
-            }}
+          // sx={{
+          //   scrollbarWidth: "thin",
+          //   "&::-webkit-scrollbar": {
+          //     width: "0.4em",
+          //   },
+          //   "&::-webkit-scrollbar-track": {
+          //     background: "#9E3584",
+          //   },
+          //   "&::-webkit-scrollbar-thumb": {
+          //     backgroundColor: "#211c33",
+          //   },
+          //   "&::-webkit-scrollbar-thumb:hover": {
+          //     background: "linear-gradient(to right, #211c33, #3a2336)",
+          //   },
+          // }}
           >
             <Table sx={{ overflow: "hidden" }} aria-label="simple table">
               <TableHead>
@@ -122,10 +140,10 @@ export default function CourseTable() {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {batch?.length &&
-                  batch.map((row, index) => (
+                {batch?.length > 0 &&
+                  batch.map((row) => (
                     <StyledTableRow
-                      key={index}
+                      key={row._id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <StyledTableCell component="th" scope="row">
@@ -142,21 +160,18 @@ export default function CourseTable() {
                         ${row.cost}
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {moment(row.startDate).format("MMM Do YY")}
-                        {/* {now.diff(row.startDate, "days") - 5 > 0 ? (
+                        {row.isExpired ? (
                           <Typography color="error">Expired</Typography>
                         ) : (
-                          `${now.diff(row.startDate, "days") - 5} Days Left`
-                        )} */}
+                          moment(
+                            moment(row.startDate) - 7 * 24 * 3600 * 1000
+                          ).format("MMM Do")
+                        )}
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {" "}
                         <Button
-                          // disabled={
-                          //   now.diff(row.startDate, "days") - 5 < 0
-                          //     ? true
-                          //     : false
-                          // }
+                          disabled={row.isExpired}
                           sx={{
                             background:
                               "linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%)",

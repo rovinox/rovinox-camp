@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 import { Typography } from "@mui/material";
 import moment from "moment";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { changeGradeHomeView } from "../duck/GradeHomeViewSlice";
@@ -17,6 +17,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -68,12 +69,31 @@ const IOSSwitch = styled((props) => (
     }),
   },
 }));
-export default function GradeHomework({ batch }) {
+export default function GradeHomework({ batch, setBatch }) {
+  const params = useLocation();
+  const batchId = params?.state;
   const gradeHomeView = useSelector(
     (state) => state.changeGradeHomeView.gradeHomeView
   );
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  // useEffect(() => {
+  //   const newBatch = [];
+  //   console.log(1, batchId);
+  //   if (batchId) {
+  //     batch.forEach((item) => {
+  //       if (item._id === batchId) {
+  //         item.selectedBatch = true;
+  //         console.log(2);
+  //         newBatch.push(item);
+  //       }
+  //       newBatch.push(item);
+  //     });
+  //     setBatch(newBatch);
+  //     console.log(3);
+  //   }
+  //   console.log("batch", newBatch);
+  // });
 
   const handleBatch = (id) => {
     navigate("/student", {
@@ -115,7 +135,7 @@ export default function GradeHomework({ batch }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {batch.length &&
+              {batch.length > 0 &&
                 batch.map((row) => (
                   <TableRow
                     key={row._id}
@@ -135,7 +155,7 @@ export default function GradeHomework({ batch }) {
                         variant="contained"
                       >
                         Grade
-                      </Button>{" "}
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

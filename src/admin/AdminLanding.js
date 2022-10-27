@@ -48,12 +48,12 @@ function a11yProps(index) {
 export default function AdminLanding() {
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
+  const [batch, setBatch] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const [batch, setBatch] = useState([]);
 
   useEffect(() => {
     if (user?.role === "student") {
@@ -91,7 +91,7 @@ export default function AdminLanding() {
           <AddBatch />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <GradeHomework batch={batch} />
+          <GradeHomework setBatch={setBatch} batch={batch} />
         </TabPanel>
       </Box>
       {/* <Test /> */}

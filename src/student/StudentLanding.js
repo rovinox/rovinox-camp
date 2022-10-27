@@ -5,6 +5,8 @@ import CourseListDrawer from "./CourseListDrawer";
 import NoCourse from "./NoCourse";
 import { useNavigate, useLocation } from "react-router-dom";
 import Header from "../component/Header";
+import { useSelector, useDispatch } from "react-redux";
+import { changeGradeHomeView } from "../duck/GradeHomeViewSlice";
 
 export default function StudentLanding(...prop) {
   const [currentCourse, setCurrentCourse] = useState(0);
@@ -13,8 +15,14 @@ export default function StudentLanding(...prop) {
   const navigate = useNavigate();
   const params = useLocation();
   const batchId = params?.state?.batchId;
-
+  const dispatch = useDispatch();
+  const gradeHomeView = useSelector(
+    (state) => state.changeGradeHomeView.gradeHomeView
+  );
   useEffect(() => {
+    if (!batchId && gradeHomeView) {
+      dispatch(changeGradeHomeView());
+    }
     const user = JSON.parse(localStorage.getItem("user"));
     console.log(user);
     setActiveStudent(user?.enabled);

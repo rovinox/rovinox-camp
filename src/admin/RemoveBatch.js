@@ -27,6 +27,7 @@ const style = {
 };
 
 export default function RemoveBatch({ batch }) {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [open, setOpen] = useState(false);
   const [batchId, setBatchId] = useState("");
   const handleOpen = () => setOpen(true);
@@ -35,14 +36,16 @@ export default function RemoveBatch({ batch }) {
     setOpen(false);
     console.log(batchId);
     try {
-      const result = await axios.put("http://localhost:8080/removebatch", {
-        batchId,
-      });
-      if (result?.data?.message) {
-        toast.success(`${result?.data?.message}`);
+      if (user.role === "admin") {
+        const result = await axios.put("http://localhost:8080/removebatch", {
+          batchId,
+        });
+        if (result?.data?.message) {
+          toast.success(`${result?.data?.message}`);
+        }
+      } else {
+        toast.error(`you don't have access to modify Batch`);
       }
-
-      console.log("setHomeWorkCount000000 ", result);
     } catch (err) {
       toast.error(`${err?.message}`);
     }
