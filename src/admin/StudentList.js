@@ -11,9 +11,18 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import ReactToastify from "../component/ReactToastify.js";
 import { PieChart, Pie, Cell, Legend } from "recharts";
-
+const Rsoan = () => {
+  return <span>hi</span>;
+};
 const columns = [
-  { field: "batch", headerName: "Batch", width: 250 },
+  {
+    field: "batch",
+    headerName: "Batch",
+    width: 250,
+    // renderCell: (props) => {
+    //   console.log("line", props);
+    // },
+  },
   { field: "firstName", headerName: "First name", width: 130 },
   { field: "lastName", headerName: "last name", width: 130 },
   { field: "email", headerName: "Email", width: 320 },
@@ -35,10 +44,10 @@ export default function StudentList({ batch }) {
       const result = await axios.get("http://localhost:8080/users");
       if (result?.data?.users) {
         result.data.users.forEach((user, index) => {
-          user.id = index + 1;
-          user.batch = `${moment(user.batchId.startDate).format(
+          user.id = user._id;
+          user.batch = `${moment(user.batchId?.startDate).format(
             "MMM Do YY"
-          )} - ${moment(user.batchId.endDate).format("MMM Do YY")}`;
+          )} - ${moment(user.batchId?.endDate).format("MMM Do YY")}`;
           user.active = user.enabled ? "Yes" : "no";
         });
         setLoading(false);

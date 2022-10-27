@@ -18,7 +18,6 @@ const valid = (req, res) => {
   //console.log("111", token);
   jwt.verify(Token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
     if (err) {
-      //res.status(403).json({ login: false });
       res.redirect("/login");
     } else {
       res.json({ login: true });

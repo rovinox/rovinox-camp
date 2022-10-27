@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
@@ -8,12 +7,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import ReactToastify from "../component/ReactToastify.js";
 import { toast } from "react-toastify";
 import moment from "moment";
 import CardContent from "@mui/material/CardContent";
 import { Widget, addResponseMessage } from "react-chat-widget";
+import Header from "../home/Header";
+import Banner from "./Banner.js";
+
 function Copyright(props) {
   return (
     <Typography
@@ -32,6 +34,7 @@ function Copyright(props) {
 
 export default function Apply() {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const batchId = state?.id;
   const [selectedBatch, setSelectedBatch] = useState(batchId);
   const [batch, setBatch] = useState([]);
@@ -70,18 +73,24 @@ export default function Apply() {
       phoneNumber: data.get("phoneNumber"),
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
+      password: data.get("password"),
       batch: selectedBatch,
     };
     console.log(user);
     try {
-      const result = await axios.post("http://localhost:8080/email", user);
-      console.log(result);
-      if (result?.data?.message) {
-        toast.success(`${result?.data?.message}`);
+      const result = await axios.post("http://localhost:8080/register", user);
+      if (result.status === 200) {
+        localStorage.setItem("user", JSON.stringify(result.data));
+        navigate("/student");
       }
     } catch (err) {
-      console.error(err?.message);
-      toast.error(`${err?.message}`);
+      if (!err?.response) {
+        toast.error("No Server Response");
+      } else if (err.response?.status === 409) {
+        toast.error("This email address already exists");
+      } else {
+        toast.error(`${err?.message}`);
+      }
     }
   };
   const handleNewUserMessage = (newMessage) => {
@@ -91,13 +100,8 @@ export default function Apply() {
   };
   return (
     <>
-      <Typography
-        sx={{ mt: 8, mb: 10, textAlign: "center" }}
-        component="h1"
-        variant="h2"
-      >
-        How to Apply
-      </Typography>
+      <Header />
+      <Banner bannerTitle="Here are the steps we follow for admission. We understand you may or may not have prior coding experience" />
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -105,12 +109,15 @@ export default function Apply() {
         sx={{
           marginTop: 8,
           display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Grid item xs={2} sm={4} md={4}>
           <CardContent
             sx={{
               textAlign: "center",
+              maxWidth: 400,
             }}
           >
             <Typography variant="h5" component="div">
@@ -129,6 +136,7 @@ export default function Apply() {
           <CardContent
             sx={{
               textAlign: "center",
+              maxWidth: 400,
             }}
           >
             <Typography variant="h5" component="div">
@@ -147,6 +155,7 @@ export default function Apply() {
           <CardContent
             sx={{
               textAlign: "center",
+              maxWidth: 400,
             }}
           >
             <Typography variant="h5" component="div">
@@ -245,9 +254,19 @@ export default function Apply() {
                 <TextField
                   required
                   fullWidth
+                  name="password"
+                  label="Create a Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
                   name="phoneNumber"
                   id="standard-number"
-                  label="Phone Number"
+                  label="Phone Number (optional)"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -281,6 +300,13 @@ export default function Apply() {
             >
               submit
             </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to="/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
