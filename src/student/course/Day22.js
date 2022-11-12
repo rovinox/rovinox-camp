@@ -20,6 +20,31 @@ export default function Day1({ day }) {
             {course.title}
           </Typography>
         ))}
+        <Typography sx={{ mb: 5 }} component="p">
+          Moving Data around in react
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>As you've learned, data moves two ways in react...</li>
+          <li>It can move into a component via props or it </li>
+          <li>Hook: functions that allow you to make changes during specific steps in the lifecycle of a component</li>
+        </ul>
+        <Typography sx={{ mb: 5 }} component="p">
+          React Lifecycle Hooks
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>useState: 
+            <ul style={{ width: "100%" }}>
+              <li>this hook is used to re-render the component with new information</li>
+              <li>This is used only on state, which is the internal data of a component</li>
+            </ul>
+          </li>
+          <li>useEffect: 
+            <ul style={{ width: "100%" }}>
+              <li>this hook is used when a component first renders, when it is updated via useState, and when it is no longer on screen</li>
+              <li>This is hook useful for knowing when state or props change, and reacting to those changes</li>
+            </ul>
+          </li>
+        </ul>
       </Box>
     </Container>
   );
