@@ -24,26 +24,18 @@ export default function Day1({ day }) {
           Moving Data around in react
         </Typography>
         <ul style={{ width: "100%" }}>
-          <li>As you've learned, data moves two ways in react...</li>
-          <li>It can move into a component via props or it </li>
-          <li>Hook: functions that allow you to make changes during specific steps in the lifecycle of a component</li>
+          <li>As you've learned, data can move into a component via props</li>
+          <li>Data can also be moved out of a component using a function</li>
+          <li>A parent component can be notified of changes in one of its children components</li>
         </ul>
         <Typography sx={{ mb: 5 }} component="p">
-          React Lifecycle Hooks
+          React Events
         </Typography>
         <ul style={{ width: "100%" }}>
-          <li>useState: 
-            <ul style={{ width: "100%" }}>
-              <li>this hook is used to re-render the component with new information</li>
-              <li>This is used only on state, which is the internal data of a component</li>
-            </ul>
-          </li>
-          <li>useEffect: 
-            <ul style={{ width: "100%" }}>
-              <li>this hook is used when a component first renders, when it is updated via useState, and when it is no longer on screen</li>
-              <li>This is hook useful for knowing when state or props change, and reacting to those changes</li>
-            </ul>
-          </li>
+          <li>React events are based on JavaScript events and work the same on all browsers</li>
+          <li>You add functionality to an element by attaching an event to it</li>
+          <li>Some common events are onClick, onFocus, and onKeyDown</li>
+          <li>Any click or touch on a keyboard, scroll on a page are all considered events</li>
         </ul>
       </Box>
     </Container>
