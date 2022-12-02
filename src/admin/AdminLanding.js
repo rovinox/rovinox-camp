@@ -61,7 +61,7 @@ export default function AdminLanding() {
     }
     const getBatch = async () => {
       try {
-        const result = await axios.get("http://localhost:8080/getbatch");
+        const result = await axios.get("/getbatch");
         console.log("result: ", result);
         setBatch(result.data.batch);
       } catch (e) {}

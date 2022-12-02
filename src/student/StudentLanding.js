@@ -1,4 +1,4 @@
-import axios from "../api/axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import CourseContent from "./CourseContent";
 import CourseListDrawer from "./CourseListDrawer";
@@ -29,7 +29,7 @@ export default function StudentLanding(...prop) {
     setIsAdmin(user?.enabled);
     const getUser = async () => {
       try {
-        const result = await axios.get("http://localhost:8080/usersession", {
+        const result = await axios.get("/usersession", {
           headers: {
             authorization: `Bearer ${user?.accessToken}`,
             "Content-Type": "application/json",

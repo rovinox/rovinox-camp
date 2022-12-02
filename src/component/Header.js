@@ -109,7 +109,7 @@ const Header = () => {
   };
   const handleLogout = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/logout");
+      const result = await axios.get("/logout");
       console.log("vv2", result);
 
       navigate("/login");

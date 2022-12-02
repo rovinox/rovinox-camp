@@ -45,7 +45,7 @@ export default function Apply() {
   useEffect(() => {
     const getBatch = async () => {
       try {
-        const result = await axios.get("http://localhost:8080/getbatch");
+        const result = await axios.get("/getbatch");
         console.log("result: ", result);
 
         setBatch(result.data.batch);
@@ -74,11 +74,11 @@ export default function Apply() {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
       password: data.get("password"),
-      batch: selectedBatch,
+      batchId: selectedBatch,
     };
     console.log(user);
     try {
-      const result = await axios.post("http://localhost:8080/register", user);
+      const result = await axios.post("/register", user);
       if (result.status === 200) {
         localStorage.setItem("user", JSON.stringify(result.data));
         navigate("/student");

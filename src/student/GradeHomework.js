@@ -117,7 +117,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
   const getUsers = async () => {
     console.log("day", selectedDay[0].day);
     try {
-      const result = await axios.post("http://localhost:8080/gethomework", {
+      const result = await axios.post("/gethomework", {
         day: selectedDay[0].day,
         batchId,
       });
@@ -144,7 +144,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
     console.log(newHomework);
     setHomeWork(newHomework);
     try {
-      const result = await axios.put("http://localhost:8080/gradehomework", {
+      const result = await axios.put("/gradehomework", {
         homeWorkId,
         graded: !graded,
       });
