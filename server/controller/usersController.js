@@ -3,7 +3,14 @@ const Student = require("../model/student");
 const users = async (req, res) => {
   try {
     const Users = await Student.find()
-      .select(["lastName", "firstName", "role", "email", "enabled"])
+      .select([
+        "lastName",
+        "firstName",
+        "role",
+        "email",
+        "enabled",
+        "phoneNumber",
+      ])
       .populate([
         {
           path: "batchId",

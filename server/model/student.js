@@ -18,6 +18,10 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+  phoneNumber: {
+    type: String,
+    required: false,
+  },
   batchId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "batch",

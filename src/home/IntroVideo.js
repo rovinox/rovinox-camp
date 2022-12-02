@@ -10,17 +10,17 @@ import MotionAnimation from "../component/MotionAnimation";
 export default function ProductHero() {
   return (
     <ProductHeroLayout>
-      <MotionAnimation xSlide={300}>
-        <Typography
-          sx={{ mt: 10 }}
-          color="inherit"
-          align="center"
-          variant="h2"
-          marked="center"
-        >
-          Land Your Dream Job In Tech
-        </Typography>
-      </MotionAnimation>
+      {/* <MotionAnimation xSlide={300}> */}
+      <Typography
+        sx={{ mt: 10 }}
+        color="inherit"
+        align="center"
+        variant="h2"
+        marked="center"
+      >
+        Land Your Dream Job In Tech
+      </Typography>
+      {/* </MotionAnimation> */}
       <Typography
         color="inherit"
         align="center"

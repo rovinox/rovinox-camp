@@ -19,17 +19,14 @@ export default function HomeworkSubmission({ selectedDay }) {
       day: selectedDay[0].day,
       link: data.get("githubLink"),
     };
-    console.log(payload);
+
     setLoading(true);
     try {
-      const result = await axios.post(
-        "http://localhost:8080/submithomework",
-        payload
-      );
+      const result = await axios.post("/submithomework", payload);
       if (result?.data?.message) {
         toast.success(`${result?.data?.message}`);
       }
-      console.log(result);
+      setLoading(false);
     } catch (err) {
       toast.error(`${err?.message}`);
     }

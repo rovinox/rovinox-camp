@@ -8,6 +8,7 @@ const getHomework = async (req, res) => {
       path: "studentId",
       select: ["lastName", "firstName"],
     });
+    console.log(foundHomeWork);
     if (foundHomeWork) {
       res.status(200).json({ homeWork: foundHomeWork, message: "data found" });
     }
