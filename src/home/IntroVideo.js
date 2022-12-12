@@ -1,79 +1,52 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
-import ProductHeroLayout from "./ProductHeroLayout";
-import {
-  RovinoxTitle,
-  CoursePacketButton,
-} from "../home/RovinoxLanding.styled.tsx";
-import MotionAnimation from "../component/MotionAnimation";
+import Grid from "@mui/material/Grid";
+import IntroPic from "../asset/IntroPic.svg";
 
 export default function ProductHero() {
   return (
-    <ProductHeroLayout>
-      {/* <MotionAnimation xSlide={300}> */}
-      <Typography
-        sx={{ mt: 10 }}
-        color="inherit"
-        align="center"
-        variant="h2"
-        marked="center"
-      >
-        Land Your Dream Job In Tech
-      </Typography>
-      {/* </MotionAnimation> */}
-      <Typography
-        color="inherit"
-        align="center"
-        variant="h5"
-        sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
-      >
-        <div className="heading-client">
-          <RovinoxTitle>
-            Jumpstart your <br />
-            <span style={{ "--i": 1 }} className="orangeText">
-              c
-            </span>
-            <span style={{ "--i": 2 }} className="orangeText">
-              a
-            </span>
-            <span style={{ "--i": 3 }} className="orangeText">
-              r
-            </span>
-            <span style={{ "--i": 4 }} className="orangeText">
-              r
-            </span>
-            <span style={{ "--i": 5 }} className="orangeText">
-              e
-            </span>
-            <span style={{ "--i": 6 }} className="orangeText">
-              r
-            </span>{" "}
-            <br />
-            in tech with Rovinox.
-            <br />
-            It’s Time to Invest In Your <br />
-            <span style={{ "--i": 7 }} className="orangeText">
-              F
-            </span>
-            <span style={{ "--i": 8 }} className="orangeText">
-              u
-            </span>
-            <span style={{ "--i": 9 }} className="orangeText">
-              t
-            </span>
-            <span style={{ "--i": 10 }} className="orangeText">
-              u
-            </span>
-            <span style={{ "--i": 11 }} className="orangeText">
-              r
-            </span>
-            <span style={{ "--i": 12 }} className="orangeText">
-              e
-            </span>
-          </RovinoxTitle>
-        </div>
-      </Typography>
-      <CoursePacketButton>Get Free Course Packet</CoursePacketButton>
-    </ProductHeroLayout>
+    <div
+      style={{
+        marginTop: 100,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "0px",
+      }}
+    >
+      <Grid Grid container spacing={2}>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+        >
+          <div>
+            <Typography variant="h2">Land your Dream Jon in Tech</Typography>
+            <Typography variant="p">
+              Jumpstart your CARRER in tech with Rovinox. It’s Time to
+              <Typography>Invest In Your FUTURE</Typography>
+            </Typography>
+          </div>
+        </Grid>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+        >
+          <img src={IntroPic} alt="pic" />
+        </Grid>
+      </Grid>
+    </div>
   );
 }

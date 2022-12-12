@@ -12,7 +12,8 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import { ApplyButton } from "./RovinoxLanding.styled.tsx";
-
+import rovinoxLogo from "../asset/rovinoxLogo.png";
+import logoRvinox from "../asset/logoRvinox.svg";
 const pages = ["Pricing", "Career Support", "About Us"];
 
 const Header = () => {
@@ -57,29 +58,12 @@ const Header = () => {
 
   return (
     <AppBar
-      sx={{ boxShadow: "none", background: !scrolled ? "none" : "#19b6fa" }}
+      sx={{ boxShadow: "none", background: !scrolled ? "none" : "#252251" }}
       position="fixed"
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+          <img style={{ marginRight: 10 }} src={logoRvinox} alt="pic" />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -117,25 +101,7 @@ const Header = () => {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+          {/* <img style={{ height: 20, width: 20 }} src={rovinoxLogo} alt="pic" /> */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button

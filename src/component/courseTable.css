@@ -9,6 +9,6 @@
   margin-top: 40px;
 }
 
-.course-table tbody tr:nth-child(odd) {
+/* .course-table tbody tr:nth-child(odd) {
   background: linear-gradient(to right, #211c33, #3a2336);
-}
+} */

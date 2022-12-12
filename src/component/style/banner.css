@@ -1,5 +1,4 @@
 .banner {
-  background: #b5c3d5;
   height: 300px;
   display: flex;
   flex-direction: row;
@@ -7,12 +6,20 @@
   justify-content: center;
   align-items: center;
   align-content: stretch;
-  background-color: #ff6347;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  background-image: url("https://source.unsplash.com/random/?programming");
 }
-.banner > h2 {
-  font-size: 2.5em;
-  width: 50%;
-  color: #e4eaf0;
+.pageTitle {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 200px;
+  text-align: center;
 }
 
 .eligibility-and-application-process-container {

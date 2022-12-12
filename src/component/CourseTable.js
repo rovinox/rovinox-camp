@@ -11,13 +11,14 @@ import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
-import { ApplyButton } from "../home/RovinoxLanding.styled.tsx";
+import { ApplyButton2 } from "../home/RovinoxLanding.styled.tsx";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#9E3584",
+    backgroundColor: "#0DA8DB",
     fontSize: 15,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -30,7 +31,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
+    backgroundColor: theme.palette.background.default,
   },
   // hide last border
   "&:last-child td, &:last-child th": {
@@ -82,7 +83,7 @@ export default function CourseTable() {
     });
   };
   return (
-    <div className="course-table">
+    <Paper sx={{ pb: 20 }}>
       <Grid sx={{ mt: 9, pr: 5, pl: 5 }} Grid container spacing={2}>
         <Grid sx={{ textAlign: "center" }} xs={12} md={12}>
           <div
@@ -104,21 +105,10 @@ export default function CourseTable() {
         </Grid>
         <Grid xs={12} md={12}>
           <TableContainer
-          // sx={{
-          //   scrollbarWidth: "thin",
-          //   "&::-webkit-scrollbar": {
-          //     width: "0.4em",
-          //   },
-          //   "&::-webkit-scrollbar-track": {
-          //     background: "#9E3584",
-          //   },
-          //   "&::-webkit-scrollbar-thumb": {
-          //     backgroundColor: "#211c33",
-          //   },
-          //   "&::-webkit-scrollbar-thumb:hover": {
-          //     background: "linear-gradient(to right, #211c33, #3a2336)",
-          //   },
-          // }}
+            sx={{
+              border: "1px #0DA8DB solid",
+              borderRadius: "10px",
+            }}
           >
             <Table sx={{ overflow: "hidden" }} aria-label="simple table">
               <TableHead>
@@ -170,7 +160,7 @@ export default function CourseTable() {
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         {" "}
-                        <Button
+                        <ApplyButton2
                           disabled={row.isExpired}
                           sx={{
                             background:
@@ -178,10 +168,9 @@ export default function CourseTable() {
                             color: "white",
                           }}
                           onClick={() => handleApply(row._id)}
-                          variant="outlined"
                         >
                           Apply
-                        </Button>{" "}
+                        </ApplyButton2>{" "}
                       </StyledTableCell>
                     </StyledTableRow>
                   ))}
@@ -190,6 +179,6 @@ export default function CourseTable() {
           </TableContainer>
         </Grid>
       </Grid>
-    </div>
+    </Paper>
   );
 }
