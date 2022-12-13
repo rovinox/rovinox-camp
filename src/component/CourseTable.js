@@ -46,7 +46,7 @@ export default function CourseTable() {
     let newBatch = [];
     const getBatch = async () => {
       try {
-        const result = await axios.get("http://localhost:8080/getbatch");
+        const result = await axios.get("/getbatch");
         if (result.data.batch) {
           result.data.batch.forEach((item) => {
             var startDate = moment([

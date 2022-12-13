@@ -37,7 +37,7 @@ export default function RemoveBatch({ batch }) {
     console.log(batchId);
     try {
       if (user.role === "admin") {
-        const result = await axios.put("http://localhost:8080/removebatch", {
+        const result = await axios.put("/removebatch", {
           batchId,
         });
         if (result?.data?.message) {

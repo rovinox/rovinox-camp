@@ -54,7 +54,7 @@ export default function AddBatch() {
     };
     console.log(batch);
     try {
-      const result = await axios.post("http://localhost:8080/addbatch", batch);
+      const result = await axios.post("/addbatch", batch);
       console.log(result);
       if (result?.data?.message) {
         toast.success(`${result?.data?.message}`);

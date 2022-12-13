@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../../component/course";
-export default function Day5({ day }) {
+import HomeworkList from "../../component/HomeworkList";
+export default function Day5({ day, batchId, isAdmin }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   return (
     <Container component="main">
@@ -29,6 +30,11 @@ export default function Day5({ day }) {
           <li>You can create websites and make apps using JS</li>
           <li>Other frameworks and libraries like React and Angular are based on JavaScript</li>
         </ul>
+        <HomeworkList
+          isAdmin={isAdmin}
+          batchId={batchId}
+          selectedDay={selectedDay}
+        />
       </Box>
     </Container>
   );

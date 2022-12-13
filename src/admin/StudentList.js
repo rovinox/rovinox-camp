@@ -23,9 +23,10 @@ const columns = [
     //   console.log("line", props);
     // },
   },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "last name", width: 130 },
+  { field: "firstName", headerName: "First name", width: 180 },
+  { field: "lastName", headerName: "last name", width: 180 },
   { field: "email", headerName: "Email", width: 320 },
+  { field: "phoneNumber", headerName: "Phone Number", width: 130 },
   { field: "active", headerName: "Enabled", width: 100 },
   { field: "role", headerName: "Role", width: 100 },
 ];
@@ -41,14 +42,14 @@ export default function StudentList({ batch }) {
   const [enabled, setEnabled] = useState(selectedStudent?.enabled);
   const getUsers = async () => {
     try {
-      const result = await axios.get("http://localhost:8080/users");
+      const result = await axios.get("/users");
       if (result?.data?.users) {
         result.data.users.forEach((user, index) => {
           user.id = user._id;
           user.batch = `${moment(user.batchId?.startDate).format(
             "MMM Do YY"
           )} - ${moment(user.batchId?.endDate).format("MMM Do YY")}`;
-          user.active = user.enabled ? "Yes" : "no";
+          user.active = user.enabled ? "Yes" : "No";
         });
         setLoading(false);
       }
@@ -96,7 +97,7 @@ export default function StudentList({ batch }) {
 
     try {
       if (user.role === "admin") {
-        const result = await axios.put("http://localhost:8080/updatestudent", {
+        const result = await axios.put("/updatestudent", {
           batchId,
           role,
           enabled,
@@ -116,7 +117,7 @@ export default function StudentList({ batch }) {
   const handleProgress = async (studentId, batchId) => {
     console.log("studentId", studentId);
     try {
-      const result = await axios.post("http://localhost:8080/getprogress", {
+      const result = await axios.post("/getprogress", {
         studentId,
         batchId,
       });
@@ -144,9 +145,9 @@ export default function StudentList({ batch }) {
         experimentalFeatures={{ newEditingApi: true }}
         editMode={"row"}
         onCellClick={(props) => {
-          setSelectedStudent(props.row);
           handleProgress(props.row._id, props.row.batchId._id);
           setRole(props.row.role);
+          setSelectedStudent(props.row);
           setEnabled(props.row.enabled);
           setBatchId(props.row.batchId._id);
 

@@ -1,6 +1,6 @@
 .banner {
   background: #b5c3d5;
-  height: 400px;
+  height: 300px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -12,6 +12,7 @@
 .banner > h2 {
   font-size: 2.5em;
   width: 50%;
+  color: #e4eaf0;
 }
 
 .eligibility-and-application-process-container {
@@ -74,4 +75,19 @@ li:last-child span.line {
   span.number {
     width: 8rem;
   }
+}
+.custom-shape-divider-bottom-1666839437 {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-bottom-1666839437 svg {
+  display: block;
+  width: calc(138% + 1.3px);
+  height: 300px;
+}
+
+.custom-shape-divider-bottom-1666839437 .shape-fill {
+  fill: #ff6347;
 }
