@@ -20,6 +20,15 @@ export default function Day5({ day }) {
             {course.title}
           </Typography>
         ))}
+        <Typography sx={{ mb: 5 }} component="p">
+          Welcome to javascript, where the crying begins.
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>JavaScript is a programming language, "the language of the web"</li>
+          <li>Learning JS will give allow you to be able to learn any other language</li>
+          <li>You can create websites and make apps using JS</li>
+          <li>Other frameworks and libraries like React and Angular are based on JavaScript</li>
+        </ul>
       </Box>
     </Container>
   );

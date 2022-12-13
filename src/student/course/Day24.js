@@ -20,6 +20,13 @@ export default function Day1({ day }) {
             {course.title}
           </Typography>
         ))}
+        <Typography sx={{ mb: 5 }} component="p">
+           Famous React Libraries You Should Know
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>Axios</li>
+          <li>Material UI</li>
+        </ul>
       </Box>
     </Container>
   );

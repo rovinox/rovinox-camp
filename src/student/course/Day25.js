@@ -20,6 +20,9 @@ export default function Day1({ day }) {
             {course.title}
           </Typography>
         ))}
+         <Typography sx={{ mb: 5 }} component="p">
+           React Practice and Recap! Q&A.
+        </Typography>
       </Box>
     </Container>
   );

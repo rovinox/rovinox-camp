@@ -34,6 +34,11 @@ export default function Day2({ day }) {
             Flex-Box
           </a>
         </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>Flexbox makes it easy to align items on a page</li>
+          <li>With flex, you can easily determine how an element should look on different devices</li>
+          <li>Flexbox makes it easy to to give width and space to items without explicitly setting those values</li>
+        </ul>
       </Box>
     </Container>
   );
