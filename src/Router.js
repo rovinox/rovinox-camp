@@ -29,7 +29,7 @@ const getDesignTokens = (mode) => ({
         }
       : {
           // palette values for dark mode
-          primary: { main: "#252251" },
+          primary: { main: "#0DA8DB" },
           divider: indigo[700],
           background: {
             default: "#191A3A",

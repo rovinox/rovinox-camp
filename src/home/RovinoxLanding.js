@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./RovinoxLanding.css";
-import vid1 from "../asset/vid1.mp4";
 import pic1 from "../asset/bro.svg";
 import pic2 from "../asset/Group2.svg";
 import pic3 from "../asset/Group3.svg";
@@ -26,6 +25,7 @@ import { BiSend } from "react-icons/bi";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Footer from "./Footer";
 
 export default function RovinoxLanding() {
   const navigate = useNavigate();
@@ -61,14 +61,6 @@ export default function RovinoxLanding() {
     <>
       <Header />
       <IntroVideo />
-      {/* <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "0px",
-        }}
-      > */}
       <Grid Grid container spacing={2}>
         <Grid xs={12} md={6}>
           <img src={pic1} alt="pic" />
@@ -91,7 +83,6 @@ export default function RovinoxLanding() {
           ))}
         </Grid>
       </Grid>
-      {/* </div> */}
 
       <Box
         sx={{
@@ -100,8 +91,8 @@ export default function RovinoxLanding() {
           justifyContent: "space-evenly",
           "& > :not(style)": {
             m: 1,
-            width: "30%",
-            height: 300,
+            width: 400,
+            height: 350,
           },
         }}
       >
@@ -112,91 +103,32 @@ export default function RovinoxLanding() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              // p: 10,
+              p: 1,
             }}
             key={item.title}
           >
-            <img src={item.image} alt=" pic" />
-            <Typography variant="h4">{item.title}</Typography>
-            <Typography sx={{ p: 2 }} variant="p">
-              {item.description}
-            </Typography>
+            <div style={{ height: 115 }}>
+              <img src={item.image} alt=" pic" />
+            </div>
+            <div style={{ height: 115 }}>
+              <Typography variant="h4">{item.title}</Typography>
+            </div>
+            <div style={{ height: 115 }}>
+              <Typography sx={{ p: 2 }} variant="p">
+                {item.description}
+              </Typography>
+            </div>
           </Paper>
         ))}
       </Box>
       <CourseTable />
       <FAQ />
-      <footer className="section__footer">
-        <div className="container__footer">
-          <div className="row">
-            <div className="footer-col">
-              <h4>Keep In Toucht</h4>
-              <a className="social codepen">
-                <div className="iconic">
-                  <BsYoutube />
-                </div>
-              </a>
-              <a className="social instagram">
-                <div className="iconic">
-                  <BsFacebook />
-                </div>
-              </a>
-              <a className="social youtube">
-                <div className="iconic">
-                  <BsTwitter />
-                </div>
-              </a>
-            </div>
-            <div className="footer-col">
-              <h4>Company Info</h4>
-              <ul>
-                <li>
-                  <a href="#">About Us</a>
-                </li>
-                <li>
-                  <a href="#">Privacy Policy</a>
-                </li>
-                <li>
-                  <a href="#">Terms of Service</a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Blog Posts</h4>
-              <ul>
-                <li>
-                  <a href="#">FAQ</a>
-                </li>
-                <li>
-                  <a href="#">Payment options</a>
-                </li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Subscribe</h4>
-              <p>Subscribe to our newsletter to stay updated on courses</p>
-              <form name="email-form">
-                <div className="email__field">
-                  <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="E-mail"
-                  />
-                  <button className="form-control submit">
-                    <BiSend />
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
+
       {/* <Widget
         subtitle="Please Include phone number in the message"
         title="Welcome To Rovinox"
       /> */}
     </>
-    // </ThemeProvider>
   );
 }

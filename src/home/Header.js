@@ -63,7 +63,9 @@ const Header = () => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img style={{ marginRight: 10 }} src={logoRvinox} alt="pic" />
+          <a href="/">
+            <img style={{ marginRight: 10 }} src={logoRvinox} alt="pic" />
+          </a>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton

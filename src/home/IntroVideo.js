@@ -29,7 +29,11 @@ export default function ProductHero() {
           <div>
             <Typography variant="h2">Land your Dream Jon in Tech</Typography>
             <Typography variant="p">
-              Jumpstart your CARRER in tech with Rovinox. It’s Time to
+              Jumpstart your{" "}
+              <Typography color="primary" variant="span">
+                CAREER
+              </Typography>{" "}
+              in tech with Rovinox. It’s Time to
               <Typography>Invest In Your FUTURE</Typography>
             </Typography>
           </div>

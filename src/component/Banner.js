@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import "./style/banner.css";
+import "./style/banner.scss";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 export default function Banner({ bannerTitle, page }) {
@@ -36,7 +36,9 @@ export default function Banner({ bannerTitle, page }) {
           height: 200,
         }}
       >
-        <Typography variant="h4">{bannerTitle}</Typography>
+        <Typography sx={{ p: 5 }} variant="h4">
+          {bannerTitle}
+        </Typography>
       </Box>
     </div>
   );
