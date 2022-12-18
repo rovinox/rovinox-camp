@@ -82,7 +82,7 @@ export default function Day3({ day }) {
           <a href="https://brew.sh/" target="_blank" rel="noreferrer">
             this
           </a>{" "}
-          instruction. Than Follow alone with the video.
+          instruction. Then Follow alone with the video.
         </Typography>
         <ReactPlayer
           height={800}

@@ -26,6 +26,32 @@ export default function Day4({ day, batchId, isAdmin }) {
         <Typography sx={{ mb: 5 }} component="p">
           Welcome to javascript, where the crying begins.
         </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>JavaScript is a programming language, "the language of the web"</li>
+          <li>Learning JS will give allow you to be able to learn any other language</li>
+          <li>You can create websites and make apps using JS</li>
+          <li>Other frameworks and libraries like React and Angular are based on JavaScript</li>
+        </ul>
+        <Typography sx={{ mb: 5 }} component="p">
+          Terminology
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>Variable: stores data in a value. All data in a progrma is stored in some sort of data </li>
+          <li>Variables can be text, numbers, or anything JS considers data</li>
+          <li><bold>let</bold>  and <bold>const</bold> are ways to define variables</li>
+          <li>Other frameworks and libraries like React and Angular are based on JavaScript</li>
+        </ul>
+        <Typography sx={{ mb: 5 }} component="p">
+          JS Data Types
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>Strings</li>
+          <li>Numbers</li>
+          <li>Objects</li>
+          <li>Arrays</li>
+          <li>Null</li>
+          <li>Undefined</li>
+        </ul>
         <Typography sx={{ m: 5 }} component="p">
           <a
             href="https://github.com/rovinox/JavaScript-part-1"
