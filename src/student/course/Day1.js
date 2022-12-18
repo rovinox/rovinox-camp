@@ -48,17 +48,13 @@ export default function Day1({ day }) {
         <ul style={{ width: "100%" }}>
           <li>CSS stands for Cascading Style Sheets</li>
           <li>
-            CSS describes how HTML elements are to be displayed on screen,
-            paper, or in other media
+            CSS determines the styling of the web
           </li>
-          <li>
-            CSS saves a lot of work. It can control the layout of multiple web
-            pages all at once
-          </li>
+          <li>Styling rules cascade down, that means the lowest style ruling will take precedence</li>
           <li>External stylesheets are stored in CSS files</li>
         </ul>
         <Typography sx={{ m: 5 }} component="p">
-          you can read more about HTML{" "}
+          you can read more about CSS{" "}
           <a
             href="https://www.w3schools.com/css/css_intro.asp"
             target="_blank"
