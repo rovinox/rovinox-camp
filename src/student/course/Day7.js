@@ -20,6 +20,17 @@ export default function Day7({ day }) {
             {course.title}
           </Typography>
         ))}
+        <Typography sx={{ mb: 5 }} component="p">
+          JS Math and Arithmetic operations...sometimes you will need to do logical operations in JavaScript.
+          This includes arithmetic(adding, substracting, dividing, multiplication), assignment, and comparison operators.
+        </Typography>
+        <h3>TYpes of JavaScript Operators</h3>
+        <li>Arithmetic Operators</li>
+          <li>Assignment Operators</li>
+          <li>Comparison Operators</li>
+          <li>Logical Operators</li>
+          <li>Conditional Operators</li>
+          <li>Type Operators</li>
       </Box>
     </Container>
   );

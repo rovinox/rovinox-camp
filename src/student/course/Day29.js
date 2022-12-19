@@ -3,7 +3,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../../component/course";
-export default function Day1({ day }) {
+import HomeworkList from "../../component/HomeworkList";
+
+export default function Day8({ day, batchId, isAdmin }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   return (
     <Container component="main">
@@ -20,6 +22,30 @@ export default function Day1({ day }) {
             {course.title}
           </Typography>
         ))}
+         <Typography sx={{ mb: 5 }} component="p">
+          
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <Typography sx={{ m: 5 }} component="p">
+          <a
+            href="https://github.com/rovinox/JavaScript-part-1"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Here
+          </a>{" "}
+          is the link to homework{" "}
+        </Typography>
+        <HomeworkList
+          isAdmin={isAdmin}
+          batchId={batchId}
+          selectedDay={selectedDay}
+        />
       </Box>
     </Container>
   );

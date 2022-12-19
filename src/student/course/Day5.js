@@ -22,13 +22,29 @@ export default function Day5({ day, batchId, isAdmin }) {
           </Typography>
         ))}
         <Typography sx={{ mb: 5 }} component="p">
-          Welcome to javascript, where the crying begins.
+          What JavaScript can do...
         </Typography>
         <ul style={{ width: "100%" }}>
-          <li>JavaScript is a programming language, "the language of the web"</li>
-          <li>Learning JS will give allow you to be able to learn any other language</li>
-          <li>You can create websites and make apps using JS</li>
-          <li>Other frameworks and libraries like React and Angular are based on JavaScript</li>
+          <li>Change HTML content
+            <ul>
+              <li>document.getElementById("demo").innerHTML = "Hello JavaScript";</li>
+            </ul>
+          </li>
+          <li>Change HTML attribute values 
+            <ul>
+                <li>document.getElementById('myImage').src='pic_bulboff.gif'"</li>
+            </ul>
+          </li>
+          <li>Change HTML styles(CSS)
+            <ul>
+                <li>document.getElementById("demo").style.fontSize = "35px"</li>
+              </ul>
+          </li>
+          <li>Show/Hide HTML elements
+            <ul>
+                <li>document.getElementById("demo").style.display = "none"</li>
+            </ul>
+          </li>
         </ul>
         <HomeworkList
           isAdmin={isAdmin}

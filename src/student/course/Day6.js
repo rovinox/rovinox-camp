@@ -3,7 +3,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../../component/course";
-export default function Day6({ day }) {
+import HomeworkList from "../../component/HomeworkList";
+
+export default function Day6({ day,isAdmin, batchId }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   return (
     <Container component="main">
@@ -20,6 +22,46 @@ export default function Day6({ day }) {
             {course.title}
           </Typography>
         ))}
+        <Typography sx={{ mb: 5 }} component="p">
+          What JavaScript can do...
+        </Typography>
+        <ul style={{ width: "100%" }}>
+          <li>Change HTML content
+            <ul>
+              <li>document.getElementById("demo").innerHTML = "Hello JavaScript";</li>
+            </ul>
+          </li>
+          <li>Change HTML attribute values 
+            <ul>
+                <li>document.getElementById('myImage').src='pic_bulboff.gif'"</li>
+            </ul>
+          </li>
+          <li>Change HTML styles(CSS)
+            <ul>
+                <li>document.getElementById("demo").style.fontSize = "35px"</li>
+              </ul>
+          </li>
+          <li>Show/Hide HTML elements
+            <ul>
+                <li>document.getElementById("demo").style.display = "none"</li>
+            </ul>
+          </li>
+        </ul>
+        <Typography sx={{ m: 5 }} component="p">
+          <a
+            href="https://github.com/rovinox/JavaScript-part-1"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Here
+          </a>{" "}
+          is the link to homework{" "}
+        </Typography>
+        <HomeworkList
+          isAdmin={isAdmin}
+          batchId={batchId}
+          selectedDay={selectedDay}
+        />
       </Box>
     </Container>
   );

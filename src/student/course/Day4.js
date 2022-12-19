@@ -51,6 +51,11 @@ export default function Day4({ day, batchId, isAdmin }) {
           <li>Arrays</li>
           <li>Null</li>
           <li>Undefined</li>
+          <li>All of these data types are stored in what is called a variable
+          <ul>
+              <li>A variable can initialized the 'var', 'let', or 'const' keywords</li>
+            </ul>
+          </li>
         </ul>
         <Typography sx={{ m: 5 }} component="p">
           <a
