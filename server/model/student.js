@@ -29,11 +29,11 @@ const studentSchema = new Schema({
   role: {
     type: String,
     required: true,
-    default: "admin",
+    default: "student",
   },
   enabled: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   refreshToken: String,
 });

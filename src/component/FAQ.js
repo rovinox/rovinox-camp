@@ -7,6 +7,7 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Button } from "@mui/material";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -47,6 +48,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function FAQ() {
   const [expanded, setExpanded] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -121,8 +123,11 @@ export default function FAQ() {
       ))}
       <Typography sx={{ m: 2, p: 3 }} component="p">
         Do you have a different question? Well, aren’t you precocious! Feel free
-        to <Button color="primary">reach out to us</Button> any time about any
-        old thing.
+        to{" "}
+        <Button onClick={() => navigate("/contactus")} color="primary">
+          reach out to us
+        </Button>{" "}
+        any time about any old thing.
       </Typography>
     </Grid>
   );

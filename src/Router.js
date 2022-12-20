@@ -13,6 +13,7 @@ import AboutUs from "./component/AboutUs.js";
 import CareerSupport from "./component/CareerSupport.js";
 import Pricing from "./component/Pricing.js";
 import OneAndOne from "./component/OneAndOne.js";
+import ContactUS from "./component/ContactUS.js";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -44,7 +45,7 @@ const getDesignTokens = (mode) => ({
 });
 
 export default function Router() {
-  const selectedTheme = useSelector((state) => state.changeTheme.theme);
+  const selectedTheme = "dark";
   // const theme = createTheme({
   // palette: {
   //   mode: selectedTheme,
@@ -73,6 +74,7 @@ export default function Router() {
           <Route path="/support" element={<CareerSupport />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/meeting" element={<OneAndOne />} />
+          <Route path="/contactus" element={<ContactUS />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

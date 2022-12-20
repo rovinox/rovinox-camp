@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { ApplyButton } from "./RovinoxLanding.styled.tsx";
 import rovinoxLogo from "../asset/rovinoxLogo.png";
 import logoRvinox from "../asset/logoRvinox.svg";
-const pages = ["Pricing", "Career Support", "About Us"];
+const pages = ["Career Support", "About Us", "Contact US"];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -53,6 +53,8 @@ const Header = () => {
       navigate("/support");
     } else if (item === "Pricing") {
       navigate("/pricing");
+    } else if (item === "Contact US") {
+      navigate("/contactus");
     }
   };
 

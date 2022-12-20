@@ -28,7 +28,6 @@ import Typography from "@mui/material/Typography";
 import Footer from "./Footer";
 
 export default function RovinoxLanding() {
-  const navigate = useNavigate();
   const points = [
     "Live, real-time instruction",
     "Great Support from day-one to your first day in tech",

@@ -19,6 +19,7 @@ import { openDrawer } from "../duck/drawerSlice";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
+import logoRvinox from "../asset/logoRvinox.svg";
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -67,10 +68,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const Header = () => {
-  const selectedTheme = useSelector((state) => state.changeTheme.theme);
   const user = JSON.parse(localStorage.getItem("user"));
-
-  console.log(selectedTheme);
+  console.log("user: ", user);
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -79,13 +78,6 @@ const Header = () => {
 
   console.log(location);
 
-  const handleTheme = () => {
-    if (selectedTheme === "light") {
-      dispatch(changeToDark());
-    } else {
-      dispatch(changeToLight());
-    }
-  };
   const handleAdmin = () => {
     navigate("/admin");
   };
@@ -151,23 +143,9 @@ const Header = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            ROVINOX
-          </Typography>
+          <a href="/student">
+            <img style={{ marginRight: 10 }} src={logoRvinox} alt="pic" />
+          </a>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -198,11 +176,15 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <Button onClick={() => dispatch(openDrawer())}>course</Button>
-                </Typography>
-              </MenuItem>
+              {user?.enabled && (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Button onClick={() => dispatch(openDrawer())}>
+                      course
+                    </Button>
+                  </Typography>
+                </MenuItem>
+              )}
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
                   {" "}
@@ -240,14 +222,18 @@ const Header = () => {
                 Student
               </Button>
             ) : (
-              <Button
-                onClick={() => {
-                  dispatch(openDrawer());
-                }}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                course
-              </Button>
+              <>
+                {user?.enabled && (
+                  <Button
+                    onClick={() => {
+                      dispatch(openDrawer());
+                    }}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    course
+                  </Button>
+                )}
+              </>
             )}
             {location.pathname !== "/admin" && user.role !== "student" && (
               <Button
@@ -260,9 +246,6 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <FormControlLabel
-              control={<MaterialUISwitch onClick={handleTheme} />}
-            />
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
