@@ -1,5 +1,5 @@
 module.exports = {
-  emailTemplate: (firstName, course) => {
+  emailTemplate: (firstName, course, message) => {
     return ` <style>
        
         img {
@@ -342,8 +342,16 @@ module.exports = {
                                     <tr>
                                         <td>
                                             <p>Hi there ${firstName},</p>
-                                            <p>Thank you for signing up to our ${course}. I hope you are as excited as we are to get you started on your new career.</p>
-                                            <p>Someone Rovinox will reach out to you for further information.</p>
+                                               <p>${
+                                                 message
+                                                   ? "Thank you so much for reaching out to us."
+                                                   : `Thank you for signing up to our ${course}. I hope you are as excited as we are to get you started on your new career.`
+                                               }</p> 
+                                            <p>Someone from Rovinox will reach out to you ${
+                                              message
+                                                ? ""
+                                                : "for further information"
+                                            }.</p>
                                             <p>Happy Coding</p>
                                         </td>
                                     </tr>

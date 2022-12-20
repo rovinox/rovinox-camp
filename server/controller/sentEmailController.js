@@ -2,10 +2,13 @@
 const nodemailer = require("nodemailer");
 const sendGridTransport = require("nodemailer-sendgrid-transport");
 const { emailTemplate } = require("../email/emailTemplate");
+const Batch = require("../model/batch");
 module.exports = {
   sendEmail: async (req, res) => {
-    const { email, firstName, lastName, course } = req.body;
+    const { email, firstName, lastName, batchId, message } = req.body;
+
     const applicantEmail = email;
+    let course = "";
     console.log("applicantEmail: ", email, firstName, lastName, course);
 
     // Generate test SMTP service account from ethereal.email
@@ -18,12 +21,19 @@ module.exports = {
       })
     );
     try {
+      if (batchId) {
+        const result = await Batch.findOne({ _id: batchId });
+        course = result.course;
+      }
       let info = await transporter.sendMail({
-        from: "neajmahmud.dev@gmail.com", // sender address
-        to: applicantEmail, // list of receivers
-        subject: "We Have Received Your Application", // Subject line
+        from: "contact@rovinox.com", // sender address
+        fromname: "Rovinox",
+        to: [applicantEmail, "contact@rovinox.com"], // list of receivers
+        subject: message
+          ? "We Have Received Your Message"
+          : "We Have Received Your Application", // Subject line
         //text: "Hello world?", // plain text body
-        html: emailTemplate(firstName, course), // html body
+        html: emailTemplate(firstName, course, message), // html body
       });
       //send mail with defined transport object
       console.log("Message sent: %s", info.message);

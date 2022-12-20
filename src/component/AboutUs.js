@@ -6,20 +6,40 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../home/Header";
+import pic1 from "../asset/bro2.svg";
+import pic2 from "../asset/pana.svg";
+import pic3 from "../asset/pana1.svg";
+import Footer from "../home/Footer";
 
 export default function AboutUs() {
   return (
     <>
       <Header />
       <Banner
+        page="ABOUT US"
         bannerTitle="Immersive Experiences that Change Lives About the Rovinox Bootcamp
         Experience"
       />
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid sx={{ p: 5 }} xs={12} md={4}>
-            <Typography sx={{ mt: 5, height: 150 }} variant="h3">
-              about Rovinox
+      <Grid Grid container spacing={2}>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+        >
+          <div>
+            <Typography
+              sx={{
+                mb: 5,
+              }}
+              variant="h4"
+            >
+              About Rovinox
             </Typography>
             <Typography variant="p">
               Rovinox is a coding Bootcamp. The Rovinox brand specializes in
@@ -28,9 +48,56 @@ export default function AboutUs() {
               skilled to land there for its job, And career support to help them
               in the process.
             </Typography>
-          </Grid>
-          <Grid sx={{ p: 5 }} xs={12} md={4}>
-            <Typography sx={{ mt: 5, height: 150 }} variant="h3">
+          </div>
+        </Grid>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+        >
+          <img src={pic1} alt="pic" />
+        </Grid>
+      </Grid>
+      <Grid Grid container spacing={2}>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+          order={{ md: 1, xs: 2 }}
+        >
+          <img src={pic2} alt="pic" />
+        </Grid>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+          order={{ md: 2, xs: 1 }}
+        >
+          <div>
+            <Typography
+              sx={{
+                mb: 5,
+              }}
+              variant="h4"
+            >
               A Community Is Waiting For You
             </Typography>
             <Typography variant="p">
@@ -38,11 +105,30 @@ export default function AboutUs() {
               project-based, and are designed by educators with real-world
               industry knowledge. We offer challenging, focused training
               designed to equip students with the skills to start their journey
-              toward a career in tech.
+              toward a career in tech
             </Typography>
-          </Grid>
-          <Grid sx={{ p: 5 }} xs={12} md={4}>
-            <Typography sx={{ mt: 5, height: 150 }} variant="h3">
+          </div>
+        </Grid>
+      </Grid>
+      <Grid Grid container spacing={2}>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+        >
+          <div>
+            <Typography
+              sx={{
+                mb: 5,
+              }}
+              variant="h4"
+            >
               We Live In a Digital World
             </Typography>
             <Typography variant="p">
@@ -59,9 +145,22 @@ export default function AboutUs() {
               my time at Rovinox to be one of my greatest decisions.” Hear From
               Graduates.
             </Typography>
-          </Grid>
+          </div>
         </Grid>
-      </Box>
+        <Grid
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: 10,
+          }}
+          xs={12}
+          md={6}
+        >
+          <img src={pic3} alt="pic" />
+        </Grid>
+      </Grid>
+      <Footer />
     </>
   );
 }

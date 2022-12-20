@@ -1,25 +1,45 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import "./style/banner.css";
-export default function Banner({ bannerTitle }) {
+import "./style/banner.scss";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+export default function Banner({ bannerTitle, page }) {
   return (
     <div>
-      <div className="banner">
-        <Typography variant="h2">{bannerTitle}</Typography>
-      </div>
-      <div class="custom-shape-divider-bottom-1666839437">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            class="shape-fill"
-          ></path>
-        </svg>
-      </div>
+      <Typography className="pageTitle" variant="h2">
+        {page}
+      </Typography>
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+        sx={{
+          backgroundImage:
+            "url(https://source.unsplash.com/random/?programming)",
+          backgroundRepeat: "no-repeat",
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: 500,
+          opacity: 0.2,
+        }}
+      />
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: 200,
+        }}
+      >
+        <Typography sx={{ p: 5 }} variant="h4">
+          {bannerTitle}
+        </Typography>
+      </Box>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function StudentLanding(...prop) {
       dispatch(changeGradeHomeView());
     }
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
+    console.log("vv user", user);
     setActiveStudent(user?.enabled);
     setIsAdmin(user?.enabled);
     const getUser = async () => {

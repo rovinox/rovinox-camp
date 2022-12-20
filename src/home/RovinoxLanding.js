@@ -1,7 +1,10 @@
 import { useState } from "react";
 import "./RovinoxLanding.css";
-import vid1 from "../asset/vid1.mp4";
-import pic1 from "../asset/pic1.jpg";
+import pic1 from "../asset/bro.svg";
+import pic2 from "../asset/Group2.svg";
+import pic3 from "../asset/Group3.svg";
+import pic4 from "../asset/Group4.svg";
+import checkMark from "../asset/checkMark.svg";
 import IntroVideo from "./IntroVideo";
 import CourseTable from "../component/CourseTable";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -19,186 +22,112 @@ import CssBaseline from "@mui/material/CssBaseline";
 import "react-chat-widget/lib/styles.css";
 import { BsYoutube, BsFacebook, BsTwitter } from "react-icons/bs";
 import { BiSend } from "react-icons/bi";
-const theme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: teal[500],
-    },
-    secondary: {
-      main: purple[500],
-    },
-  },
-});
-export default function RovinoxLanding() {
-  const navigate = useNavigate();
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Footer from "./Footer";
 
+export default function RovinoxLanding() {
+  const points = [
+    "Live, real-time instruction",
+    "Great Support from day-one to your first day in tech",
+    "Learn in-demand job ready skills to be come a SoftWare Developer",
+    "Dive into web development with fun and cool projects",
+  ];
+  const section3rd = [
+    {
+      title: "High Quality Lectures",
+      description:
+        "All lectures have been very well prepared for the best learning experience of future developers.",
+      image: pic2,
+    },
+    {
+      title: "In-demand, Job Ready Skills",
+      description:
+        "Learn all major Web Technologies: HTML5, CSS3, Javascript, Mobile Apps, API's: Google Maps, Facebook and MORE!",
+      image: pic3,
+    },
+    {
+      title: "Get Help Anytime!",
+      description:
+        "Getting Stuck? Ask questions any time directly any time and we are happy to help!",
+      image: pic4,
+    },
+  ];
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    // <ThemeProvider theme={theme}>
+    //   <CssBaseline />
+    <>
       <Header />
       <IntroVideo />
-
-      <div className="main-landing">
-        <div
+      <Grid Grid container spacing={2}>
+        <Grid xs={12} md={6}>
+          <img src={pic1} alt="pic" />
+        </Grid>
+        <Grid
+          xs={12}
+          md={6}
           style={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
-            padding: "0px",
+            flexDirection: "column",
           }}
         >
-          <Grid Grid container spacing={2}>
-            <Grid xs={12} md={6}>
-              <img className="remote-pic" src={pic1} alt="pic" />
-            </Grid>
-            <Grid
-              xs={12}
-              md={6}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-              }}
-            >
-              <CoursePromise>
-                {" "}
-                <CheckCircleIcon color="primary" />
-                Live, real-time instruction
-              </CoursePromise>
-              <CoursePromise>
-                {" "}
-                <CheckCircleIcon color="primary" /> Great Support from day-one
-                to your first day in tech
-              </CoursePromise>
-              <CoursePromise>
-                {" "}
-                <CheckCircleIcon color="primary" /> Learn in-demand job ready
-                skills to be come a SoftWare Developer
-              </CoursePromise>
-              <CoursePromise>
-                {" "}
-                <CheckCircleIcon color="primary" /> Dive into web development
-                with fun and cool projects
-              </CoursePromise>
-            </Grid>
-          </Grid>
-        </div>
-        <div id="about">
-          <div className="container">
-            <div className="course-row">
-              <div className="col-md-4">
-                <img
-                  src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777628/quality_q31k6u.png"
-                  className="aboutImage"
-                  alt=" pic"
-                />
-                <h2>High Quality Lectures</h2>
-                <p>
-                  All lectures have been very well prepared for the best
-                  learning experience of future developers.
-                </p>
-              </div>
-              <div className="col-md-4">
-                <img
-                  src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777629/tools_yorndk.png"
-                  className="aboutImage"
-                  alt=" pic"
-                />
-                <h2>In-demand, Job Ready Skills</h2>
-                <p>
-                  Learn all major Web Technologies: HTML5, CSS3, Javascript,
-                  Mobile Apps, API's: Google Maps, Facebook and MORE!
-                </p>
-              </div>
-              <div className="col-md-4">
-                <img
-                  src="http://res.cloudinary.com/dfqddpjfl/image/upload/v1498777627/help_dfec8u.png"
-                  className="aboutImage"
-                  alt="pic"
-                />
-                <h2>Get Help Anytime!</h2>
-                <p>
-                  Getting Stuck? Ask questions any time directly any time and we
-                  are happy to help!
-                </p>
-              </div>
+          {points.map((point) => (
+            <CoursePromise>
+              {" "}
+              <img style={{ marginRight: 5 }} src={checkMark} alt="pic" />
+              {point}
+            </CoursePromise>
+          ))}
+        </Grid>
+      </Grid>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
+          "& > :not(style)": {
+            m: 1,
+            width: 400,
+            height: 350,
+          },
+        }}
+      >
+        {section3rd.map((item) => (
+          <Paper
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              p: 1,
+            }}
+            key={item.title}
+          >
+            <div style={{ height: 115 }}>
+              <img src={item.image} alt=" pic" />
             </div>
-          </div>
-        </div>
-        <CourseTable />
-        <FAQ />
-        <footer className="section__footer">
-          <div className="container__footer">
-            <div className="row">
-              <div className="footer-col">
-                <h4>Keep In Toucht</h4>
-                <a className="social codepen">
-                  <div className="iconic">
-                    <BsYoutube />
-                  </div>
-                </a>
-                <a className="social instagram">
-                  <div className="iconic">
-                    <BsFacebook />
-                  </div>
-                </a>
-                <a className="social youtube">
-                  <div className="iconic">
-                    <BsTwitter />
-                  </div>
-                </a>
-              </div>
-              <div className="footer-col">
-                <h4>Company Info</h4>
-                <ul>
-                  <li>
-                    <a href="#">About Us</a>
-                  </li>
-                  <li>
-                    <a href="#">Privacy Policy</a>
-                  </li>
-                  <li>
-                    <a href="#">Terms of Service</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="footer-col">
-                <h4>Blog Posts</h4>
-                <ul>
-                  <li>
-                    <a href="#">FAQ</a>
-                  </li>
-                  <li>
-                    <a href="#">Payment options</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="footer-col">
-                <h4>Subscribe</h4>
-                <p>Subscribe to our newsletter to stay updated on courses</p>
-                <form name="email-form">
-                  <div className="email__field">
-                    <input
-                      id="email"
-                      type="email"
-                      name="email"
-                      placeholder="E-mail"
-                    />
-                    <button className="form-control submit">
-                      <BiSend />
-                    </button>
-                  </div>
-                </form>
-              </div>
+            <div style={{ height: 115 }}>
+              <Typography variant="h4">{item.title}</Typography>
             </div>
-          </div>
-        </footer>
-      </div>
-      <Widget
+            <div style={{ height: 115 }}>
+              <Typography sx={{ p: 2 }} variant="p">
+                {item.description}
+              </Typography>
+            </div>
+          </Paper>
+        ))}
+      </Box>
+      <CourseTable />
+      <FAQ />
+      <Footer />
+
+      {/* <Widget
         subtitle="Please Include phone number in the message"
         title="Welcome To Rovinox"
-      />
-    </ThemeProvider>
+      /> */}
+    </>
   );
 }
