@@ -11,8 +11,21 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import ReactToastify from "../component/ReactToastify.js";
 import { PieChart, Pie, Cell, Legend } from "recharts";
-const Rsoan = () => {
-  return <span>hi</span>;
+import HomeworkView from "./HomeworkView.js";
+import Rating from "@mui/material/Rating";
+import { Typography } from "@mui/material";
+const labels = {
+  0: "Not Rated",
+  0.5: "Useless",
+  1: "Useless+",
+  1.5: "Poor",
+  2: "Poor+",
+  2.5: "Ok",
+  3: "Ok+",
+  3.5: "Good",
+  4: "Good+",
+  4.5: "Excellent",
+  5: "Excellent+",
 };
 const columns = [
   {
@@ -37,8 +50,10 @@ export default function StudentList({ batch }) {
   const [loading, setLoading] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [homeworkCount, setHomeWorkCount] = useState(null);
+  const [homeworkList, setHomeWorkList] = useState(null);
   const [batchId, setBatchId] = useState(selectedStudent?.batchId?._id);
   const [role, setRole] = useState(selectedStudent?.role);
+  const [overallRating, setOverAllRating] = useState(0);
   const [enabled, setEnabled] = useState(selectedStudent?.enabled);
   const getUsers = async () => {
     try {
@@ -121,10 +136,35 @@ export default function StudentList({ batch }) {
         studentId,
         batchId,
       });
+      console.log("result: ", result);
       if (result.data?.homeWork?.length > 0) {
-        setHomeWorkCount(result.data?.homeWork?.length);
+        const uniqueIds = [];
+        const averageArr = [];
+        const unique = result.data?.homeWork.filter((element) => {
+          const isDuplicate = uniqueIds.includes(element.day);
+          averageArr.push(element.rating);
+          if (!isDuplicate) {
+            uniqueIds.push(element.day);
+            return true;
+          }
+          return false;
+        });
+        let sum = 0;
+        averageArr.forEach(function (num) {
+          sum += num;
+        });
+        const average = sum / averageArr.length;
+        console.log(Math.round(average * 10) / 10);
+        setOverAllRating(Math.round(average * 10) / 10);
+        setHomeWorkCount(unique?.length);
+        setHomeWorkList(
+          result.data?.homeWork.sort((a, b) => {
+            return a.day - b.day;
+          })
+        );
       } else {
         setHomeWorkCount(null);
+        setHomeWorkList([]);
       }
 
       console.log("setHomeWorkCount ", result);
@@ -132,6 +172,7 @@ export default function StudentList({ batch }) {
       console.log(err);
     }
   };
+  console.log("labels[overallRating", labels[overallRating], overallRating);
   return (
     <div style={{ height: 540, width: "100%" }}>
       <ReactToastify />
@@ -150,7 +191,6 @@ export default function StudentList({ batch }) {
           setSelectedStudent(props.row);
           setEnabled(props.row.enabled);
           setBatchId(props.row.batchId._id);
-
           console.log(props.row);
         }}
         components={{
@@ -169,27 +209,45 @@ export default function StudentList({ batch }) {
             }}
           >
             {homeworkCount && (
-              <PieChart width={250} height={250}>
-                <Pie
-                  data={data}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  outerRadius={80}
-                  label
-                  dataKey="value"
-                >
-                  {data.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Legend />
-              </PieChart>
+              <div>
+                <PieChart width={500} height={280}>
+                  <Pie
+                    data={data}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={80}
+                    label
+                    dataKey="value"
+                  >
+                    {data.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Legend />
+                </PieChart>
+                <Grid item xs={12}>
+                  <Box
+                    sx={{
+                      width: 500,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography sx={{ mr: 2 }}>Overall Rating :</Typography>{" "}
+                    <Rating name="read-only" value={overallRating} readOnly />
+                    {overallRating !== null && (
+                      <Box sx={{ ml: 2 }}>{labels[overallRating]}</Box>
+                    )}
+                  </Box>
+                </Grid>
+              </div>
             )}
-
+            <HomeworkView homeworkList={homeworkList} />
             <Box
               component="form"
               Validate

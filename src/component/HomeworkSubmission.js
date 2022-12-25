@@ -9,6 +9,7 @@ import ReactToastify from "../component/ReactToastify.js";
 import axios from "axios";
 export default function HomeworkSubmission({ selectedDay }) {
   const [loading, setLoading] = useState(false);
+  console.log("selectedDay", selectedDay);
 
   const user = JSON.parse(localStorage.getItem("user"));
   const submitHomework = async (event) => {
@@ -18,6 +19,7 @@ export default function HomeworkSubmission({ selectedDay }) {
       email: user.email,
       day: selectedDay[0].day,
       link: data.get("githubLink"),
+      title: selectedDay[0].title,
     };
 
     setLoading(true);

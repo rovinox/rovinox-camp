@@ -14,6 +14,7 @@ import CareerSupport from "./component/CareerSupport.js";
 import Pricing from "./component/Pricing.js";
 import OneAndOne from "./component/OneAndOne.js";
 import ContactUS from "./component/ContactUS.js";
+import NotFound from "./component/NotFound.js";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -31,7 +32,7 @@ const getDesignTokens = (mode) => ({
       : {
           // palette values for dark mode
           primary: { main: "#0DA8DB" },
-          divider: indigo[700],
+          divider: "#fff",
           background: {
             default: "#191A3A",
             paper: "#212242",
@@ -75,6 +76,7 @@ export default function Router() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/meeting" element={<OneAndOne />} />
           <Route path="/contactus" element={<ContactUS />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

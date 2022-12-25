@@ -72,7 +72,7 @@ export default function AdminLanding() {
   return (
     <>
       <Header />
-      <Box component="div" sx={{ width: "100%" }}>
+      <Box component="div" sx={{ width: "100%", mt: 15 }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange}>
             <Tab label="Student List" {...a11yProps(0)} />

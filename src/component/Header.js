@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -138,9 +138,27 @@ const Header = () => {
       children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
     };
   }
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <AppBar position="static">
+    <AppBar
+      sx={{ boxShadow: "none", background: !scrolled ? "none" : "#252251" }}
+      position="fixed"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <a href="/student">

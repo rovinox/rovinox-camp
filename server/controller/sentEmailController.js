@@ -5,10 +5,14 @@ const { emailTemplate } = require("../email/emailTemplate");
 const Batch = require("../model/batch");
 module.exports = {
   sendEmail: async (req, res) => {
-    const { email, firstName, lastName, batchId, message } = req.body;
+    const { email, firstName, lastName, batchId, message, phoneNumber } =
+      req.body;
 
     const applicantEmail = email;
     let course = "";
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     console.log("applicantEmail: ", email, firstName, lastName, course);
 
     // Generate test SMTP service account from ethereal.email
@@ -33,7 +37,12 @@ module.exports = {
           ? "We Have Received Your Message"
           : "We Have Received Your Application", // Subject line
         //text: "Hello world?", // plain text body
-        html: emailTemplate(firstName, course, message), // html body
+        html: emailTemplate(
+          capitalizeFirstLetter(firstName),
+          course,
+          message,
+          phoneNumber
+        ), // html body
       });
       //send mail with defined transport object
       console.log("Message sent: %s", info.message);

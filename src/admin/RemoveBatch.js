@@ -112,7 +112,7 @@ export default function RemoveBatch({ batch }) {
                       variant="contained"
                       color="error"
                     >
-                      Delete
+                      disable
                     </Button>{" "}
                   </TableCell>
                 </TableRow>
