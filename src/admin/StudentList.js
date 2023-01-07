@@ -129,6 +129,18 @@ export default function StudentList({ batch }) {
       toast.error(`${err?.message}`);
     }
   };
+  const formatRating = (number) => {
+    if (number === 0) return number;
+    const num = Number.parseFloat(number).toFixed(2);
+    let integral = num.slice(0, 1);
+    let fractional = num.slice(2);
+    if (fractional > 50) {
+      return `${+integral + 1}`;
+    } else {
+      return `${integral}.5`;
+    }
+  };
+
   const handleProgress = async (studentId, batchId) => {
     console.log("studentId", studentId);
     try {
@@ -142,7 +154,7 @@ export default function StudentList({ batch }) {
         const averageArr = [];
         const unique = result.data?.homeWork.filter((element) => {
           const isDuplicate = uniqueIds.includes(element.day);
-          averageArr.push(element.rating);
+          averageArr.push(element?.rating);
           if (!isDuplicate) {
             uniqueIds.push(element.day);
             return true;
@@ -154,8 +166,7 @@ export default function StudentList({ batch }) {
           sum += num;
         });
         const average = sum / averageArr.length;
-        console.log(Math.round(average * 10) / 10);
-        setOverAllRating(Math.round(average * 10) / 10);
+        setOverAllRating(formatRating(average));
         setHomeWorkCount(unique?.length);
         setHomeWorkList(
           result.data?.homeWork.sort((a, b) => {
