@@ -57,6 +57,8 @@ app.use("/logout", require("./routes/logout"));
 app.use("/email", require("./routes/email"));
 
 // app.use(verifyJWT);
+app.use("/user", require("./routes/user"));
+app.use("/payment", require("./routes/payment"), require("./routes/email"));
 app.use("/users", require("./routes/users"));
 app.use("/gethomework", require("./routes/gethomework"));
 app.use("/usersession", require("./routes/valid"));

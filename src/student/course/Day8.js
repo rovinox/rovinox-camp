@@ -55,6 +55,11 @@ export default function Day8({ day, batchId, isAdmin }) {
           <li></li>
         </ul>
       </Box>
+      <HomeworkList
+        isAdmin={isAdmin}
+        batchId={batchId}
+        selectedDay={selectedDay}
+      />
     </Container>
   );
 }

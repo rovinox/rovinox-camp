@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { courseList } from "../../component/course";
 import HomeworkList from "../../component/HomeworkList";
 
-export default function Day6({ day,isAdmin, batchId }) {
+export default function Day6({ day, batchId, isAdmin }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   return (
     <Container component="main">
@@ -26,24 +26,30 @@ export default function Day6({ day,isAdmin, batchId }) {
           What JavaScript can do...
         </Typography>
         <ul style={{ width: "100%" }}>
-          <li>Change HTML content
+          <li>
+            Change HTML content
             <ul>
-              <li>document.getElementById("demo").innerHTML = "Hello JavaScript";</li>
+              <li>
+                document.getElementById("demo").innerHTML = "Hello JavaScript";
+              </li>
             </ul>
           </li>
-          <li>Change HTML attribute values 
+          <li>
+            Change HTML attribute values
             <ul>
-                <li>document.getElementById('myImage').src='pic_bulboff.gif'"</li>
+              <li>document.getElementById('myImage').src='pic_bulboff.gif'"</li>
             </ul>
           </li>
-          <li>Change HTML styles(CSS)
+          <li>
+            Change HTML styles(CSS)
             <ul>
-                <li>document.getElementById("demo").style.fontSize = "35px"</li>
-              </ul>
+              <li>document.getElementById("demo").style.fontSize = "35px"</li>
+            </ul>
           </li>
-          <li>Show/Hide HTML elements
+          <li>
+            Show/Hide HTML elements
             <ul>
-                <li>document.getElementById("demo").style.display = "none"</li>
+              <li>document.getElementById("demo").style.display = "none"</li>
             </ul>
           </li>
         </ul>
@@ -63,6 +69,11 @@ export default function Day6({ day,isAdmin, batchId }) {
           selectedDay={selectedDay}
         />
       </Box>
+      <HomeworkList
+        isAdmin={isAdmin}
+        batchId={batchId}
+        selectedDay={selectedDay}
+      />
     </Container>
   );
 }

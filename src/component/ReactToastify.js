@@ -1,8 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSelector } from "react-redux";
 export default function ReactToastify() {
-  const selectedTheme = useSelector((state) => state.changeTheme.theme);
   return (
     <div>
       <ToastContainer
@@ -15,7 +13,7 @@ export default function ReactToastify() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme={selectedTheme}
+        theme={"dark"}
       />
     </div>
   );

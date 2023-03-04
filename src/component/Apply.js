@@ -19,22 +19,6 @@ import StepBar from "./StepBar.js";
 import Group7 from "../asset/Group7.svg";
 import Footer from "../home/Footer.js";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 export default function Apply() {
   const { state } = useLocation();
   const navigate = useNavigate();

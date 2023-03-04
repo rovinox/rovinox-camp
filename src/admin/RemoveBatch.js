@@ -77,9 +77,17 @@ export default function RemoveBatch({ batch }) {
         </Box>
       </Modal>
       <ReactToastify />
-      <TableContainer>
-        <Typography sx={{ ml: 25, mt: 10 }} variant="h5">
-          select a batch to delete
+      <TableContainer
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <Typography sx={{ textAlign: "center", m: 5 }} variant="h5">
+          Select a batch to disable
         </Typography>
         <Table sx={{ maxWidth: 800 }} aria-label="simple table">
           <TableHead>
@@ -112,7 +120,7 @@ export default function RemoveBatch({ batch }) {
                       variant="contained"
                       color="error"
                     >
-                      Delete
+                      disable
                     </Button>{" "}
                   </TableCell>
                 </TableRow>

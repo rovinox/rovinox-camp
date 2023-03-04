@@ -17,7 +17,9 @@ const homeWorkSchema = new Schema({
   course: {
     type: String,
   },
-
+  comment: {
+    type: String,
+  },
   graded: {
     type: Boolean,
     default: false,
@@ -25,6 +27,13 @@ const homeWorkSchema = new Schema({
   day: {
     type: Number,
     required: true,
+  },
+  title: {
+    type: String,
+  },
+  rating: {
+    type: Number,
+    default: 0,
   },
 });
 

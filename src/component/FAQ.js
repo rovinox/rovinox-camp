@@ -99,16 +99,24 @@ export default function FAQ() {
 
   return (
     <Grid
-      sx={{ mt: 8, p: 5, width: "80%", textAlign: "center" }}
+      sx={{
+        mt: 8,
+        p: 5,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
       Grid
       container
       spacing={2}
     >
-      <Typography sx={{ m: 5 }} component="h2" variant="h4">
+      <Typography sx={{ mb: 5 }} component="h2" variant="h4">
         Frequently Asked Questions...
       </Typography>
       {FAQData.map((item, index) => (
         <Accordion
+          sx={{ maxWidth: 800 }}
           key={`panel${index + 1}`}
           expanded={expanded === `panel${index + 1}`}
           onChange={handleChange(`panel${index + 1}`)}

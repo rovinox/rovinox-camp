@@ -1,5 +1,17 @@
 module.exports = {
-  emailTemplate: (firstName, course, message, phoneNumber) => {
+  paymentTemplate: (cardInfo) => {
+    const { receiptURL, firstName } = cardInfo;
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    let receiptLink = `<a
+                          href="${receiptURL}"
+                          title="Rovinox"
+                          target="_blank"
+                        >
+                          <h2>Here is the receipt</h2>
+                        </a>`;
+
     return `<html lang="en-US">
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -91,11 +103,10 @@ module.exports = {
                           font-family: 'Rubik', sans-serif;
                         "
                       >
-                        <span>Hi there ${firstName},</span> ${
-      message
-        ? "Thank you so much for reaching out to us"
-        : "Congratulation on taking the first step"
-    }
+                        <span>Hi there ${capitalizeFirstLetter(
+                          firstName
+                        )},</span> Thank for making the
+                        payment
                       </h1>
                       <span
                         style="
@@ -114,15 +125,7 @@ module.exports = {
                           margin: 0;
                         "
                       >
-                        ${
-                          message
-                            ? `We're excited to hear from you. We understand that you amy have some questions. Someone from Rovinox will reach out to you soon ${
-                                phoneNumber ? `at ${phoneNumber}` : ""
-                              }`
-                            : `Thank you for signing up to our
-                        ${course} course. I hope you are as excited as we are to get
-                        you started on your new career. Our team will reach out to you soon.`
-                        }
+                        ${receiptLink}
                       </p>
                     </td>
                   </tr>

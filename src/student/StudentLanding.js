@@ -48,7 +48,7 @@ export default function StudentLanding(...prop) {
   }, []);
 
   return (
-    <div>
+    <div style={{ marginTop: 30 }}>
       {activeStudent ? (
         <>
           <Header />

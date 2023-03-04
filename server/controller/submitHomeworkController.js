@@ -2,7 +2,7 @@ const Homework = require("../model/homeWork");
 const Student = require("../model/student");
 
 const submitHomework = async (req, res) => {
-  const { day, graded, link, email } = req.body;
+  const { day, graded, link, email, title } = req.body;
 
   try {
     const foundStudent = await Student.findOne({ email });
@@ -13,6 +13,7 @@ const submitHomework = async (req, res) => {
       day,
       graded,
       link,
+      title,
     });
     if (result) {
       res

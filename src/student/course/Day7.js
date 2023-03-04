@@ -3,7 +3,9 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { courseList } from "../../component/course";
-export default function Day7({ day }) {
+import HomeworkList from "../../component/HomeworkList";
+
+export default function Day7({ day, batchId, isAdmin }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   return (
     <Container component="main">
@@ -32,6 +34,11 @@ export default function Day7({ day }) {
           <li>Conditional Operators</li>
           <li>Type Operators</li>
       </Box>
+      <HomeworkList
+        isAdmin={isAdmin}
+        batchId={batchId}
+        selectedDay={selectedDay}
+      />
     </Container>
   );
 }

@@ -26,6 +26,10 @@ const studentSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "batch",
   },
+  balance: {
+    type: Number,
+    required: true,
+  },
   role: {
     type: String,
     required: true,

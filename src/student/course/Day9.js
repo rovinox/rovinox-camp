@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { courseList } from "../../component/course";
 import HomeworkList from "../../component/HomeworkList";
 
-export default function Day9({day, batchId, isAdmin }) {
+export default function Day9({ day, batchId, isAdmin }) {
   const selectedDay = courseList.filter((item) => item.day === day);
   return (
     <Container component="main">
@@ -22,21 +22,26 @@ export default function Day9({day, batchId, isAdmin }) {
             {course.title}
           </Typography>
         ))}
-         <Typography sx={{ mb: 5 }} component="p">
+        <Typography sx={{ mb: 5 }} component="p">
           Arrays are ways to store un-ordered list of things in one place.
-          Arrays are used throughout all programming languages to store large sets of data.
+          Arrays are used throughout all programming languages to store large
+          sets of data.
         </Typography>
         <ul style={{ width: "100%" }}>
           <li>Arrays are stored in brackets</li>
-          <li>Arrays can...
+          <li>
+            Arrays can...
             <ul>
-                <li>Sort data</li>
-                <li>Retrieve data</li>
-                <li>Filter data</li>
-                <li>Mutate data</li>
+              <li>Sort data</li>
+              <li>Retrieve data</li>
+              <li>Filter data</li>
+              <li>Mutate data</li>
             </ul>
           </li>
-          <li>You can know the number of things inside an array using the length property</li>
+          <li>
+            You can know the number of things inside an array using the length
+            property
+          </li>
           <li>Properties of an array describe the array</li>
           <li>methods of an array change or access data in the array</li>
         </ul>
@@ -56,6 +61,11 @@ export default function Day9({day, batchId, isAdmin }) {
           selectedDay={selectedDay}
         />
       </Box>
+      <HomeworkList
+        isAdmin={isAdmin}
+        batchId={batchId}
+        selectedDay={selectedDay}
+      />
     </Container>
   );
 }
