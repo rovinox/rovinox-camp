@@ -1,44 +1,97 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Card from "react-credit-cards";
 import InputMask from "react-input-mask";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-
-import "react-credit-cards/es/styles-compiled.css";
-//import "./styles.css";
-
-const currencies = [
-  {
-    value: "full",
-    label: "Full Amount",
-  },
-  {
-    value: "custom",
-    label: "Custom Amount",
-  },
-];
+import axios from "axios";
+import Card from "./Card";
+import Header from "../../component/Header";
+import Payment from "payment";
+import ReactToastify from "../../component/ReactToastify.js";
+import { toast } from "react-toastify";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
 export default function PaymentForm() {
+  const amountInput = useRef();
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log("user: ", user);
   const [cvc, setCvc] = useState("");
   const [expiry, setExpiry] = useState("");
   const [focused, setFocused] = useState("");
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-  const [amountType, setAmountType] = useState("");
-  const [amount, setAmount] = useState("");
-  const balance = 5000;
+  const [zipCode, setZipCode] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [paymentType, setPaymentType] = useState([]);
+  const [amex, setAmex] = useState(false);
+  const [customAmount, setCustomAmount] = useState(false);
   const handleInputFocus = ({ target }) => {
     setFocused(target.id);
   };
 
-  return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
+  useEffect(() => {
+    console.log("hit vvv");
 
+    getUser();
+  }, []);
+  const getUser = async () => {
+    try {
+      const result = await axios.post("/user", {
+        email: user.email,
+      });
+      console.log("result: ", result);
+      setPaymentType([
+        {
+          value: result?.data?.users?.balance,
+          label: "Full Amount",
+        },
+        {
+          value: "custom",
+          label: "Custom Amount",
+        },
+      ]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const cardInfo = {
+      cvc,
+      expiry,
+      number,
+      amount,
+      name,
+      zipCode,
+      email: user.email,
+    };
+
+    try {
+      const result = await axios.post("/payment", cardInfo);
+      if (result.status === 200) {
+        console.log(result);
+        toast.success("Your payment has been sent successfully");
+        getUser();
+        setCvc("");
+        setExpiry("");
+        setName("");
+        setNumber("");
+        setZipCode("");
+        setAmount(0);
+        setCustomAmount(false);
+      }
+    } catch (err) {
+      toast.error(`${err?.message}`);
+    }
+  };
+
+  return (
+    <div style={{ marginTop: 50 }}>
+      <Header />
+      <ReactToastify />
       <Card
         locale={{
           valid: "Expire",
@@ -66,98 +119,102 @@ export default function PaymentForm() {
         md={6}
       >
         <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            p: 2,
-          }}
-        >
-          <Typography>
-            Your application is the first step to your new future. You'll need
-            about{" "}
-            <Typography component="span" variant="h5">
-              30 seconds
-            </Typography>{" "}
-            to complete your portion. Relax,{" "}
-            <Typography component="span" variant="h5">
-              no payment
-            </Typography>{" "}
-            or{" "}
-            <Typography component="span" variant="h5">
-              commitment
-            </Typography>{" "}
-            will be required during the application process.
-          </Typography>
-        </Box>
-        <Box
           component="form"
           Validate
-          //  onSubmit={handleSubmit}
-          sx={{ mt: 3, p: 2 }}
+          onSubmit={handleSubmit}
+          sx={{ mt: 3, p: 2, maxWidth: 800 }}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 select
                 fullWidth
-                label="Select"
+                label="Payment Type"
                 helperText="Please select your amount type"
               >
-                {currencies.map((option) => (
-                  <MenuItem
-                    onClick={() => {
-                      console.log(option.value);
-                      setAmountType(option.value);
-                    }}
-                    key={option.value}
-                    value={option.value}
-                  >
-                    {option.label}
-                  </MenuItem>
-                ))}
+                {paymentType?.length > 0 &&
+                  paymentType.map((option) => (
+                    <MenuItem
+                      onClick={() => {
+                        console.log(option.value);
+                        if (option.value === "custom") {
+                          setAmount("");
+                          setCustomAmount(true);
+                        } else {
+                          setAmount(option.value);
+                          setCustomAmount(false);
+                        }
+                      }}
+                      key={option.value}
+                      value={option.value}
+                    >
+                      {option.label}
+                    </MenuItem>
+                  ))}
               </TextField>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
+                inputRef={amountInput}
                 fullWidth
                 id="Amount"
                 label="Amount"
                 name="Amount"
-                autoComplete="family-name"
                 type="number"
-                defaultValue={amountType === "full" ? balance : amount}
-                disabled={amountType ? false : true}
+                value={amount}
+                disabled={!customAmount}
+                helperText={customAmount ? "Please select your a amount" : ""}
+                onFocusCapture={handleInputFocus}
+                error={customAmount && !amount ? true : false}
+                onChange={(e) => setAmount(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
               <InputMask
-                mask="9999 9999 9999 9999"
+                mask={amex ? "9999 999999 99999" : "9999 9999 9999 9999"}
                 value={number}
-                onChange={(e) => setNumber(e.target.value)}
+                onChange={(e) => {
+                  const issuer = Payment.fns.cardType(e.target.value);
+                  setAmex(issuer === "amex");
+                  console.log("issuer", issuer);
+                  setNumber(e.target.value);
+                }}
                 disabled={false}
                 maskChar=" "
               >
                 {() => (
                   <TextField
                     id="number"
+                    name="number"
                     fullWidth
-                    label="Número"
+                    required
+                    label="Card Number"
                     onFocusCapture={handleInputFocus}
                   />
                 )}
               </InputMask>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 id="name"
+                name="name"
                 fullWidth
-                label="Nome"
+                required
+                label="Name on the card"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                onFocusCapture={handleInputFocus}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                id="zipcode"
+                name="zipcode"
+                fullWidth
+                required
+                label="Zip code"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
                 onFocusCapture={handleInputFocus}
               />
             </Grid>
@@ -172,8 +229,10 @@ export default function PaymentForm() {
                 {() => (
                   <TextField
                     id="expiry"
+                    name="expiry"
                     fullWidth
-                    label="Validade"
+                    required
+                    label="Expiration"
                     onFocusCapture={handleInputFocus}
                   />
                 )}
@@ -181,7 +240,7 @@ export default function PaymentForm() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <InputMask
-                mask="999"
+                mask={amex ? "9999" : "999"}
                 value={cvc}
                 onChange={(e) => setCvc(e.target.value)}
                 disabled={false}
@@ -190,7 +249,9 @@ export default function PaymentForm() {
                 {() => (
                   <TextField
                     id="cvc"
+                    name="cvc"
                     fullWidth
+                    required
                     label="CVC"
                     onFocusCapture={handleInputFocus}
                   />

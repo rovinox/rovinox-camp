@@ -2,11 +2,23 @@
 const nodemailer = require("nodemailer");
 const sendGridTransport = require("nodemailer-sendgrid-transport");
 const { emailTemplate } = require("../email/emailTemplate");
+const { paymentTemplate } = require("../email/paymentTemplate");
 const Batch = require("../model/batch");
+const Student = require("../model/student");
+
 module.exports = {
   sendEmail: async (req, res) => {
-    const { email, firstName, lastName, batchId, message, phoneNumber } =
-      req.body;
+    const {
+      email,
+      firstName,
+      lastName,
+      batchId,
+      message,
+      phoneNumber,
+      amount,
+    } = req.body;
+
+    const cardInfo = res.locals.cardInfo;
 
     const applicantEmail = email;
     let course = "";
@@ -29,28 +41,33 @@ module.exports = {
         const result = await Batch.findOne({ _id: batchId });
         course = result.course;
       }
+
       let info = await transporter.sendMail({
         from: "contact@rovinox.com", // sender address
         fromname: "Rovinox",
         to: [applicantEmail, "contact@rovinox.com"], // list of receivers
         subject: message
           ? "We Have Received Your Message"
+          : amount
+          ? "Receipt From Rovinox"
           : "We Have Received Your Application", // Subject line
         //text: "Hello world?", // plain text body
-        html: emailTemplate(
-          capitalizeFirstLetter(firstName),
-          course,
-          message,
-          phoneNumber
-        ), // html body
+        html: amount
+          ? paymentTemplate(cardInfo)
+          : emailTemplate(
+              capitalizeFirstLetter(firstName),
+              course,
+              message,
+              phoneNumber
+            ), // html body
       });
-      //send mail with defined transport object
+      // send mail with defined transport object
       console.log("Message sent: %s", info.message);
       res.status(200).json({ message: "Message sent" });
       // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-      // Preview only available when sending through an Ethereal account
+      //  Preview only available when sending through an Ethereal account
       console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      //Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+      //  Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
     } catch (err) {
       console.log(err);
     }

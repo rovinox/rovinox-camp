@@ -42,6 +42,7 @@ const columns = [
   { field: "phoneNumber", headerName: "Phone Number", width: 130 },
   { field: "active", headerName: "Enabled", width: 100 },
   { field: "role", headerName: "Role", width: 100 },
+  { field: "balance", headerName: "Balance", width: 100 },
 ];
 
 export default function StudentList({ batch }) {
@@ -55,6 +56,7 @@ export default function StudentList({ batch }) {
   const [role, setRole] = useState(selectedStudent?.role);
   const [overallRating, setOverAllRating] = useState(0);
   const [enabled, setEnabled] = useState(selectedStudent?.enabled);
+  const [balance, setBalance] = useState(selectedStudent?.balance);
   const getUsers = async () => {
     try {
       const result = await axios.get("/users");
@@ -117,6 +119,7 @@ export default function StudentList({ batch }) {
           role,
           enabled,
           id,
+          balance,
         });
         if (result?.data?.message) {
           toast.success(`${result?.data?.message}`);
@@ -202,6 +205,7 @@ export default function StudentList({ batch }) {
           setSelectedStudent(props.row);
           setEnabled(props.row.enabled);
           setBatchId(props.row.batchId._id);
+          setBalance(props.row.balance);
           console.log(props.row);
         }}
         components={{
@@ -285,7 +289,7 @@ export default function StudentList({ batch }) {
                   />
                 </Grid>
                 {batchList.length && (
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       required
                       fullWidth
@@ -306,7 +310,7 @@ export default function StudentList({ batch }) {
                   </Grid>
                 )}
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
                     name="role"
@@ -322,7 +326,7 @@ export default function StudentList({ batch }) {
                     ))}
                   </TextField>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
                     name="enabled"
@@ -337,6 +341,16 @@ export default function StudentList({ batch }) {
                       </MenuItem>
                     ))}
                   </TextField>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    name="balance"
+                    fullWidth
+                    id="balance"
+                    label="Balance"
+                    value={balance}
+                    onChange={(e) => setBalance(e.target.value)}
+                  />
                 </Grid>
               </Grid>
               <Button

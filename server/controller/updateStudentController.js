@@ -1,7 +1,7 @@
 const Student = require("../model/student");
 
 const updateStudent = async (req, res) => {
-  const { batchId, role, enabled, id } = req.body;
+  const { batchId, role, enabled, id, balance } = req.body;
   console.log(" batchId, role, enabled, id: ", batchId, role, enabled, id);
 
   try {
@@ -11,6 +11,7 @@ const updateStudent = async (req, res) => {
         batchId,
         role,
         enabled,
+        balance,
       }
     );
     result.save();

@@ -64,8 +64,11 @@ const Header = () => {
       console.error(error?.message);
     }
   };
-  const handlpaymentPage = () => {
+  const handlePaymentPage = () => {
     navigate("/payment");
+  };
+  const handleProfilePage = () => {
+    navigate("/profile");
   };
   function stringToColor(string) {
     let hash = 0;
@@ -151,7 +154,7 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {user?.enabled && (
+              {user?.enabled && location.pathname === "/student" && (
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <Button onClick={() => dispatch(openDrawer())}>
@@ -163,9 +166,10 @@ const Header = () => {
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
                   {" "}
-                  {location.pathname !== "/admin" && (
-                    <Button onClick={handleAdmin}> Admin</Button>
-                  )}
+                  {location.pathname !== "/admin" &&
+                    user.role !== "student" && (
+                      <Button onClick={handleAdmin}> Admin</Button>
+                    )}
                 </Typography>
               </MenuItem>
             </Menu>
@@ -189,27 +193,28 @@ const Header = () => {
             ROVINOX
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {location.pathname === "/admin" ? (
+            {location.pathname !== "/student" && (
               <Button
                 onClick={handleStudent}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 Student
               </Button>
-            ) : (
-              <>
-                {user?.enabled && (
-                  <Button
-                    onClick={() => {
-                      dispatch(openDrawer());
-                    }}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    course
-                  </Button>
-                )}
-              </>
             )}
+
+            <>
+              {user?.enabled && location.pathname === "/student" && (
+                <Button
+                  onClick={() => {
+                    dispatch(openDrawer());
+                  }}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  course
+                </Button>
+              )}
+            </>
+
             {location.pathname !== "/admin" && user.role !== "student" && (
               <Button
                 onClick={handleAdmin}
@@ -252,10 +257,12 @@ const Header = () => {
                 <Typography textAlign="center">vv</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">vv</Typography>
+                <Typography onClick={handleProfilePage} textAlign="center">
+                  Profile
+                </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
-                <Typography onClick={handlpaymentPage} textAlign="center">
+                <Typography onClick={handlePaymentPage} textAlign="center">
                   payment
                 </Typography>
               </MenuItem>

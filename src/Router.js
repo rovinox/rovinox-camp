@@ -16,6 +16,7 @@ import OneAndOne from "./component/OneAndOne.js";
 import ContactUS from "./component/ContactUS.js";
 import NotFound from "./component/NotFound.js";
 import PaymentForm from "./component/payment/PaymentForm.js";
+import Profile from "./component/profile/Profile.js";
 
 const getDesignTokens = (mode) => ({
   palette: {
@@ -78,6 +79,7 @@ export default function Router() {
           <Route path="/meeting" element={<OneAndOne />} />
           <Route path="/contactus" element={<ContactUS />} />
           <Route path="/payment" element={<PaymentForm />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

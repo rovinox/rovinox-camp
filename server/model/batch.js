@@ -11,7 +11,7 @@ const batchSchema = new Schema({
     required: true,
   },
   cost: {
-    type: String,
+    type: Number,
     required: true,
   },
   course: {

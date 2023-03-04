@@ -1,4 +1,5 @@
 const Student = require("../model/student");
+const Batch = require("../model/batch");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -20,7 +21,7 @@ const handleNewUser = async (req, res) => {
   try {
     //encrypt the password
     const hashedPwd = await bcrypt.hash(password, 10);
-
+    const foundBatch = await Batch.findOne({ _id: batchId });
     //create and store the new user
     const result = await Student.create({
       email,
@@ -29,6 +30,7 @@ const handleNewUser = async (req, res) => {
       firstName,
       phoneNumber,
       batchId,
+      balance: foundBatch.cost,
     });
 
     console.log(result);

@@ -1,8 +1,9 @@
 const Student = require("../model/student");
 
-const users = async (req, res) => {
+const user = async (req, res) => {
+  const { email } = req.body;
   try {
-    const Users = await Student.find()
+    const Users = await Student.findOne({ email })
       .select([
         "lastName",
         "firstName",
@@ -25,4 +26,4 @@ const users = async (req, res) => {
   }
 };
 
-module.exports = { users };
+module.exports = { user };
