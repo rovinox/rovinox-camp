@@ -73,14 +73,15 @@ export default function AdminLanding() {
     <>
       <Header />
       <Box component="div" sx={{ width: "100%", mt: 15 }}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={value} onChange={handleChange}>
+        <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+          <Tabs value={value} onChange={handleChange} centered>
             <Tab label="Student List" {...a11yProps(0)} />
             <Tab label="Remove Batch" {...a11yProps(1)} />
             <Tab label="Add Batch" {...a11yProps(2)} />
             <Tab label="Grade Homework" {...a11yProps(3)} />
           </Tabs>
         </Box>
+
         <TabPanel value={value} index={0}>
           <StudentList batch={batch} />
         </TabPanel>

@@ -91,23 +91,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="footer-col">
-            <h4>Subscribe</h4>
-            <p>Subscribe to our newsletter to stay updated on courses</p>
-            <form name="email-form">
-              <div className="email__field">
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="E-mail"
-                />
-                <button className="form-control submit">
-                  <BiSend />
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
       </div>
     </footer>
