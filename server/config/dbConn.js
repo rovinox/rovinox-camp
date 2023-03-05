@@ -1,14 +1,15 @@
-const mongoose = require("mongoose");
+const { Client } = require("pg");
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.DB_URI, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    });
-  } catch (err) {
-    console.error(err);
-  }
+const client = new Client({
+  user: "postgres",
+  host: "localhost",
+  database: "rovinox-camp",
+  password: "1123",
+  port: 5432,
+});
+client.connect();
+module.exports = {
+  query: (text, params, callback) => {
+    return client.query(text, params, callback);
+  },
 };
-
-module.exports = connectDB;

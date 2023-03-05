@@ -12,7 +12,7 @@ const session = require("express-session");
 const PORT = process.env.SERVER_PORT || 8080;
 
 // Connect to MongoDB
-connectDB();
+//connectDB();
 
 // custom middleware logger
 
@@ -72,7 +72,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../build/index.html"));
 });
 
-mongoose.connection.once("open", () => {
-  console.log("Connected to MongoDB");
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-});
+// mongoose.connection.once("open", () => {
+//   console.log("Connected to MongoDB");
+// });
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
