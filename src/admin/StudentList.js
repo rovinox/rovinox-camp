@@ -52,7 +52,7 @@ export default function StudentList({ batch }) {
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [homeworkCount, setHomeWorkCount] = useState(null);
   const [homeworkList, setHomeWorkList] = useState(null);
-  const [batchId, setBatchId] = useState(selectedStudent?.batchId?._id);
+  const [batchId, setBatchId] = useState(selectedStudent?.batchId);
   const [role, setRole] = useState(selectedStudent?.role);
   const [overallRating, setOverAllRating] = useState(0);
   const [enabled, setEnabled] = useState(selectedStudent?.enabled);
@@ -61,12 +61,12 @@ export default function StudentList({ batch }) {
     try {
       const result = await axios.get("/users");
       if (result?.data?.users) {
-        result.data.users.forEach((user, index) => {
-          user.id = user._id;
-          user.batch = `${moment(user.batchId?.startDate).format(
+        result.data.users.forEach((item, index) => {
+          item.id = item.studentId;
+          item.batch = `${moment(item?.startDate).format(
             "MMM Do YY"
-          )} - ${moment(user.batchId?.endDate).format("MMM Do YY")}`;
-          user.active = user.enabled ? "Yes" : "No";
+          )} - ${moment(item?.endDate).format("MMM Do YY")}`;
+          item.active = item.enabled ? "Yes" : "No";
         });
         setLoading(false);
       }
@@ -95,14 +95,15 @@ export default function StudentList({ batch }) {
   ];
   const batchList = batch.map((option) => {
     return {
-      value: option._id,
-      label: `${moment(option.startDate).format("MMM Do YY")} -
-                          ${moment(option.endDate).format("MMM Do YY")}`,
+      value: option.batchId,
+      label: `${moment(option.startDate).format("MMM Do YY")} - ${moment(
+        option.endDate
+      ).format("MMM Do YY")}`,
     };
   });
   console.log("sdgsgzsdg", batchList);
   const handleSubmit = async (e) => {
-    const id = selectedStudent._id;
+    const id = selectedStudent.studentId;
     console.log("id: ", id);
     e.preventDefault();
     console.log({
@@ -200,11 +201,11 @@ export default function StudentList({ batch }) {
         experimentalFeatures={{ newEditingApi: true }}
         editMode={"row"}
         onCellClick={(props) => {
-          handleProgress(props.row._id, props.row.batchId._id);
+          handleProgress(props.row.studentId, props.row.batchId);
           setRole(props.row.role);
           setSelectedStudent(props.row);
           setEnabled(props.row.enabled);
-          setBatchId(props.row.batchId._id);
+          setBatchId(props.row.batchId);
           setBalance(props.row.balance);
           console.log(props.row);
         }}
@@ -288,7 +289,7 @@ export default function StudentList({ batch }) {
                     value={selectedStudent.lastName}
                   />
                 </Grid>
-                {batchList.length && (
+                {batchList.length > 0 && (
                   <Grid item xs={12} sm={6}>
                     <TextField
                       required
@@ -302,7 +303,7 @@ export default function StudentList({ batch }) {
                       }}
                     >
                       {batchList.map((option, index) => (
-                        <MenuItem key={index} value={option.value.trim()}>
+                        <MenuItem key={index} value={option.value}>
                           {option.label}
                         </MenuItem>
                       ))}
