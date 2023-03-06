@@ -1,24 +1,28 @@
 const bcrypt = require("bcrypt");
-const Student = require("../model/student");
+const DB = require("../config/dbConn");
 const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   const { email, password } = req.body;
   console.log(email, password);
-  const foundUser = await Student.findOne({ email });
+  const foundUser = await DB.query(`SELECT * FROM student WHERE email = $1`, [
+    email,
+  ]);
 
-  if (!foundUser) {
+  if (foundUser.rows.length === 0) {
     res.status(401).json({ message: "Incorrect email or password" });
   } else {
     const authenticated = await bcrypt.compareSync(
       password,
-      foundUser.password
+      foundUser.rows[0].password
     );
     if (!authenticated) {
       res.status(401).json({ message: "Incorrect email or password" });
     } else {
       const accessToken = jwt.sign(
         {
-          user: foundUser,
+          UserInfo: {
+            email: foundUser.rows[0].email,
+          },
         },
         process.env.ACCESS_TOKEN_SECRET,
         // 5 minutes or 15
@@ -46,12 +50,12 @@ const login = async (req, res) => {
       console.log("foundUser", foundUser);
       res.json({
         accessToken,
-        firstName: foundUser.firstName,
-        lastName: foundUser.lastName,
+        firstName: foundUser.rows[0].firstName,
+        lastName: foundUser.rows[0].lastName,
         email,
-        role: foundUser.role,
-        batchId: foundUser.batchId,
-        enabled: foundUser.enabled,
+        role: foundUser.rows[0].role,
+        batchId: foundUser.rows[0].batchId,
+        enabled: foundUser.rows[0].enabled,
       });
     }
   }

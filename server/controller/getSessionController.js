@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const Student = require("../model/student");
 
 const valid = (req, res) => {
   const authHeader2222 = req?.cookies?.jwt;

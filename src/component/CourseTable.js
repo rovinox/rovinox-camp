@@ -133,7 +133,7 @@ export default function CourseTable() {
                 {batch?.length > 0 &&
                   batch.map((row) => (
                     <StyledTableRow
-                      key={row._id}
+                      key={row.batchId}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <StyledTableCell component="th" scope="row">
@@ -167,7 +167,7 @@ export default function CourseTable() {
                               "linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%)",
                             color: "white",
                           }}
-                          onClick={() => handleApply(row._id)}
+                          onClick={() => handleApply(row.batchId)}
                         >
                           Apply
                         </ApplyButton2>{" "}

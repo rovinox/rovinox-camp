@@ -23,10 +23,9 @@ export default function CourseListDrawer({ setCurrentCourse }) {
     >
       <List>
         {courseList.map((course, index) => (
-          <ListItemButton sx={{ height: 35 }}>
+          <ListItemButton key={index} sx={{ height: 35 }}>
             <ListItem
               onClick={() => setCurrentCourse(course.day)}
-              key={index}
               sx={{
                 height: 35,
               }}

@@ -25,9 +25,6 @@ export default function Apply() {
   const batchId = state?.id;
   const [selectedBatch, setSelectedBatch] = useState(batchId);
   const [batch, setBatch] = useState([]);
-  const getCustomLauncher = (handleToggle) => (
-    <Button onClick={handleToggle}>This is my launcher component!</Button>
-  );
 
   useEffect(() => {
     const getBatch = async () => {
@@ -47,7 +44,7 @@ export default function Apply() {
     batch.length > 0 &&
     batch.map((option) => {
       return {
-        value: option._id,
+        value: option.batchId,
         label: `${moment(option.startDate).format("MMM Do YY")} -
                           ${moment(option.endDate).format("MMM Do YY")}`,
       };
@@ -63,9 +60,9 @@ export default function Apply() {
       password: data.get("password"),
       batchId: selectedBatch,
     };
-    console.log(user);
     try {
       const result = await axios.post("/register", user);
+      console.log("result: ", result);
       await axios.post("/email", user);
       if (result.status === 200) {
         localStorage.setItem("user", JSON.stringify(result.data));
@@ -81,12 +78,6 @@ export default function Apply() {
       }
     }
   };
-  const handleNewUserMessage = (newMessage) => {
-    console.log(`New message incoming! ${newMessage}`);
-    // Now send the message throught the backend API
-    addResponseMessage("Someone From Rovinox will reach out to you");
-  };
-
   return (
     <>
       <ReactToastify />
