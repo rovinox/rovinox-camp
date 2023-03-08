@@ -24,6 +24,7 @@ export default function HomeworkSubmission({ selectedDay }) {
 
     setLoading(true);
     try {
+      console.log(payload);
       const result = await axios.post("/submithomework", payload);
       if (result?.data?.message) {
         toast.success(`${result?.data?.message}`);

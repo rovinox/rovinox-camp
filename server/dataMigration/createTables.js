@@ -29,7 +29,6 @@ const createHomeworkTable = `CREATE TABLE IF NOT EXISTS homework(
  "batchId" int NOT NULL,
  day int NOT NULL,
  link varchar(255) NULL,
- course varchar(255) NOT NULL,
  comment varchar(255) NULL,
  title varchar(255) NOT NULL,
  rating decimal DEFAULT 0,
