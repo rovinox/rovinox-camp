@@ -1,38 +1,35 @@
 const Homework = require("../model/homeWork");
-const Student = require("../model/student");
+const DB = require("../config/dbConn");
 
 const gradeHomework = async (req, res) => {
   const { homeWorkId, graded, comment, rating } = req.body;
-
+  console.log({ homeWorkId, graded, comment, rating });
   try {
-    let result = "";
+    let result = [];
     if (comment) {
-      const updatedData = await Homework.findOneAndUpdate(
-        { _id: homeWorkId },
-        { comment }
+      const updatedData = await DB.query(
+        `UPDATE homework h SET comment = $1 WHERE h."homeworkId" = $2 returning *`,
+        [comment, homeWorkId]
       );
       console.log(updatedData);
-      result = updatedData;
-      result.save();
+      result = updatedData.rows;
     } else if (graded) {
-      const updatedData = await Homework.findOneAndUpdate(
-        { _id: homeWorkId },
-        { graded }
+      const updatedData = await DB.query(
+        `UPDATE homework h SET graded = $1 WHERE h."homeworkId" = $2 returning *`,
+        [graded, homeWorkId]
       );
-      result = updatedData;
-      result.save();
       console.log(updatedData);
+      result = updatedData.rows;
     } else if (rating) {
-      const updatedData = await Homework.findOneAndUpdate(
-        { _id: homeWorkId },
-        { rating }
+      const updatedData = await DB.query(
+        `UPDATE homework h SET rating = $1 WHERE h."homeworkId" = $2 returning *`,
+        [rating, homeWorkId]
       );
-      result = updatedData;
-      result.save();
       console.log(updatedData);
+      result = updatedData.rows;
     }
 
-    if (result) {
+    if (result.length > 0) {
       res.status(201).json({ message: `homeWork has been saved successfully` });
     }
 

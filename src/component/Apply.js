@@ -63,10 +63,11 @@ export default function Apply() {
     try {
       const result = await axios.post("/register", user);
       console.log("result: ", result);
-      await axios.post("/email", user);
+      // await axios.post("/email", user);
       if (result.status === 200) {
         localStorage.setItem("user", JSON.stringify(result.data));
         navigate("/student");
+        console.log("hi");
       }
     } catch (err) {
       if (!err?.response) {
@@ -259,6 +260,15 @@ export default function Apply() {
           </Box>
         </Grid>
       </Grid>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={() => navigate("/student")}
+      >
+        xdfgdhdh
+      </Button>
       <Footer />
     </>
   );

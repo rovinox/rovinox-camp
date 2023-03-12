@@ -150,7 +150,7 @@ export default function GradeHomework({ batch, setBatch }) {
                     </TableCell>
                     <TableCell align="right">
                       <Button
-                        onClick={() => handleBatch(row._id)}
+                        onClick={() => handleBatch(row.batchId)}
                         color="primary"
                         variant="contained"
                       >

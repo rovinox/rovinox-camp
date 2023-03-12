@@ -160,9 +160,10 @@ export default function GradeHomework({ selectedDay, batchId }) {
   };
 
   const handMarkAsGraded = async (homeWorkId, graded) => {
+    console.log("from fun", homeWorkId);
     const cloneHomework = [...homework];
     const newHomework = cloneHomework.map((homework) => {
-      if (homeWorkId === homework._id) {
+      if (homeWorkId === homework.homeworkId) {
         return { ...homework, loading: true };
       } else {
         return { ...homework, loading: false };
@@ -189,7 +190,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
   };
   const handleComment = async (homeWorkId) => {
     setIsCommentEdit(!isCommentEdit);
-    console.log({ homeWorkId, comment });
+    console.log("handle vvv", { homeWorkId, comment });
     if (isCommentEdit) {
       try {
         const result = await axios.put("/gradehomework", {
@@ -230,6 +231,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
       toast.error(`${err?.message}`);
     }
   };
+  console.log("homework", homework);
   return (
     <div style={{ marginBottom: 30 }}>
       <ReactToastify />
@@ -258,7 +260,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
                         Name:
                         <Typography variant="span" sx={{ ml: 1 }}>
                           {" "}
-                          {item.studentId.firstName} {item.studentId.lastName}
+                          {item.firstName} {item.lastName}
                         </Typography>
                       </Grid>
                       <Grid
@@ -314,7 +316,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
                             precision={0.5}
                             getLabelText={getLabelText}
                             onChange={(event, value) => {
-                              handleRating(item._id, value);
+                              handleRating(item.homeworkId, value);
                             }}
                             onChangeActive={(event, newHover) => {
                               setHover(newHover);
@@ -351,7 +353,7 @@ export default function GradeHomework({ selectedDay, batchId }) {
                             <Typography>No</Typography>
                             <FormControlLabel
                               onClick={() =>
-                                handMarkAsGraded(item._id, item.graded)
+                                handMarkAsGraded(item.homeworkId, item.graded)
                               }
                               control={
                                 <IOSSwitch
@@ -389,7 +391,10 @@ export default function GradeHomework({ selectedDay, batchId }) {
                         </Button>
                       )}
                       <Button
-                        onClick={() => handleComment(item._id)}
+                        onClick={() => {
+                          handleComment(item.homeworkId);
+                          console.log("from iten", item);
+                        }}
                         type="submit"
                         variant="contained"
                         sx={{ mt: 2 }}
