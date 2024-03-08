@@ -29,10 +29,10 @@ export default function Apply() {
   useEffect(() => {
     const getBatch = async () => {
       try {
-        const result = await axios.get("/getbatch");
+        const result = await axios.get("http://localhost:8081/batches");
         console.log("result: ", result);
 
-        setBatch(result.data.batch);
+        setBatch(result.data);
       } catch (e) {
         console.log(e);
       }
@@ -267,7 +267,6 @@ export default function Apply() {
         sx={{ mt: 3, mb: 2 }}
         onClick={() => navigate("/student")}
       >
-        xdfgdhdh
       </Button>
       <Footer />
     </>

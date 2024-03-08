@@ -47,9 +47,10 @@ export default function CourseTable() {
     let newBatch = [];
     const getBatch = async () => {
       try {
-        const result = await axios.get("/getbatch");
-        if (result.data.batch) {
-          result.data.batch.forEach((item) => {
+        const result = await axios.get("http://localhost:8081/batches");
+        console.log('result: ', result);
+        if (result?.data) {
+          result.data.forEach((item) => {
             var startDate = moment([
               moment(moment(item.startDate) - 7 * 24 * 3600 * 1000).format(
                 "MM-DD-YY"
@@ -133,7 +134,7 @@ export default function CourseTable() {
                 {batch?.length > 0 &&
                   batch.map((row) => (
                     <StyledTableRow
-                      key={row.batchId}
+                      key={row.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <StyledTableCell component="th" scope="row">
@@ -167,7 +168,7 @@ export default function CourseTable() {
                               "linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%)",
                             color: "white",
                           }}
-                          onClick={() => handleApply(row.batchId)}
+                          onClick={() => handleApply(row.id)}
                         >
                           Apply
                         </ApplyButton2>{" "}
