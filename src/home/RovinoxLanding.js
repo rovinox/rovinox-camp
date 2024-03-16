@@ -27,7 +27,9 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Footer from "./Footer";
 
+
 export default function RovinoxLanding() {
+
   const points = [
     "Live, real-time instruction",
     "Great Support from day-one to your first day in tech",

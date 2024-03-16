@@ -4,6 +4,7 @@ import StudentLanding from "./student/StudentLanding.js";
 import Login from "./student/Login";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { purple, teal, green, amber, grey, indigo } from "@mui/material/colors";
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import CssBaseline from "@mui/material/CssBaseline";
 import Apply from "./component/Apply";
 import AdminLanding from "./admin/AdminLanding";
@@ -61,9 +62,12 @@ export default function Router() {
   // },
   //});
   const theme = createTheme(getDesignTokens(selectedTheme));
-  console.log("theme: ", theme);
-
+  const client = new ApolloClient({
+    uri: 'http://localhost:8080/graphql',
+    cache: new InMemoryCache(),
+  });
   return (
+       <ApolloProvider client={client}>     
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
@@ -84,5 +88,6 @@ export default function Router() {
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
+      </ApolloProvider>
   );
 }

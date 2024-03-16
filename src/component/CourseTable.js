@@ -15,6 +15,8 @@ import { ApplyButton2 } from "../home/RovinoxLanding.styled.tsx";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import { useQuery } from '@apollo/client';
+import {GET_BATCHERS} from '../queries/batchQueries.js'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,40 +42,44 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CourseTable() {
+   const { loading, error, data } = useQuery(GET_BATCHERS);
+  
+  console.log('loading, error, data : ', {loading, error, data} );
   let navigate = useNavigate();
   const [batch, setBatch] = useState([]);
 
-  useEffect(() => {
+  if (loading) return
+   if (error) return
+
     let newBatch = [];
-    const getBatch = async () => {
-      try {
-        const result = await axios.get("/getbatch");
-        if (result.data.batch) {
-          result.data.batch.forEach((item) => {
-            var startDate = moment([
-              moment(moment(item.startDate) - 7 * 24 * 3600 * 1000).format(
-                "MM-DD-YY"
-              ),
-            ]);
-            var now = moment([moment().format("MM-DD-YY")]);
-            let dateDiff = startDate.diff(now, "days");
-            if (dateDiff === 0) {
-              item.isExpired = true;
-              newBatch.push(item);
-            } else {
-              item.isExpired = false;
-              newBatch.push(item);
-            }
-          });
-          setBatch(newBatch);
-          console.log("data", newBatch);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getBatch();
-  }, []);
+   
+    
+       
+        // if (!loading&& !error && data?.batches?.length) {
+        //   const batches = [...data?.batches]
+        //   batches.forEach((item) => {
+        //     //item.batchId = item._id
+        //     var startDate = moment([
+        //       moment(moment(item.startDate) - 7 * 24 * 3600 * 1000).format(
+        //         "MM-DD-YY"
+        //       ),
+        //     ]);
+        //     var now = moment([moment().format("MM-DD-YY")]);
+        //     let dateDiff = startDate.diff(now, "days");
+        //     if (dateDiff === 0) {
+        //       //item.isExpired = true;
+        //       newBatch.push(item);
+        //     } else {
+        //       //item.isExpired = false;
+        //       newBatch.push(item);
+        //     }
+        //   });
+        //   setBatch(newBatch);
+        // }
+        // console.log("data", data?.batches);
+     
+  
+
 
   const handleApply = (id) => {
     navigate("/apply", {
@@ -130,8 +136,8 @@ export default function CourseTable() {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {batch?.length > 0 &&
-                  batch.map((row) => (
+                {data?.batches > 0 &&
+                  data.batches.map((row) => (
                     <StyledTableRow
                       key={row.batchId}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

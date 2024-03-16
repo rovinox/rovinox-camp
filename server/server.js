@@ -1,78 +1,107 @@
-require("dotenv").config();
-const express = require("express");
-const app = express();
-const path = require("path");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const mongoose = require("mongoose");
-const connectDB = require("./config/dbConn");
-const verifyJWT = require("./middleware/verifyJWT");
-const session = require("express-session");
+const express = require("express")
+const { ApolloServer } = require('@apollo/server') 
+const { createHandler } = require("graphql-http/lib/use/express")
+const { ruruHTML } = require("ruru/server")
+require('dotenv').config();
+const connectDB = require('./config/dbConn');
+const schema = require('./schema/schema');
+const cors = require('cors');
+//const {resolvers} = require('./resolvers')
+//const { typeDefs }= require('./schema/schema')
+const { startStandaloneServer } = require('@apollo/server/standalone')
+const batch = require("./model/batch");
+// Construct a schema, using GraphQL schema language
+const typeDefs = `#graphql
+  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
-const PORT = process.env.SERVER_PORT || 8080;
+  # This "Book" type defines the queryable fields for every book in our data source.
 
-// Connect to MongoDB
-//connectDB();
 
-// custom middleware logger
 
-// Handle options credentials check - before CORS!
-// and fetch cookies credentials requirement
-//app.use(credentials);
+type Book {
+    title: String
+    author: String
+  }
+  # The "Query" type is special: it lists all of the available queries that
+  # clients can execute, along with the return type for each. In this
+  # case, the "books" query returns an array of zero or more Books (defined above).
+  
+  type Batch {
+    _id: String
+  startDate: String!
+  endDate: String!
+  cost: Float!
+  course: String!
+  enabled: Boolean!
+}
 
-// Cross Origin Resource Sharing
-//app.use(cors(corsOptions));
+type Query {
+    books: [Book],
+    batches: [Batch],
+  }
+
+`;
+const PORT = process.env.PORT || 8080
+// The root provides a resolver function for each API endpoint
+
+
+const app = express()
+// Connect to database
+connectDB();
+
 app.use(cors());
 
-// built-in middleware to handle urlencoded form data
-app.use(express.urlencoded({ extended: false }));
 
-// built-in middleware for json
-app.use(express.json());
+//   const resolvers = {
+//     Query: {
+//       batch :()=> {
+//         return batch.find()
+//       },
+//     }
+// }
+const bookArr = [ {
+  title: 'The Awakening',
+  author: 'Kate Chopin',
+},
+{
+  title: 'City of Glass',
+  author: 'Paul Auster',
+},]
+const resolvers = {
+  Query: {
+    books: () => bookArr,
+    batches: async () => await batch.find()
+  },
+};
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
+})
 
-//middleware for cookies
-app.use(cookieParser());
+async function start(){
 
-// app.use(
-//   session({
-//     secret: process.env.ACCESS_TOKEN_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       maxAge: 1000 * 60 * 60 * 24,
-//     },
+  const { url } =  await startStandaloneServer(server, {
+    listen: { port: PORT }
+  })
+  
+  console.log(`Server ready at: ${url}`)
+}
+start()
+// Create and use the GraphQL handler.
+// app.all(
+//   "/graphql",
+//   createHandler({
+//     schema: schema,
+//     rootValue: resolvers,
 //   })
-// );
+// )
 
-//serve static files
-app.use(express.static(`${__dirname}/../build`));
+// // Serve the GraphiQL IDE.
+// app.get("/", (_req, res) => {
+//   res.type("html")
+//   res.end(ruruHTML({ endpoint: "/graphql" }))
+// })
 
-// routes
-app.use("/getbatch", require("./routes/getBatch"));
-app.use("/addbatch", require("./routes/addBatch"));
-app.use("/register", require("./routes/register"));
-app.use("/login", require("./routes/login"));
-app.use("/refresh", require("./routes/refresh"));
-app.use("/logout", require("./routes/logout"));
-app.use("/email", require("./routes/email"));
-
-// app.use(verifyJWT);
-app.use("/user", require("./routes/user"));
-app.use("/payment", require("./routes/payment"), require("./routes/email"));
-app.use("/users", require("./routes/users"));
-app.use("/gethomework", require("./routes/gethomework"));
-app.use("/usersession", require("./routes/valid"));
-app.use("/submithomework", require("./routes/submitHomework"));
-app.use("/gradehomework", require("./routes/gradeHomework"));
-app.use("/updatestudent", require("./routes/updateStudent"));
-app.use("/removebatch", require("./routes/removeBatch"));
-app.use("/getprogress", require("./routes/getProgress"));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
-
-// mongoose.connection.once("open", () => {
-//   console.log("Connected to MongoDB");
-// });
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// // Start the server at port
+// app.listen(PORT)
+// console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql`)
