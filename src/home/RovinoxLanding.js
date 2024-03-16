@@ -62,7 +62,7 @@ export default function RovinoxLanding() {
     <>
       <Header />
       <IntroVideo />
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid xs={12} md={6}>
           <img src={pic1} alt="pic" />
         </Grid>

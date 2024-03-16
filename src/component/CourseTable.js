@@ -48,12 +48,14 @@ export default function CourseTable() {
   let navigate = useNavigate();
   const [batch, setBatch] = useState([]);
 
-  if (loading) return
-   if (error) return
 
-    let newBatch = [];
+
+
    
-    
+ 
+
+    if (loading) return
+    if (error) return
        
         // if (!loading&& !error && data?.batches?.length) {
         //   const batches = [...data?.batches]
@@ -90,7 +92,7 @@ export default function CourseTable() {
   };
   return (
     <Paper sx={{ pb: 20 }}>
-      <Grid sx={{ mt: 9, pr: 5, pl: 5 }} Grid container spacing={2}>
+      <Grid sx={{ mt: 9, pr: 5, pl: 5 }}  container spacing={2}>
         <Grid sx={{ textAlign: "center" }} xs={12} md={12}>
           <div
             style={{
@@ -136,10 +138,56 @@ export default function CourseTable() {
                 </StyledTableRow>
               </TableHead>
               <TableBody>
-                {data?.batches > 0 &&
+                {data.batches.map(row => {
+                  return (
+                    <StyledTableRow
+                      key={row._id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                       <StyledTableCell component="th" scope="row">
+                        {row.course}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        {moment(row.startDate).format("MMM Do")} -
+                        {moment(row.endDate).format("MMM Do")}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        Mon,Thurs,Fri 6PM-9PM{" "}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                        ${row.cost}
+                      </StyledTableCell>
+                      <StyledTableCell align="right">
+                      
+                      {row.isExpired ? (
+                        <Typography color="error">Expired</Typography>
+                      ) : (
+                        moment(
+                          moment(row.startDate) - 7 * 24 * 3600 * 1000
+                        ).format("MMM Do")
+                      )}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {" "}
+                      <ApplyButton2
+                        //disabled={row.isExpired}
+                        sx={{
+                          background:
+                            "linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%)",
+                          color: "white",
+                        }}
+                        onClick={() => handleApply(row?._id)}
+                      >
+                        Apply
+                      </ApplyButton2>{" "}
+                    </StyledTableCell>
+                    </StyledTableRow>
+                  )
+                })}
+                {/* {data?.batches > 0 &&
                   data.batches.map((row) => (
                     <StyledTableRow
-                      key={row.batchId}
+                      key={row._id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <StyledTableCell component="th" scope="row">
@@ -156,6 +204,7 @@ export default function CourseTable() {
                         ${row.cost}
                       </StyledTableCell>
                       <StyledTableCell align="right">
+                      
                         {row.isExpired ? (
                           <Typography color="error">Expired</Typography>
                         ) : (
@@ -167,19 +216,19 @@ export default function CourseTable() {
                       <StyledTableCell align="right">
                         {" "}
                         <ApplyButton2
-                          disabled={row.isExpired}
+                          //disabled={row.isExpired}
                           sx={{
                             background:
                               "linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%)",
                             color: "white",
                           }}
-                          onClick={() => handleApply(row.batchId)}
+                          onClick={() => handleApply(row?.batchId)}
                         >
                           Apply
                         </ApplyButton2>{" "}
                       </StyledTableCell>
                     </StyledTableRow>
-                  ))}
+                  ))} */}
               </TableBody>
             </Table>
           </TableContainer>

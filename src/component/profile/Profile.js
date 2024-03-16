@@ -11,7 +11,7 @@ export default function Profile() {
       <Typography sx={{ mt: 20, mb: 5 }} variant="h2">
         Profile
       </Typography>
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid sx={{ mt: 2 }} xs={12} md={4}>
           <AccountInfo />
         </Grid>

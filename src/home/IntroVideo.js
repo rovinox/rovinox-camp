@@ -14,7 +14,7 @@ export default function ProductHero() {
         padding: "0px",
       }}
     >
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid
           sx={{
             display: "flex",

@@ -70,7 +70,7 @@ const bookArr = [ {
 const resolvers = {
   Query: {
     books: () => bookArr,
-    batches: async () => await batch.find()
+    batches: async () => await batch.find({enabled: true})
   },
 };
 const server = new ApolloServer({

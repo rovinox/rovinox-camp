@@ -46,7 +46,7 @@ export default function ContactUs() {
         page="Contact US"
         bannerTitle="Please Send us All of Your Questions"
       />
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid
           item
           sx={{

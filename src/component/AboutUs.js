@@ -20,7 +20,7 @@ export default function AboutUs() {
         bannerTitle="Immersive Experiences that Change Lives About the Rovinox Bootcamp
         Experience"
       />
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid
           sx={{
             display: "flex",
@@ -63,7 +63,7 @@ export default function AboutUs() {
           <img src={pic1} alt="pic" />
         </Grid>
       </Grid>
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid
           item
           sx={{
@@ -110,7 +110,7 @@ export default function AboutUs() {
           </div>
         </Grid>
       </Grid>
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid
           sx={{
             display: "flex",

@@ -4,20 +4,19 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import ReactToastify from "../component/ReactToastify.js";
 import { toast } from "react-toastify";
 import moment from "moment";
-import CardContent from "@mui/material/CardContent";
-import { Widget, addResponseMessage } from "react-chat-widget";
 import Header from "../home/Header";
 import Banner from "./Banner.js";
 import StepBar from "./StepBar.js";
 import Group7 from "../asset/Group7.svg";
 import Footer from "../home/Footer.js";
+import { useQuery } from '@apollo/client';
+import {GET_BATCHERS} from '../queries/batchQueries.js'
 
 export default function Apply() {
   const { state } = useLocation();
@@ -25,26 +24,15 @@ export default function Apply() {
   const batchId = state?.id;
   const [selectedBatch, setSelectedBatch] = useState(batchId);
   const [batch, setBatch] = useState([]);
+  const { loading, error, data } = useQuery(GET_BATCHERS);
+  console.log('{ loading, error, data }: ', { loading, error, data });
 
-  useEffect(() => {
-    const getBatch = async () => {
-      try {
-        const result = await axios.get("/getbatch");
-        console.log("result: ", result);
 
-        setBatch(result.data.batch);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getBatch();
-    console.log("data", batch);
-  }, []);
   const batchList =
-    batch.length > 0 &&
-    batch.map((option) => {
+  data?.batches?.length > 0 &&
+  data?.batches?.map((option) => {
       return {
-        value: option.batchId,
+        value: option._id,
         label: `${moment(option.startDate).format("MMM Do YY")} -
                           ${moment(option.endDate).format("MMM Do YY")}`,
       };
@@ -60,24 +48,24 @@ export default function Apply() {
       password: data.get("password"),
       batchId: selectedBatch,
     };
-    try {
-      const result = await axios.post("/register", user);
-      console.log("result: ", result);
-      // await axios.post("/email", user);
-      if (result.status === 200) {
-        localStorage.setItem("user", JSON.stringify(result.data));
-        navigate("/student");
-        console.log("hi");
-      }
-    } catch (err) {
-      if (!err?.response) {
-        toast.error("No Server Response");
-      } else if (err.response?.status === 409) {
-        toast.error("This email address already exists");
-      } else {
-        toast.error(`${err?.message}`);
-      }
-    }
+    // try {
+    //   const result = await axios.post("/register", user);
+    //   console.log("result: ", result);
+    //   // await axios.post("/email", user);
+    //   if (result.status === 200) {
+    //     localStorage.setItem("user", JSON.stringify(result.data));
+    //     navigate("/student");
+    //     console.log("hi");
+    //   }
+    // } catch (err) {
+    //   if (!err?.response) {
+    //     toast.error("No Server Response");
+    //   } else if (err.response?.status === 409) {
+    //     toast.error("This email address already exists");
+    //   } else {
+    //     toast.error(`${err?.message}`);
+    //   }
+    // }
   };
   return (
     <>
@@ -109,7 +97,7 @@ export default function Apply() {
           </Typography>
         </div>
       </div>
-      <Grid Grid container spacing={2}>
+      <Grid container spacing={2}>
         <Grid
           item
           sx={{
@@ -260,15 +248,15 @@ export default function Apply() {
           </Box>
         </Grid>
       </Grid>
-      <Button
+      {/* <Button
         type="submit"
         fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
         onClick={() => navigate("/student")}
       >
-        xdfgdhdh
-      </Button>
+        
+      </Button> */}
       <Footer />
     </>
   );
